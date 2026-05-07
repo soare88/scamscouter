@@ -3,78 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>ScamScouter - Check Suspicious Links, Messages & Scam Websites</title>
   <meta name="description" content="Use ScamScouter to check suspicious links, scam messages, phishing emails and fake websites before you click." />
-  <meta name="keywords" content="scam checker, phishing checker, suspicious link checker, fake website checker, scam website detector" />
   <meta name="robots" content="index, follow" />
-
-  <meta property="og:title" content="ScamScouter - AI Scam Checker" />
-  <meta property="og:description" content="Check suspicious links, messages and scam websites before you click." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://scamscouter.com" />
-
   <link rel="canonical" href="https://scamscouter.com/" />
   <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
+</head><body>
   <div id="site-analytics"></div>
-
   <div class="page-bg">
     <div class="hero-glow"></div>
-
     <div id="site-header"></div>
 
     <main class="premium-hero">
       <section class="premium-hero-left">
         <div class="hero-badge" id="eyebrow">AI-assisted scam protection</div>
-
-        <h1 id="headline">
-          Check.<br />
-          Detect.<br />
-          <span>Protect.</span>
-        </h1>
-
-        <p id="subheadline">
-          ScamScouter helps you check suspicious links, messages, emails and scam websites before you click.
-          Paste anything suspicious and get an instant risk analysis.
-        </p>
+        <h1 id="headline">Check suspicious links before you click.</h1>
+        <p id="subheadline">Paste any suspicious link, message, email or website below and get an instant scam risk analysis.</p>
 
         <div class="home-scanner-card">
-          <textarea id="input" rows="4" placeholder="Paste a suspicious link, message, email, or website..."></textarea>
+          <div class="scanner-mini-header">
+            <div>
+              <p class="mini-label" id="scannerLabel">Scan anything suspicious</p>
+              <h2 id="scannerTitle">Paste a link, message or email</h2>
+            </div>
+            <span class="status-dot" id="statusDot">Live</span>
+          </div>
+          <textarea id="input" rows="5" placeholder="Paste a suspicious link, message, email, or website..."></textarea>
           <button id="scanBtn" onclick="runScan()" class="scan-btn">Scan Now</button>
+          <p class="scanner-proof">Free beta • No signup required • Instant results</p>
           <div id="out" class="output-area"></div>
         </div>
 
-        <div class="hero-stats" aria-label="ScamScouter trust signals">
+        <div class="hero-stats">
           <article><strong>Free</strong><span>No signup required</span></article>
           <article><strong>Instant</strong><span>Fast risk analysis</span></article>
           <article><strong>AI</strong><span>Scam pattern checks</span></article>
-          <article><strong>Safe</strong><span>Before you click</span></article>
         </div>
       </section>
 
       <section class="premium-hero-right" aria-label="Example trust score">
         <div class="score-glow"></div>
-
         <div class="score-card">
           <div class="score-card-header">
-            <div>
-              <p>Checking example</p>
-              <h2>scamscouter.com</h2>
-            </div>
+            <div><p>Checking example</p><h2>scamscouter.com</h2></div>
             <div class="safe-check">✓</div>
           </div>
-
           <div class="score-circle-wrap">
-            <div class="score-circle">
-              <span>Trust Score</span>
-              <strong>92%</strong>
-              <em>Very Safe</em>
-            </div>
+            <div class="score-circle"><span>Trust Score</span><strong>92%</strong><em>Very Safe</em></div>
           </div>
-
           <div class="check-list">
             <div><span>SSL Certificate</span><strong>Valid</strong></div>
             <div><span>Blacklist Status</span><strong>Clean</strong></div>
@@ -86,29 +62,14 @@
     </main>
 
     <section class="feature-grid premium-features">
-      <article class="feature-card">
-        <div class="feature-icon">🛡️</div>
-        <h3>AI Scam Detection</h3>
-        <p>ScamScouter analyzes suspicious patterns in links, emails, messages and websites to help you avoid scams.</p>
-      </article>
-
-      <article class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Instant Risk Score</h3>
-        <p>Get a simple verdict, risk score, red flags and practical safety advice in seconds.</p>
-      </article>
-
-      <article class="feature-card">
-        <div class="feature-icon">🔒</div>
-        <h3>Check Before You Click</h3>
-        <p>Useful for phishing links, fake stores, marketplace scams, delivery scams and suspicious emails.</p>
-      </article>
+      <article class="feature-card"><div class="feature-icon">🛡️</div><h3>AI Scam Detection</h3><p>ScamScouter analyzes suspicious patterns in links, emails, messages and websites to help you avoid scams.</p></article>
+      <article class="feature-card"><div class="feature-icon">⚡</div><h3>Instant Risk Score</h3><p>Get a simple verdict, risk score, red flags and practical safety advice in seconds.</p></article>
+      <article class="feature-card"><div class="feature-icon">🔒</div><h3>Check Before You Click</h3><p>Useful for phishing links, fake stores, marketplace scams, delivery scams and suspicious emails.</p></article>
     </section>
 
     <section class="seo-section">
       <h2>Popular scam checks</h2>
       <p style="margin-bottom:18px;">Quick access to common scam checks in English and Romanian.</p>
-
       <div class="quick-links">
         <a href="/is-this-link-safe.html">Is this link safe?</a>
         <a href="/fake-website-checker.html">Fake website checker</a>
@@ -124,16 +85,12 @@
 
     <section class="seo-section">
       <h2>Built for quick decisions</h2>
-      <p>
-        ScamScouter helps you slow down before clicking a suspicious link, entering card details,
-        paying a fake delivery fee, replying to a fake buyer or trusting an unexpected email.
-      </p>
+      <p>ScamScouter helps you slow down before clicking a suspicious link, entering card details, paying a fake delivery fee, replying to a fake buyer or trusting an unexpected email.</p>
     </section>
 
     <div id="site-footer"></div>
   </div>
-
   <script src="/includes.js"></script>
-  <script type="module" src="/app.js?v=1.1"></script>
+  <script type="module" src="/app.js?v=1.3"></script>
 </body>
 </html>
