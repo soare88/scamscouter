@@ -1,1 +1,6 @@
-{"name":"scamscouter","version":"1.0.0","private":true,"type":"module"}
+{
+  "name": "scamscouter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module"
+}
