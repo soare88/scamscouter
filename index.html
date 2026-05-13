@@ -9,27 +9,34 @@
   <link rel="canonical" href="https://scamscouter.com/" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Mic stil adăugat pentru zona de acțiuni */
-    .upload-zone {
+    /* Stiluri discrete pentru a nu strica designul */
+    .scanner-controls {
       display: flex;
-      gap: 10px;
-      margin-top: 15px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
     }
-    .btn-upload {
-      background-color: #f0f2f5;
-      border: 2px dashed #007bff;
-      color: #007bff;
-      padding: 10px 20px;
-      border-radius: 8px;
+    .btn-ocr {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #aab6c8;
+      padding: 14px 20px;
+      border-radius: 14px;
       cursor: pointer;
-      font-weight: bold;
+      font-size: 14px;
+      font-weight: 600;
       display: flex;
       align-items: center;
       gap: 8px;
+      transition: all 0.2s;
     }
-    .btn-upload:hover {
-      background-color: #e7f0ff;
+    .btn-ocr:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+    .scan-btn-main {
+      flex: 1;
+      margin-top: 0 !important; /* Suprascriem marginea veche */
     }
   </style>
 </head><body>
@@ -53,90 +60,49 @@
             <span class="status-dot" id="statusDot">Live</span>
           </div>
           
-          <textarea id="input" rows="5" placeholder="Lipește textul sau încarcă o poză/screenshot..."></textarea>
+          <textarea id="input" rows="5" placeholder="Paste text or link here..."></textarea>
           
-          <div class="upload-zone">
+          <div class="scanner-controls">
             <input type="file" id="imageUpload" accept="image/*" style="display:none" onchange="window.processImage(this)">
-            <button type="button" class="btn-upload" onclick="document.getElementById('imageUpload').click()">
-              📸 Adaugă Poză / Screenshot
+            <button type="button" class="btn-ocr" onclick="document.getElementById('imageUpload').click()">
+              📸 <span>Photo / Screenshot</span>
             </button>
-            
-            <button id="scanBtn" onclick="runScan()" class="scan-btn">Verifică acum</button>
+            <button id="scanBtn" onclick="runScan()" class="scan-btn scan-btn-main">Scan Now</button>
           </div>
-
+          
+          <p class="scanner-proof">Free beta • No signup required • Instant results</p>
           <div id="out" class="output-area"></div>
+        </div>
+
+        <div class="hero-stats">
+          <article><strong>Free</strong><span>No signup required</span></article>
+          <article><strong>Instant</strong><span>Fast risk analysis</span></article>
+          <article><strong>AI</strong><span>Scam pattern checks</span></article>
         </div>
       </section>
 
-      <section class="premium-hero-right">
-        <div class="status-board">
-          <div class="status-item">
-            <span class="status-icon">🛡️</span>
-            <div>
-              <strong id="card1Title">Safe Analysis</strong>
-              <p id="card1Text">We check domain age and security certificates.</p>
-            </div>
+      <section class="premium-hero-right" aria-label="Example trust score">
+        <div class="score-glow"></div>
+        <div class="score-card">
+          <div class="score-card-header">
+            <div><p>Checking example</p><h2>scamscouter.com</h2></div>
+            <div class="safe-check">✓</div>
           </div>
-          <div class="status-item">
-            <span class="status-icon">🚩</span>
-            <div>
-              <strong id="card2Title">Scam Signals</strong>
-              <p id="card2Text">We detect keywords used in phishing and frauds.</p>
-            </div>
+          <div class="score-circle-wrap">
+            <div class="score-circle"><span>Trust Score</span><strong>92%</strong><em>Very Safe</em></div>
           </div>
-          <div class="status-item">
-            <span class="status-icon">🔍</span>
-            <div>
-              <strong id="card3Title">Impersonation</strong>
-              <p id="card3Text">We find fake sites pretending to be real brands.</p>
-            </div>
+          <div class="check-list">
+            <div><span>SSL Certificate</span><strong>Valid</strong></div>
+            <div><span>Blacklist Status</span><strong>Clean</strong></div>
+            <div><span>Domain Signals</span><strong>Checked</strong></div>
+            <div><span>Scam Patterns</span><strong>Analyzed</strong></div>
           </div>
         </div>
       </section>
     </main>
 
-    <section class="features-grid">
-      <article class="feature-card">
-        <div class="feature-icon">🚀</div>
-        <h3>Fast Verification</h3>
-        <p>Get results in seconds with our automated risk scoring engine.</p>
-      </article>
-      <article class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Risk Scoring</h3>
-        <p>We analyze multiple signals to give you a clear 0-100 risk score.</p>
-      </article>
-      <article class="feature-card">
-        <div class="feature-icon">🔒</div>
-        <h3>Check Before You Click</h3>
-        <p>Useful for phishing links, fake stores, marketplace scams, delivery scams and suspicious emails.</p>
-      </article>
-    </section>
-
-    <section class="seo-section">
-      <h2>Popular scam checks</h2>
-      <p style="margin-bottom:18px;">Quick access to common scam checks in English and Romanian.</p>
-      <div class="quick-links">
-        <a href="/is-this-link-safe.html">Is this link safe?</a>
-        <a href="/fake-website-checker.html">Fake website checker</a>
-        <a href="/phishing-email-checker.html">Phishing email checker</a>
-        <a href="/paypal-scam-email-checker.html">PayPal scam email checker</a>
-        <a href="/dhl-scam-text-checker.html">DHL scam text checker</a>
-        <a href="/scam-olx-romania.html">Scam OLX România</a>
-        <a href="/verifica-link-suspect.html">Verifică link suspect</a>
-        <a href="/sms-fan-courier-fals.html">SMS FAN Courier fals</a>
-        <a href="/pricing.html">Premium coming soon</a>
-      </div>
-    </section>
-
-    <section class="seo-section">
-      <h2>Built for quick decisions</h2>
-      <p>ScamScouter helps you slow down before clicking a suspicious link, entering card details, paying a fake delivery fee, replying to a fake buyer or trusting an unexpected email.</p>
-    </section>
-
     <div id="site-footer"></div>
   </div>
-  
   <script src="/includes.js"></script>
   <script type="module" src="/app.js"></script>
 </body>
