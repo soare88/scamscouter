@@ -9,21 +9,15 @@ async function loadInclude(id, file) {
     const html = await res.text();
     el.innerHTML = html;
 
-    // Scripts inserted with innerHTML do not automatically run.
-    // This makes analytics.html scripts execute correctly.
     const scripts = Array.from(el.querySelectorAll("script"));
-
     for (const oldScript of scripts) {
       const newScript = document.createElement("script");
-
       for (const attr of oldScript.attributes) {
         newScript.setAttribute(attr.name, attr.value);
       }
-
       if (oldScript.textContent) {
         newScript.textContent = oldScript.textContent;
       }
-
       oldScript.replaceWith(newScript);
     }
   } catch (err) {

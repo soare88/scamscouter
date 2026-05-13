@@ -1,0 +1,1 @@
+Fixed full site pack. Keeps design styling, Analytics loader fix, app.js safe render/report, and Detection Engine v1.1.1. Replace all files in repo root with these contents. Keep your real GA4 ID in analytics.html.

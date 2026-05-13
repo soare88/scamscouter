@@ -190,9 +190,7 @@ export default async function handler(req, res) {
     }
 
     function extractUrls(input) {
-      return (
-        input.match(/https?:\/\/[^\s]+|(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s]*)?/gi) || []
-      );
+      return input.match(/https?:\/\/[^\s]+|(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s]*)?/gi) || [];
     }
 
     function domainFromUrl(raw) {
@@ -218,10 +216,7 @@ export default async function handler(req, res) {
     const mainDomain = domains[0] || null;
 
     if (!urls.length && text.length > 25) {
-      addSignal(
-        "Message text was analyzed without a clear URL. Treat unknown messages with caution.",
-        12
-      );
+      addSignal("Message text was analyzed without a clear URL. Treat unknown messages with caution.", 12);
     }
 
     for (const domain of domains) {
@@ -234,11 +229,7 @@ export default async function handler(req, res) {
         signals.push("Trusted official domain detected: " + domain);
       } else {
         hasUnknownDomain = true;
-        addSignal(
-          "Unknown or unverified domain. ScamScouter does not mark unknown domains as fully safe: " +
-            domain,
-          25
-        );
+        addSignal("Unknown or unverified domain. ScamScouter does not mark unknown domains as fully safe: " + domain, 25);
       }
 
       if (knownHighRiskDomains.some((bad) => isSubdomainOrExact(domain, bad))) {
@@ -255,9 +246,7 @@ export default async function handler(req, res) {
       }
 
       for (const brand of protectedBrands) {
-        const trustedBrandDomain = trustedDomains.some(
-          (safe) => isSubdomainOrExact(domain, safe) && domain.includes(brand)
-        );
+        const trustedBrandDomain = trustedDomains.some((safe) => isSubdomainOrExact(domain, safe) && domain.includes(brand));
 
         if (label.includes(brand) && !trustedBrandDomain) {
           hasBrandImpersonation = true;
@@ -304,13 +293,9 @@ export default async function handler(req, res) {
       addSignal("Message may ask for sensitive information.", 18);
     }
 
-    /*
-      Strict safety policy:
-      - Unknown domains cannot be Safe.
-      - Crypto / investment / trading patterns should be high risk.
-      - Known suspicious domains should be high risk.
-      - Known official domains can be Safe only if no other risk exists.
-    */
+    // Strict safety policy.
+    // Unknown domains cannot be Safe.
+    // Known high risk domains are High Risk.
     if (hasUnknownDomain && score < 40) score = 40;
     if (hasCryptoRisk && score < 70) score = 70;
     if (hasBrandImpersonation && score < 75) score = 75;
@@ -344,9 +329,7 @@ export default async function handler(req, res) {
 
     const signalList = signals.length
       ? signals.map((s) => "- " + s).join("\n")
-      : isRo
-        ? "- Nu au fost detectate semnale majore automat."
-        : "- No major automated red flags detected.";
+      : (isRo ? "- Nu au fost detectate semnale majore automat." : "- No major automated red flags detected.");
 
     const checksList = [
       mainDomain ? "Domain analysis: checked" : "Domain analysis: no domain detected",
@@ -356,9 +339,7 @@ export default async function handler(req, res) {
       "Brand impersonation patterns: checked",
       "URL structure: checked",
       "ScamScouter engine: " + ENGINE_VERSION
-    ]
-      .map((s) => "- " + s)
-      .join("\n");
+    ].map((s) => "- " + s).join("\n");
 
     const result = isRo
       ? `${ENGINE_VERSION}
@@ -408,7 +389,6 @@ Do not enter passwords, card numbers, verification codes, seed phrases or privat
     });
   } catch (error) {
     console.error("Scan API error:", error);
-
     return res.status(500).json({
       ok: false,
       version: ENGINE_VERSION,
