@@ -28,16 +28,8 @@
             </div>
             <span class="status-dot" id="statusDot">Live</span>
           </div>
-          
           <textarea id="input" rows="5" placeholder="Paste a suspicious link, message, email, or website..."></textarea>
-          
-          <!-- Aici am pus ambele butoane sa fie identice (folosesc aceeasi clasa scan-btn) -->
-          <input type="file" id="imageUpload" accept="image/*" style="display:none" onchange="window.processImage(this)">
-          <div style="display: flex; gap: 14px; margin-top: 14px;">
-            <button type="button" onclick="document.getElementById('imageUpload').click()" class="scan-btn" style="margin-top: 0; flex: 1; display: flex; justify-content: center; align-items: center; gap: 8px;">📸 Photo</button>
-            <button id="scanBtn" onclick="runScan()" class="scan-btn" style="margin-top: 0; flex: 1;">Scan Now</button>
-          </div>
-
+          <button id="scanBtn" onclick="runScan()" class="scan-btn">Scan Now</button>
           <p class="scanner-proof">Free beta • No signup required • Instant results</p>
           <div id="out" class="output-area"></div>
         </div>

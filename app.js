@@ -442,30 +442,6 @@ window.runScan = async function () {
   }
 };
 
-window.processImage = async function(input) {
-  if (!input.files || !input.files[0]) return;
-  
-  const out = document.getElementById("out");
-  clearOutput(out);
-  out.appendChild(makeEl("div", "loading", "Reading text from image... 📸"));
-
-  try {
-    const Tesseract = await import('https://esm.sh/tesseract.js@5');
-    const worker = await Tesseract.createWorker(currentLang === 'ro' ? 'ron' : 'eng');
-    const { data: { text } } = await worker.recognize(input.files[0]);
-    await worker.terminate();
-
-    if (text && text.trim().length > 3) {
-      document.getElementById("input").value = text;
-      window.runScan();
-    } else {
-      renderError("Image text could not be read clearly.");
-    }
-  } catch (err) {
-    renderError("Error processing image.");
-  }
-};
-
 window.upgrade = function () {
   alert(t("upgradeSoon"));
 };
