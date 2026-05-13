@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ScamScouter - Check Suspicious Links, Messages & Scam Websites</title>
-  <meta name="description" content="Use ScamScouter to check suspicious links, scam messages, phishing emails and fake websites." />
+  <meta name="description" content="Use ScamScouter to check suspicious links, scam messages, phishing emails and fake websites before you click." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://scamscouter.com/" />
   <link rel="stylesheet" href="style.css" />
@@ -29,15 +29,15 @@
             <span class="status-dot" id="statusDot">Live</span>
           </div>
           
-          <textarea id="input" rows="5" placeholder="Paste a suspicious link, message, email, or website..."></textarea>
+          <textarea id="input" rows="5" placeholder="Paste text or link here..."></textarea>
           
           <div style="display: flex; gap: 12px; align-items: center; margin-top: 15px;">
             <input type="file" id="imageUpload" accept="image/*" style="display:none" onchange="window.processImage(this)">
             <button id="scanBtn" onclick="runScan()" class="scan-btn" style="flex: 1; margin-top: 0;">Scan Now</button>
-            <button type="button" onclick="document.getElementById('imageUpload').click()" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.14); color: white; padding: 15px; border-radius: 12px; cursor: pointer; transition: 0.2s;">📸</button>
+            <button type="button" onclick="document.getElementById('imageUpload').click()" style="background: rgba(255,255,255,0.1); border: 1px solid var(--border); color: white; padding: 15px 20px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center;" title="Upload screenshot">📸</button>
           </div>
           
-          <p class="scanner-proof">Free beta • No signup required • Instant results</p>
+          <p class="scanner-proof" style="text-align:center; color:rgba(255,255,255,0.5); font-size:13px; margin-top:15px;">Free beta • No signup required • Instant results</p>
           <div id="out" class="output-area"></div>
         </div>
       </section>

@@ -22,7 +22,7 @@ let currentLang = localStorage.getItem("scamscouter_lang") || "en";
 window.processImage = async function(input) {
   if (!input.files || !input.files[0]) return;
   const out = document.getElementById("out");
-  out.innerHTML = '<div class="loading" style="color:var(--blue2);font-weight:700;">Scanning image... 📸</div>';
+  out.innerHTML = '<div class="loading">Reading text from image... 📸</div>';
 
   try {
     const Tesseract = await import('https://esm.sh/tesseract.js@5');
@@ -34,10 +34,10 @@ window.processImage = async function(input) {
       document.getElementById("input").value = text;
       window.runScan();
     } else {
-      out.innerHTML = '<div style="color:var(--red);padding:10px;">Image text not detected clearly.</div>';
+      out.innerHTML = '<div class="error-box" style="color:var(--red);">Image text could not be read clearly.</div>';
     }
   } catch (err) {
-    out.innerHTML = '<div style="color:var(--red);padding:10px;">OCR Error. Please try copy-pasting text.</div>';
+    out.innerHTML = '<div class="error-box" style="color:var(--red);">Error processing image.</div>';
   }
 };
 
@@ -46,7 +46,7 @@ window.runScan = async function () {
   if (!input || !input.value.trim()) return;
 
   const out = document.getElementById("out");
-  out.innerHTML = '<div class="loading" style="color:var(--blue2);font-weight:700;">Analyzing signals... 🤖</div>';
+  out.innerHTML = '<div class="loading">Analyzing scan signals... 🤖</div>';
 
   try {
     const res = await fetch("/api/scan", {
@@ -56,17 +56,36 @@ window.runScan = async function () {
     });
     const data = await res.json();
     
+    // Fallbacks if data properties are missing
+    const score = data.score !== undefined ? data.score : 50;
+    const verdict = data.verdict || "Warning";
+    let riskClass = "warning";
+    if (score >= 60) riskClass = "risk";
+    else if (score <= 29) riskClass = "safe";
+
     out.innerHTML = `
       <div class="result-box">
-        <h3 class="result-${data.riskLevel}" style="margin-bottom:8px;">${data.verdict} (${data.score}/100)</h3>
-        <p style="color: var(--muted); font-size: 14px; line-height:1.5;">${data.result.replace(/\n/g, '<br>')}</p>
+        <h3 class="result-header result-${riskClass}" style="margin-bottom:12px;">${verdict} (${score}/100)</h3>
+        <p style="white-space: pre-wrap; line-height: 1.6; color: var(--muted);">${data.result || "Scan completed."}</p>
       </div>
     `;
   } catch (err) {
-    out.innerHTML = '<div style="color:var(--red);padding:10px;">Scan failed. Check your internet or API status.</div>';
+    out.innerHTML = '<div class="error-box" style="color:var(--red);">Scan failed. Please try again.</div>';
   }
 };
 
-onAuthStateChanged(auth, u => { user = u; });
+onAuthStateChanged(auth, u => { 
+    user = u; 
+    const userDiv = document.getElementById("user");
+    if(userDiv) {
+        userDiv.textContent = u ? u.email : (currentLang === 'ro' ? "Mod Vizitator" : "Guest Mode");
+    }
+});
 window.login = () => signInWithPopup(auth, provider);
 window.logout = () => signOut(auth);
+
+window.setLanguage = function (lang) {
+  currentLang = lang;
+  localStorage.setItem("scamscouter_lang", lang);
+  location.reload(); // Quick refresh to apply translations naturally
+};
