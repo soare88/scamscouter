@@ -35,31 +35,22 @@ const translations = {
     subheadline: "Paste any suspicious link, message, email or website below and get an instant scam risk analysis.",
     scannerLabel: "Scan anything suspicious",
     scannerTitle: "Paste a link, message or email",
-    statusDot: "Live",
-    inputPlaceholder: "Paste a suspicious link, message, email, or website...",
-    scanButton: "Scan Now",
-    analyzing: "Analyzing scam signals... 🤖",
-    emptyInput: "Please paste a suspicious link, message, or email.",
-    loginFailed: "Sign in failed. Please try again.",
+    scanBtn: "Check Now",
+    card1Title: "Safe Analysis",
+    card1Text: "We check domain age and security certificates.",
+    card2Title: "Scam Signals",
+    card2Text: "We detect keywords used in phishing and frauds.",
+    card3Title: "Impersonation",
+    card3Text: "We find fake sites pretending to be real brands.",
+    emptyInput: "Please paste some text, a link or upload an image first.",
     scanFailed: "Scan failed. Please try again.",
-    riskScore: "Risk score",
-    freeScansLeft: "Free scans left",
-    safe: "✅ Looks Safe",
-    caution: "⚠️ Use Caution",
-    risk: "🚨 High Scam Risk",
-    shareResult: "Share Result",
-    copyResult: "Copy Result",
-    reportSite: "Report this site",
-    copied: "Result copied to clipboard.",
-    reportSaved: "Report saved. Thank you for helping improve ScamScouter.",
-    reportNeedsScan: "Please run a scan first.",
-    loginToReport: "Please sign in before reporting a scam.",
-    shareTitle: "ScamScouter Scan Result",
-    checkedWith: "Checked with ScamScouter",
-    upgradeSoon: "Premium plans are coming soon. Contact hello@scamscouter.com for early access."
+    saveReport: "Report as Scam",
+    reportSaved: "Report saved! Thank you for helping the community.",
+    ocrLoading: "Reading text from image... 📸",
+    ocrError: "Could not read text from this image. Please try a clearer screenshot."
   },
   ro: {
-    guest: "Mod vizitator",
+    guest: "Mod Vizitator",
     signIn: "Autentificare",
     signOut: "Deconectare",
     language: "Limbă",
@@ -68,310 +59,153 @@ const translations = {
     navContact: "Contact",
     navPrivacy: "Confidențialitate",
     eyebrow: "Protecție anti-scam asistată de AI",
-    headline: "Verifică linkurile suspecte înainte să dai click.",
-    subheadline: "Lipește mai jos orice link, mesaj, email sau site suspect și primește o analiză instant a riscului de scam.",
-    scannerLabel: "Scanează orice pare suspect",
+    headline: "Verifică link-urile suspecte înainte să dai click.",
+    subheadline: "Lipește orice link, mesaj, email sau site suspect mai jos și primești o analiză instantanee a riscului.",
+    scannerLabel: "Scanează orice suspect",
     scannerTitle: "Lipește un link, mesaj sau email",
-    statusDot: "Activ",
-    inputPlaceholder: "Lipește un link, mesaj, email sau site suspect...",
-    scanButton: "Scanează acum",
-    analyzing: "Analizăm semnalele de fraudă... 🤖",
-    emptyInput: "Te rog lipește un link, mesaj sau email suspect.",
-    loginFailed: "Autentificarea a eșuat. Încearcă din nou.",
-    scanFailed: "Scanarea a eșuat. Încearcă din nou.",
-    riskScore: "Scor de risc",
-    freeScansLeft: "Scanări gratuite rămase",
-    safe: "✅ Pare sigur",
-    caution: "⚠️ Atenție",
-    risk: "🚨 Risc ridicat de scam",
-    shareResult: "Distribuie rezultatul",
-    copyResult: "Copiază rezultatul",
-    reportSite: "Raportează site-ul",
-    copied: "Rezultatul a fost copiat.",
-    reportSaved: "Raport salvat. Mulțumim că ajuți ScamScouter.",
-    reportNeedsScan: "Te rog rulează o scanare înainte.",
-    loginToReport: "Te rog autentifică-te înainte să raportezi un scam.",
-    shareTitle: "Rezultat scanare ScamScouter",
-    checkedWith: "Verificat cu ScamScouter",
-    upgradeSoon: "Planurile premium vor fi disponibile în curând. Contact: hello@scamscouter.com"
+    scanBtn: "Verifică acum",
+    card1Title: "Analiză Siguranță",
+    card1Text: "Verificăm vechimea domeniului și certificatele de securitate.",
+    card2Title: "Semnale de Fraudă",
+    card2Text: "Detectăm cuvinte cheie folosite în phishing și înșelătorii.",
+    card3Title: "Impersonare",
+    card3Text: "Găsim site-uri false care pretind a fi branduri reale.",
+    emptyInput: "Vă rugăm să introduceți un text, un link sau să încărcați o poză.",
+    scanFailed: "Scanarea a eșuat. Încercați din nou.",
+    saveReport: "Raportează ca Scam",
+    reportSaved: "Raport salvat! Mulțumim că ajuți comunitatea.",
+    ocrLoading: "Citim textul din poză... 📸",
+    ocrError: "Nu am putut citi textul din această poză. Încearcă un screenshot mai clar."
   }
 };
 
-function detectLanguage() {
-  const saved = localStorage.getItem("scamscouter_lang");
-  if (saved && translations[saved]) return saved;
-
-  const browserLang = navigator.language || navigator.userLanguage || "en";
-  return browserLang.toLowerCase().startsWith("ro") ? "ro" : "en";
-}
-
-let currentLang = detectLanguage();
+let currentLang = "en";
 
 function t(key) {
-  return translations[currentLang][key] || translations.en[key] || key;
-}
-
-function setText(id, key) {
-  const el = document.getElementById(id);
-  if (el) el.innerText = t(key);
-}
-
-function applyLanguage() {
-  document.documentElement.lang = currentLang;
-
-  const map = {
-    langLabel: "language",
-    loginBtn: "signIn",
-    logoutBtn: "signOut",
-    scanBtn: "scanButton"
-  };
-
-  ["langLabel", "loginBtn", "logoutBtn", "eyebrow", "headline", "subheadline", "scannerLabel", "scannerTitle", "statusDot", "scanBtn"].forEach((id) => {
-    setText(id, map[id] || id);
-  });
-
-  document.querySelectorAll("[data-i18n]").forEach((el) => {
-    el.innerText = t(el.getAttribute("data-i18n"));
-  });
-
-  const userBox = document.getElementById("user");
-  if (userBox && !user) userBox.innerText = t("guest");
-
-  const input = document.getElementById("input");
-  if (input) input.placeholder = t("inputPlaceholder");
-
-  const langSelect = document.getElementById("languageSelect");
-  if (langSelect) langSelect.value = currentLang;
+  return translations[currentLang][key] || key;
 }
 
 window.setLanguage = function (lang) {
-  if (!translations[lang]) return;
-
   currentLang = lang;
   localStorage.setItem("scamscouter_lang", lang);
-  applyLanguage();
+  updateUI();
 };
 
-window.addEventListener("scamscouter:includes-ready", applyLanguage);
+function updateUI() {
+  document.getElementById("langLabel").textContent = t("language");
+  document.getElementById("eyebrow").textContent = t("eyebrow");
+  document.getElementById("headline").textContent = t("headline");
+  document.getElementById("subheadline").textContent = t("subheadline");
+  document.getElementById("scannerLabel").textContent = t("scannerLabel");
+  document.getElementById("scannerTitle").textContent = t("scannerTitle");
+  document.getElementById("scanBtn").textContent = t("scanBtn");
 
-onAuthStateChanged(auth, async (u) => {
+  document.getElementById("card1Title").textContent = t("card1Title");
+  document.getElementById("card1Text").textContent = t("card1Text");
+  document.getElementById("card2Title").textContent = t("card2Title");
+  document.getElementById("card2Text").textContent = t("card2Text");
+  document.getElementById("card3Title").textContent = t("card3Title");
+  document.getElementById("card3Text").textContent = t("card3Text");
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    el.textContent = t(key);
+  });
+}
+
+// Funcția de procesare IMAGINE (OCR)
+window.processImage = async function(input) {
+  if (!input.files || !input.files[0]) return;
+  
+  const file = input.files[0];
+  const out = document.getElementById("out");
+  out.innerHTML = `<div class="loading">${t("ocrLoading")}</div>`;
+
+  try {
+    // Încărcăm dinamic Tesseract.js
+    const Tesseract = await import('https://esm.sh/tesseract.js@5');
+    const worker = await Tesseract.createWorker(currentLang === 'ro' ? 'ron' : 'eng');
+    
+    const { data: { text } } = await worker.recognize(file);
+    await worker.terminate();
+
+    if (!text || text.trim().length < 3) {
+      out.innerHTML = `<div class="error-box">${t("ocrError")}</div>`;
+      return;
+    }
+
+    // Punem textul în textarea și rulăm scanarea
+    document.getElementById("input").value = text;
+    window.runScan();
+    
+  } catch (err) {
+    console.error("OCR Error:", err);
+    out.innerHTML = `<div class="error-box">${t("ocrError")}</div>`;
+  }
+};
+
+window.login = () => signInWithPopup(auth, provider).catch(console.error);
+window.logout = () => signOut(auth).catch(console.error);
+
+onAuthStateChanged(auth, (u) => {
   user = u;
+  const userDiv = document.getElementById("user");
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
 
-  const userBox = document.getElementById("user");
-
-  if (u) {
-    if (userBox) userBox.innerText = u.email;
-
-    await setDoc(doc(db, "users", u.uid), {
-      email: u.email,
-      uid: u.uid,
-      lastLogin: Date.now(),
-      product: "ScamScouter",
-      language: currentLang
-    }, { merge: true });
+  if (user) {
+    userDiv.textContent = user.displayName || user.email;
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "block";
   } else {
-    if (userBox) userBox.innerText = t("guest");
+    userDiv.textContent = t("guest");
+    loginBtn.style.display = "block";
+    logoutBtn.style.display = "none";
   }
 });
 
-window.login = async function () {
-  try {
-    const result = await signInWithPopup(auth, provider);
-    user = result.user;
-
-    await setDoc(doc(db, "users", user.uid), {
-      email: user.email,
-      uid: user.uid,
-      createdAt: Date.now(),
-      product: "ScamScouter",
-      language: currentLang
-    }, { merge: true });
-  } catch (err) {
-    console.error(err);
-    alert(t("loginFailed"));
-  }
-};
-
-window.logout = async function () {
-  try {
-    await signOut(auth);
-    user = null;
-    applyLanguage();
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-function clearOutput(out) {
-  while (out.firstChild) out.removeChild(out.firstChild);
-}
-
-function makeEl(tag, className, text) {
-  const el = document.createElement(tag);
-  if (className) el.className = className;
-  if (text !== undefined && text !== null) el.textContent = text;
-  return el;
-}
-
-function renderError(message) {
-  const out = document.getElementById("out");
-  if (!out) return;
-
-  clearOutput(out);
-
-  const box = makeEl("div", "result-box");
-  const header = makeEl("div", "result-header result-risk", "Error");
-  const p = makeEl("p", "", message);
-
-  box.appendChild(header);
-  box.appendChild(p);
-  out.appendChild(box);
-}
-
 function renderLoading() {
   const out = document.getElementById("out");
-  if (!out) return;
+  out.innerHTML = '<div class="loading">Analyzing for scams...</div>';
+}
 
-  clearOutput(out);
-  out.appendChild(makeEl("div", "loading", t("analyzing")));
+function renderError(msg) {
+  const out = document.getElementById("out");
+  out.innerHTML = `<div class="error-box">${msg}</div>`;
 }
 
 function renderResult(data) {
   const out = document.getElementById("out");
-  if (!out) return;
+  const scoreClass = data.score > 60 ? "score-high" : data.score > 30 ? "score-mid" : "score-low";
 
-  clearOutput(out);
-
-  let score = Number(data.score);
-  if (!Number.isFinite(score)) score = 50;
-  score = Math.max(0, Math.min(100, score));
-
-  let status = data.riskLevel || "warning";
-  let label = t("caution");
-
-  if (status === "safe" || score <= 29) {
-    status = "safe";
-    label = t("safe");
-  }
-
-  if (status === "warning" || (score >= 30 && score <= 59)) {
-    status = "warning";
-    label = t("caution");
-  }
-
-  if (status === "risk" || score >= 60) {
-    status = "risk";
-    label = t("risk");
-  }
-
-  const input = document.getElementById("input");
-  if (input) {
-    input.classList.remove("safe-box", "risk-box", "warning-box");
-    input.classList.add(status === "safe" ? "safe-box" : status === "risk" ? "risk-box" : "warning-box");
-  }
-
-  lastShareText = `${label}\n${t("riskScore")}: ${score}/100\n\n${data.result || ""}`;
-
-  const box = makeEl("div", "result-box");
-  const header = makeEl("div", `result-header result-${status}`, label);
-
-  const meter = makeEl("div", "risk-meter");
-  const fill = makeEl("div", `risk-fill ${status}`);
-  fill.style.width = `${score}%`;
-  meter.appendChild(fill);
-
-  const scoreP = makeEl("p");
-  const scoreStrong = makeEl("strong", "", `${t("riskScore")}: `);
-  scoreP.appendChild(scoreStrong);
-  scoreP.appendChild(document.createTextNode(`${score}/100`));
-
-  const resultText = makeEl("div");
-  resultText.style.whiteSpace = "pre-wrap";
-  resultText.textContent = data.result || "";
-
-  const remaining = makeEl("p");
-  const remainingStrong = makeEl("strong", "", `${t("freeScansLeft")}: `);
-  remaining.appendChild(remainingStrong);
-  remaining.appendChild(document.createTextNode(String(data.remaining ?? "unlimited")));
-
-  const actions = makeEl("div", "result-actions");
-
-  const shareBtn = makeEl("button", "", t("shareResult"));
-  shareBtn.onclick = window.shareResult;
-
-  const copyBtn = makeEl("button", "", t("copyResult"));
-  copyBtn.onclick = window.copyResult;
-
-  const reportBtn = makeEl("button", "", t("reportSite"));
-  reportBtn.onclick = window.reportScam;
-
-  actions.appendChild(shareBtn);
-  actions.appendChild(copyBtn);
-  actions.appendChild(reportBtn);
-
-  box.appendChild(header);
-  box.appendChild(meter);
-  box.appendChild(scoreP);
-  box.appendChild(resultText);
-  box.appendChild(remaining);
-  box.appendChild(actions);
-
-  out.appendChild(box);
+  out.innerHTML = `
+    <div class="result-card">
+      <div class="result-header">
+        <h3>Analysis Result</h3>
+        <span class="score-badge ${scoreClass}">${data.score}/100</span>
+      </div>
+      <div class="verdict">${data.verdict}</div>
+      <pre class="result-text">${data.result}</pre>
+      <div class="result-actions">
+        <button onclick="window.saveReport()" class="report-btn">${t("saveReport")}</button>
+      </div>
+    </div>
+  `;
 }
 
-window.shareResult = async function () {
-  const out = document.getElementById("out");
-  const text = lastShareText || out?.innerText || "I checked a suspicious link with ScamScouter.";
-  const shareText = `${text}\n\n${t("checkedWith")}: https://scamscouter.com`;
-
-  try {
-    if (navigator.share) {
-      await navigator.share({
-        title: t("shareTitle"),
-        text: shareText,
-        url: "https://scamscouter.com"
-      });
-    } else {
-      await navigator.clipboard.writeText(shareText);
-      alert(t("copied"));
-    }
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-window.copyResult = async function () {
-  const out = document.getElementById("out");
-  const text = lastShareText || out?.innerText || "";
-  const copyText = `${text}\n\n${t("checkedWith")}: https://scamscouter.com`;
-
-  try {
-    await navigator.clipboard.writeText(copyText);
-    alert(t("copied"));
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-window.reportScam = async function () {
-  if (!lastScan) {
-    alert(t("reportNeedsScan"));
+window.saveReport = async function () {
+  if (!user) {
+    alert("Please sign in to save a report.");
     return;
   }
-
-  if (!user) {
-    alert(t("loginToReport"));
-    await window.login();
-    if (!user) return;
-  }
+  if (!lastScan) return;
 
   try {
     await addDoc(collection(db, "scamReports"), {
-      input: lastScan.input,
-      domain: lastScan.domain || null,
+      text: lastScan.input,
+      domain: lastScan.domain,
       verdict: lastScan.verdict,
       score: lastScan.score,
-      result: lastScan.result,
       signals: lastScan.signals || [],
       reporterUid: user.uid,
       reporterEmail: user.email,
@@ -389,11 +223,9 @@ window.reportScam = async function () {
 
 window.runScan = async function () {
   const input = document.getElementById("input");
-
   if (!input) return;
 
   const text = input.value;
-
   if (!text.trim()) {
     alert(t("emptyInput"));
     return;
@@ -402,10 +234,7 @@ window.runScan = async function () {
   renderLoading();
 
   try {
-    const headers = {
-      "Content-Type": "application/json"
-    };
-
+    const headers = { "Content-Type": "application/json" };
     if (user) {
       headers.Authorization = `Bearer ${await user.getIdToken()}`;
     }
@@ -413,10 +242,7 @@ window.runScan = async function () {
     const response = await fetch("/api/scan", {
       method: "POST",
       headers,
-      body: JSON.stringify({
-        text,
-        language: currentLang
-      })
+      body: JSON.stringify({ text, language: currentLang })
     });
 
     const data = await response.json();
@@ -442,9 +268,13 @@ window.runScan = async function () {
   }
 };
 
-window.upgrade = function () {
-  alert(t("upgradeSoon"));
-};
+// Initialize language from storage
+const savedLang = localStorage.getItem("scamscouter_lang");
+if (savedLang) currentLang = savedLang;
+updateUI();
 
-document.addEventListener("DOMContentLoaded", applyLanguage);
-applyLanguage();
+window.addEventListener("scamscouter:includes-ready", () => {
+  const select = document.getElementById("languageSelect");
+  if (select) select.value = currentLang;
+  updateUI();
+});
