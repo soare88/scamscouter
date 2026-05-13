@@ -4,41 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ScamScouter - Check Suspicious Links, Messages & Scam Websites</title>
-  <meta name="description" content="Use ScamScouter to check suspicious links, scam messages, phishing emails and fake websites before you click." />
+  <meta name="description" content="Use ScamScouter to check suspicious links, scam messages, phishing emails and fake websites." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://scamscouter.com/" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Stiluri discrete pentru a nu strica designul */
-    .scanner-controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    .btn-ocr {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #aab6c8;
-      padding: 14px 20px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-    }
-    .btn-ocr:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-    }
-    .scan-btn-main {
-      flex: 1;
-      margin-top: 0 !important; /* Suprascriem marginea veche */
-    }
-  </style>
 </head><body>
   <div id="site-analytics"></div>
   <div class="page-bg">
@@ -60,28 +29,20 @@
             <span class="status-dot" id="statusDot">Live</span>
           </div>
           
-          <textarea id="input" rows="5" placeholder="Paste text or link here..."></textarea>
+          <textarea id="input" rows="5" placeholder="Paste a suspicious link, message, email, or website..."></textarea>
           
-          <div class="scanner-controls">
+          <div style="display: flex; gap: 12px; align-items: center; margin-top: 15px;">
             <input type="file" id="imageUpload" accept="image/*" style="display:none" onchange="window.processImage(this)">
-            <button type="button" class="btn-ocr" onclick="document.getElementById('imageUpload').click()">
-              📸 <span>Photo / Screenshot</span>
-            </button>
-            <button id="scanBtn" onclick="runScan()" class="scan-btn scan-btn-main">Scan Now</button>
+            <button id="scanBtn" onclick="runScan()" class="scan-btn" style="flex: 1; margin-top: 0;">Scan Now</button>
+            <button type="button" onclick="document.getElementById('imageUpload').click()" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.14); color: white; padding: 15px; border-radius: 12px; cursor: pointer; transition: 0.2s;">📸</button>
           </div>
           
           <p class="scanner-proof">Free beta • No signup required • Instant results</p>
           <div id="out" class="output-area"></div>
         </div>
-
-        <div class="hero-stats">
-          <article><strong>Free</strong><span>No signup required</span></article>
-          <article><strong>Instant</strong><span>Fast risk analysis</span></article>
-          <article><strong>AI</strong><span>Scam pattern checks</span></article>
-        </div>
       </section>
 
-      <section class="premium-hero-right" aria-label="Example trust score">
+      <section class="premium-hero-right">
         <div class="score-glow"></div>
         <div class="score-card">
           <div class="score-card-header">
