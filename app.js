@@ -58,7 +58,7 @@ const translations = {
     loginToReport: "Please sign in before reporting a scam.",
     shareTitle: "ScamScouter Scan Result",
     checkedWith: "Checked with ScamScouter",
-    uploadImage: "Upload screenshot/photo",
+    uploadImage: "Choose screenshot/photo",
     removeImage: "Remove image",
     imageReady: "Image ready for scan",
     imageTooLarge: "Image is too large. Please upload an image under 4 MB.",
@@ -99,7 +99,7 @@ const translations = {
     loginToReport: "Te rog autentifică-te înainte să raportezi un scam.",
     shareTitle: "Rezultat scanare ScamScouter",
     checkedWith: "Verificat cu ScamScouter",
-    uploadImage: "Încarcă poză/screenshot",
+    uploadImage: "Alege poză/screenshot",
     removeImage: "Șterge poza",
     imageReady: "Poza este pregătită pentru scanare",
     imageTooLarge: "Imaginea este prea mare. Te rog încarcă o imagine sub 4 MB.",
@@ -152,6 +152,10 @@ function applyLanguage() {
 
   const langSelect = document.getElementById("languageSelect");
   if (langSelect) langSelect.value = currentLang;
+
+  if (typeof updateImageUploadLanguage === "function") {
+    updateImageUploadLanguage();
+  }
 }
 
 window.setLanguage = function (lang) {
@@ -160,6 +164,7 @@ window.setLanguage = function (lang) {
   currentLang = lang;
   localStorage.setItem("scamscouter_lang", lang);
   applyLanguage();
+  ensureImageUploadUI();
 };
 
 window.addEventListener("scamscouter:includes-ready", applyLanguage);
@@ -417,11 +422,27 @@ function fileToBase64(file) {
   });
 }
 
+function updateImageUploadLanguage() {
+  const label = document.querySelector(".image-upload-label");
+  const removeBtn = document.getElementById("removeImageBtn");
+  const status = document.getElementById("imageUploadStatus");
+
+  if (label) label.textContent = t("uploadImage");
+  if (removeBtn) removeBtn.textContent = t("removeImage");
+
+  if (status && selectedImageName) {
+    status.textContent = `${t("imageReady")}: ${selectedImageName}`;
+  }
+}
+
 function ensureImageUploadUI() {
   const input = document.getElementById("input");
   if (!input) return;
 
-  if (document.getElementById("imageUploadBox")) return;
+  if (document.getElementById("imageUploadBox")) {
+    updateImageUploadLanguage();
+    return;
+  }
 
   const box = document.createElement("div");
   box.id = "imageUploadBox";
@@ -436,8 +457,12 @@ function ensureImageUploadUI() {
   fileInput.type = "file";
   fileInput.id = "imageInput";
   fileInput.accept = "image/*";
-  fileInput.capture = "environment";
   fileInput.className = "image-upload-input";
+
+  // Important:
+  // We do NOT use capture="environment" here.
+  // This lets mobile users choose Gallery, Screenshots, Files, or Camera depending on their phone.
+  fileInput.removeAttribute("capture");
 
   const status = document.createElement("div");
   status.id = "imageUploadStatus";
@@ -450,13 +475,16 @@ function ensureImageUploadUI() {
   removeBtn.textContent = t("removeImage");
   removeBtn.style.display = "none";
 
-  removeBtn.onclick = () => {
+  const clearImage = () => {
     selectedImageData = null;
     selectedImageName = "";
     fileInput.value = "";
     status.textContent = "";
     removeBtn.style.display = "none";
+    updateImageUploadLanguage();
   };
+
+  removeBtn.onclick = clearImage;
 
   fileInput.addEventListener("change", async () => {
     const file = fileInput.files && fileInput.files[0];
@@ -476,9 +504,7 @@ function ensureImageUploadUI() {
       removeBtn.style.display = "inline-flex";
     } catch (err) {
       console.error(err);
-      selectedImageData = null;
-      selectedImageName = "";
-      status.textContent = "";
+      clearImage();
     }
   });
 
@@ -488,6 +514,7 @@ function ensureImageUploadUI() {
   box.appendChild(removeBtn);
 
   input.parentNode.insertBefore(box, input);
+  updateImageUploadLanguage();
 }
 
 document.addEventListener("DOMContentLoaded", ensureImageUploadUI);
