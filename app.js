@@ -18,6 +18,8 @@ const provider = new GoogleAuthProvider();
 
 let user = null;
 let lastScan = null;
+let selectedImageData = null;
+let selectedImageName = "";
 let lastShareText = "";
 
 const translations = {
@@ -56,6 +58,10 @@ const translations = {
     loginToReport: "Please sign in before reporting a scam.",
     shareTitle: "ScamScouter Scan Result",
     checkedWith: "Checked with ScamScouter",
+    uploadImage: "Upload screenshot/photo",
+    removeImage: "Remove image",
+    imageReady: "Image ready for scan",
+    imageTooLarge: "Image is too large. Please upload an image under 4 MB.",
     upgradeSoon: "Premium plans are coming soon. Contact hello@scamscouter.com for early access."
   },
   ro: {
@@ -93,6 +99,10 @@ const translations = {
     loginToReport: "Te rog autentifică-te înainte să raportezi un scam.",
     shareTitle: "Rezultat scanare ScamScouter",
     checkedWith: "Verificat cu ScamScouter",
+    uploadImage: "Încarcă poză/screenshot",
+    removeImage: "Șterge poza",
+    imageReady: "Poza este pregătită pentru scanare",
+    imageTooLarge: "Imaginea este prea mare. Te rog încarcă o imagine sub 4 MB.",
     upgradeSoon: "Planurile premium vor fi disponibile în curând. Contact: hello@scamscouter.com"
   }
 };
@@ -387,6 +397,103 @@ window.reportScam = async function () {
   }
 };
 
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const result = String(reader.result || "");
+      const base64 = result.includes(",") ? result.split(",")[1] : result;
+      resolve({
+        base64,
+        mimeType: file.type || "image/jpeg",
+        name: file.name || "uploaded-image"
+      });
+    };
+
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function ensureImageUploadUI() {
+  const input = document.getElementById("input");
+  if (!input) return;
+
+  if (document.getElementById("imageUploadBox")) return;
+
+  const box = document.createElement("div");
+  box.id = "imageUploadBox";
+  box.className = "image-upload-box";
+
+  const label = document.createElement("label");
+  label.className = "image-upload-label";
+  label.setAttribute("for", "imageInput");
+  label.textContent = t("uploadImage");
+
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.id = "imageInput";
+  fileInput.accept = "image/*";
+  fileInput.capture = "environment";
+  fileInput.className = "image-upload-input";
+
+  const status = document.createElement("div");
+  status.id = "imageUploadStatus";
+  status.className = "image-upload-status";
+
+  const removeBtn = document.createElement("button");
+  removeBtn.type = "button";
+  removeBtn.id = "removeImageBtn";
+  removeBtn.className = "image-remove-btn";
+  removeBtn.textContent = t("removeImage");
+  removeBtn.style.display = "none";
+
+  removeBtn.onclick = () => {
+    selectedImageData = null;
+    selectedImageName = "";
+    fileInput.value = "";
+    status.textContent = "";
+    removeBtn.style.display = "none";
+  };
+
+  fileInput.addEventListener("change", async () => {
+    const file = fileInput.files && fileInput.files[0];
+
+    if (!file) return;
+
+    if (file.size > 4 * 1024 * 1024) {
+      alert(t("imageTooLarge"));
+      fileInput.value = "";
+      return;
+    }
+
+    try {
+      selectedImageData = await fileToBase64(file);
+      selectedImageName = selectedImageData.name;
+      status.textContent = `${t("imageReady")}: ${selectedImageName}`;
+      removeBtn.style.display = "inline-flex";
+    } catch (err) {
+      console.error(err);
+      selectedImageData = null;
+      selectedImageName = "";
+      status.textContent = "";
+    }
+  });
+
+  box.appendChild(label);
+  box.appendChild(fileInput);
+  box.appendChild(status);
+  box.appendChild(removeBtn);
+
+  input.parentNode.insertBefore(box, input);
+}
+
+document.addEventListener("DOMContentLoaded", ensureImageUploadUI);
+window.addEventListener("scamscouter:includes-ready", ensureImageUploadUI);
+
+
 window.runScan = async function () {
   const input = document.getElementById("input");
 
@@ -394,7 +501,7 @@ window.runScan = async function () {
 
   const text = input.value;
 
-  if (!text.trim()) {
+  if (!text.trim() && !selectedImageData) {
     alert(t("emptyInput"));
     return;
   }
@@ -415,7 +522,8 @@ window.runScan = async function () {
       headers,
       body: JSON.stringify({
         text,
-        language: currentLang
+        language: currentLang,
+        image: selectedImageData
       })
     });
 
@@ -427,7 +535,7 @@ window.runScan = async function () {
     }
 
     lastScan = {
-      input: text,
+      input: text || selectedImageName || "Uploaded image",
       domain: data.domain || null,
       verdict: data.verdict,
       score: data.score,
@@ -446,5 +554,6 @@ window.upgrade = function () {
   alert(t("upgradeSoon"));
 };
 
-document.addEventListener("DOMContentLoaded", applyLanguage);
+document.addEventListener("DOMContentLoaded", () => { applyLanguage(); ensureImageUploadUI(); });
 applyLanguage();
+ensureImageUploadUI();
