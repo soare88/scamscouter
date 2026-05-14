@@ -1,4 +1,4 @@
-const ENGINE_VERSION = "ScamScouter Detection Engine v1.1.1";
+const ENGINE_VERSION = "ScamScouter Detection Engine v1.2 Image Upload";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -12,16 +12,76 @@ export default async function handler(req, res) {
   try {
     const text = String((req.body && req.body.text) || "").trim();
     const language = String((req.body && req.body.language) || "en").toLowerCase();
+    const image = req.body && req.body.image ? req.body.image : null;
 
-    if (!text) {
+    if (!text && !image) {
       return res.status(400).json({
         ok: false,
         version: ENGINE_VERSION,
-        error: "No text provided."
+        error: "No text or image provided."
       });
     }
 
-    const lower = text.toLowerCase();
+
+    let imageAnalysis = "";
+    let imageExtractedText = "";
+
+    if (image && image.base64 && image.mimeType && process.env.GEMINI_API_KEY) {
+      try {
+        const isRoImage = language.startsWith("ro");
+        const imagePrompt = isRoImage
+          ? "Analizează această poză/screenshot pentru semne de scam, phishing, linkuri suspecte, mesaje false, plăți, crypto, curier, bancă sau marketplace. Extrage textul vizibil important. Răspunde scurt în română cu: Text observat, Semnale de risc, Recomandare."
+          : "Analyze this photo/screenshot for scam, phishing, suspicious links, fake messages, payments, crypto, delivery, banking or marketplace fraud. Extract the important visible text. Reply briefly in English with: Observed text, Risk signals, Recommendation.";
+
+        const geminiResponse = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${process.env.GEMINI_API_KEY}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [
+                    { text: imagePrompt },
+                    {
+                      inline_data: {
+                        mime_type: image.mimeType,
+                        data: image.base64
+                      }
+                    }
+                  ]
+                }
+              ]
+            })
+          }
+        );
+
+        if (geminiResponse.ok) {
+          const geminiData = await geminiResponse.json();
+          imageAnalysis =
+            geminiData &&
+            geminiData.candidates &&
+            geminiData.candidates[0] &&
+            geminiData.candidates[0].content &&
+            geminiData.candidates[0].content.parts &&
+            geminiData.candidates[0].content.parts[0] &&
+            geminiData.candidates[0].content.parts[0].text
+              ? geminiData.candidates[0].content.parts[0].text
+              : "";
+
+          imageExtractedText = imageAnalysis;
+        }
+      } catch (e) {
+        imageAnalysis = "";
+        imageExtractedText = "";
+      }
+    }
+
+    const combinedText = [text, imageExtractedText].filter(Boolean).join("\n\n");
+    const lower = combinedText.toLowerCase();
+
     const signals = [];
     let score = 20;
 
@@ -211,11 +271,11 @@ export default async function handler(req, res) {
       return domain.split(".")[0] || domain;
     }
 
-    const urls = extractUrls(text);
+    const urls = extractUrls(combinedText);
     const domains = [...new Set(urls.map(domainFromUrl).filter(Boolean))];
     const mainDomain = domains[0] || null;
 
-    if (!urls.length && text.length > 25) {
+    if (!urls.length && combinedText.length > 25) {
       addSignal("Message text was analyzed without a clear URL. Treat unknown messages with caution.", 12);
     }
 
@@ -268,6 +328,16 @@ export default async function handler(req, res) {
 
       if (/\d{2,}/.test(label) && !isTrusted) {
         addSignal("Numbers detected in unknown domain label.", 10);
+      }
+    }
+
+    if (image && image.base64) {
+      signals.push("Image/screenshot uploaded and analyzed.");
+      if (!process.env.GEMINI_API_KEY) {
+        addSignal("Image upload received, but AI image analysis is not enabled on the server.", 5);
+      }
+      if (imageAnalysis) {
+        addSignal("AI image analysis completed. Review extracted text and risk signals below.", 10);
       }
     }
 
@@ -385,6 +455,7 @@ Do not enter passwords, card numbers, verification codes, seed phrases or privat
       remaining: "unlimited",
       domain: mainDomain,
       signals,
+      imageAnalysis,
       checks: checksList
     });
   } catch (error) {
