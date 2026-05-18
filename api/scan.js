@@ -1,4 +1,4 @@
-const ENGINE_VERSION = "ScamScouter Detection Engine v1.2.3 Small Stable";
+const ENGINE_VERSION = "ScamScouter Detection Engine v1.3 OCR + Phone";
 
 const TRUSTED = [
   "google.com","apple.com","microsoft.com","amazon.com","paypal.com","revolut.com","wise.com",
@@ -21,7 +21,8 @@ const WORDS = [
   "confirm payment","wallet verification","seed phrase","private key","security code","limited time",
   "guaranteed profit","withdrawal fee","tax payment","unlock funds","click here to verify",
   "cod de verificare","cont blocat","plata colet","taxa livrare","taxă livrare","premiu","castigat",
-  "câștigat","confirmă plata","card bancar","date card","profit garantat","taxă retragere","deblochează fonduri"
+  "câștigat","confirmă plata","card bancar","date card","profit garantat","taxă retragere","deblochează fonduri",
+  "whatsapp","transfer bancar","revolut","iban","curier","colet","livrare"
 ];
 
 function exactOrSub(domain, root) {
@@ -46,13 +47,19 @@ function labelOf(domain) {
   return domain.split(".")[0] || domain;
 }
 
+function getPhones(text) {
+  const matches = String(text).match(/(?:\+?\d[\d\s().-]{7,}\d)/g) || [];
+  return [...new Set(matches.map(p => p.replace(/\s+/g, " ").trim()).filter(p => p.replace(/\D/g, "").length >= 8))];
+}
+
+function getEmails(text) {
+  const matches = String(text).match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/gi) || [];
+  return [...new Set(matches.map(e => e.toLowerCase()))];
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({
-      ok: false,
-      version: ENGINE_VERSION,
-      error: "Method not allowed. Use POST."
-    });
+    return res.status(405).json({ ok: false, version: ENGINE_VERSION, error: "Method not allowed. Use POST." });
   }
 
   try {
@@ -61,16 +68,13 @@ export default async function handler(req, res) {
     const isRo = language.startsWith("ro");
 
     if (!text) {
-      return res.status(400).json({
-        ok: false,
-        version: ENGINE_VERSION,
-        error: "No text provided."
-      });
+      return res.status(400).json({ ok: false, version: ENGINE_VERSION, error: "No text provided." });
     }
 
     const lower = text.toLowerCase();
-    const urls = getUrls(text);
-    const domains = [...new Set(urls.map(getDomain).filter(Boolean))];
+    const domains = [...new Set(getUrls(text).map(getDomain).filter(Boolean))];
+    const phones = getPhones(text);
+    const emails = getEmails(text);
 
     let score = 20;
     let trusted = false;
@@ -83,6 +87,20 @@ export default async function handler(req, res) {
     function add(msg, points) {
       signals.push(msg);
       score += points;
+    }
+
+    if (phones.length) {
+      add("Phone number detected: " + phones.join(", "), 8);
+      if (/(whatsapp|sms|curier|colet|livrare|payment|plata|plată|transfer|revolut|iban|taxa|taxă|card|cod)/i.test(text)) {
+        add("Phone number appears in a payment/delivery/account context. Verify before contacting or paying.", 18);
+      }
+    }
+
+    if (emails.length) {
+      add("Email address detected: " + emails.join(", "), 6);
+      if (/(paypal|support|security|verify|account|cont|plata|payment|bank|banca)/i.test(text)) {
+        add("Email appears in an account/payment/security context. Check sender carefully.", 14);
+      }
     }
 
     if (!domains.length && text.length > 25) {
@@ -107,13 +125,8 @@ export default async function handler(req, res) {
         add("Known high-risk or reported suspicious domain detected: " + domain, 90);
       }
 
-      if (RISK_TLD.some(tld => domain.endsWith(tld))) {
-        add("Higher-risk domain extension detected: " + domain, 24);
-      }
-
-      if (SHORT.some(s => exactOrSub(domain, s))) {
-        add("URL shortener detected. Destination may be hidden: " + domain, 24);
-      }
+      if (RISK_TLD.some(tld => domain.endsWith(tld))) add("Higher-risk domain extension detected: " + domain, 24);
+      if (SHORT.some(s => exactOrSub(domain, s))) add("URL shortener detected. Destination may be hidden: " + domain, 24);
 
       for (const brand of BRANDS) {
         const official = TRUSTED.some(d => exactOrSub(domain, d) && domain.includes(brand));
@@ -140,17 +153,18 @@ export default async function handler(req, res) {
     }
 
     if (lower.includes("http://")) add("Non-HTTPS link detected.", 12);
-
-    if (["password","parola","card","cod","security code","seed phrase","private key"].some(w => lower.includes(w))) {
+    if (["password","parola","card","cod","security code","seed phrase","private key","otp"].some(w => lower.includes(w))) {
       add("Message may ask for sensitive information.", 18);
     }
 
     if (unknown && score < 40) score = 40;
+    if (phones.length && score < 30) score = 30;
+    if (emails.length && score < 28) score = 28;
     if (crypto && score < 70) score = 70;
     if (brandRisk && score < 75) score = 75;
     if (knownRisk && score < 95) score = 95;
 
-    if (trusted && !unknown && !knownRisk && !crypto && !brandRisk && signals.length <= 1) {
+    if (trusted && !unknown && !knownRisk && !crypto && !brandRisk && !phones.length && signals.length <= 1) {
       score = Math.min(score, 18);
     }
 
@@ -158,7 +172,6 @@ export default async function handler(req, res) {
 
     let verdict = "Safe";
     let riskLevel = "safe";
-
     if (score >= 60) {
       verdict = "High Risk";
       riskLevel = "risk";
@@ -173,6 +186,8 @@ export default async function handler(req, res) {
 
     const checks = [
       domains[0] ? "Domain analysis: checked" : "Domain analysis: no domain detected",
+      phones.length ? "Phone number analysis: checked" : "Phone number analysis: no number detected",
+      emails.length ? "Email analysis: checked" : "Email analysis: no email detected",
       "Unknown domain policy: checked",
       "Known high-risk list: checked",
       "Crypto / investment patterns: checked",
@@ -194,10 +209,10 @@ Semnale detectate:
 ${signalList}
 
 Explicație:
-ScamScouter analizează linkuri, domenii și mesaje suspecte. Domeniile necunoscute primesc cel puțin Atenție. Domeniile crypto/investment/trading, imitările de brand și domeniile raportate primesc risc ridicat.
+ScamScouter analizează linkuri, domenii, mesaje, emailuri și numere de telefon. Domeniile necunoscute primesc cel puțin Atenție. Numerele de telefon din contexte de plată, curier, cont sau coduri trebuie verificate manual.
 
 Sfaturi:
-Nu introduce parole, date de card, coduri de verificare, seed phrase sau private key pe linkuri suspecte.`
+Nu introduce parole, date de card, coduri de verificare, seed phrase sau private key. Nu suna și nu plăti către numere necunoscute fără verificare din surse oficiale.`
       : `${ENGINE_VERSION}
 
 Verdict: ${verdict}
@@ -210,10 +225,10 @@ Detected signals:
 ${signalList}
 
 Explanation:
-ScamScouter analyzes suspicious links, domains and messages. Unknown domains receive at least Use Caution. Crypto/investment/trading patterns, brand impersonation and reported domains receive a higher risk score.
+ScamScouter analyzes suspicious links, domains, messages, emails and phone numbers. Unknown domains receive at least Use Caution. Phone numbers in payment, delivery, account or code-verification contexts should be manually verified.
 
 Safety advice:
-Do not enter passwords, card numbers, verification codes, seed phrases or private keys on suspicious links.`;
+Do not enter passwords, card numbers, verification codes, seed phrases or private keys. Do not call or pay unknown numbers without verifying through official sources.`;
 
     return res.status(200).json({
       ok: true,
@@ -224,15 +239,13 @@ Do not enter passwords, card numbers, verification codes, seed phrases or privat
       result,
       remaining: "unlimited",
       domain: domains[0] || null,
+      phones,
+      emails,
       signals,
       checks
     });
   } catch (error) {
     console.error("Scan API error:", error);
-    return res.status(500).json({
-      ok: false,
-      version: ENGINE_VERSION,
-      error: "Scan failed on server. Please try again."
-    });
+    return res.status(500).json({ ok: false, version: ENGINE_VERSION, error: "Scan failed on server. Please try again." });
   }
 }
