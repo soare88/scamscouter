@@ -977,3 +977,18 @@ body.scamscouter-css-loaded-test {
     width: 100%;
   }
 }
+
+
+/* OCR browser upload improvement */
+.image-upload-status {
+  min-height: 20px;
+}
+
+.loading,
+.image-upload-status {
+  overflow-wrap: anywhere;
+}
+
+.image-upload-box {
+  position: relative;
+}

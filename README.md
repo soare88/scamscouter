@@ -1,31 +1,31 @@
-# ScamScouter Complete WWW Index Fix
+# ScamScouter Core Detection v1.3 OCR + Phone
 
-This is the full site package rebuilt for Google Search Console indexing.
+This is the next major product update after index stabilization.
 
-Official domain used everywhere:
-https://www.scamscouter.com/
-
-Included fixes:
-- sitemap.xml uses only https://www.scamscouter.com URLs
-- robots.txt points to https://www.scamscouter.com/sitemap.xml
-- all HTML canonical tags use https://www.scamscouter.com
-- favicon files included
-- header logo is inline SVG, no external logo path needed
-- app.js cache-busted to v1.2.3
-- api/scan.js is the small stable version to avoid deploy/API issues
-- CSS is loaded through /scamscouter.css?v=3
+Included:
+- Browser OCR for screenshots/photos using Tesseract.js
+- No Gemini cost for Free image checks
+- One image upload button: Choose screenshot/photo / Alege poză/screenshot
+- OCR text is extracted in the user's browser and inserted into the scan box
+- Phone number detection in api/scan.js
+- Email detection in api/scan.js
+- Small stable API file
+- Official www indexing preserved:
+  https://www.scamscouter.com/
+- sitemap.xml and robots.txt stay on www
+- Header logo SVG and favicon included
 
 Important:
-1. Upload all files directly into the root of your GitHub repository.
+1. Upload all files directly into the root of your GitHub repo.
 2. Do not upload the ZIP itself.
 3. Do not upload the parent folder.
-4. Keep api/scan.js exactly in api/scan.js.
+4. Keep api/scan.js exactly inside api/scan.js.
 5. If analytics.html contains G-XXXXXXXXXX, replace it with your real Google Analytics Measurement ID.
-6. After Vercel deploy is Ready, test:
-   - https://www.scamscouter.com/sitemap.xml
-   - https://www.scamscouter.com/robots.txt
-   - https://www.scamscouter.com/api/scan
+6. After Vercel deploys, hard refresh with Ctrl + Shift + R.
 
-Search Console:
-Use the property https://www.scamscouter.com/ and submit:
-https://www.scamscouter.com/sitemap.xml
+Test:
+- Open https://www.scamscouter.com/api/scan
+  It should show: ScamScouter Detection Engine v1.3 OCR + Phone
+- Upload a screenshot from your phone.
+- The extracted text should appear in the text box.
+- Press Scan Now.

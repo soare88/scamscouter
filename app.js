@@ -18,8 +18,8 @@ const provider = new GoogleAuthProvider();
 
 let user = null;
 let lastScan = null;
-let selectedImageData = null;
 let selectedImageName = "";
+let extractedImageText = "";
 let lastShareText = "";
 
 const translations = {
@@ -38,10 +38,10 @@ const translations = {
     scannerLabel: "Scan anything suspicious",
     scannerTitle: "Paste a link, message or email",
     statusDot: "Live",
-    inputPlaceholder: "Paste a suspicious link, message, email, or website...",
+    inputPlaceholder: "Paste a suspicious link, message, email, phone number, or website...",
     scanButton: "Scan Now",
     analyzing: "Analyzing scam signals... 🤖",
-    emptyInput: "Please paste a suspicious link, message, or email.",
+    emptyInput: "Please paste a suspicious link, message, phone number, or email.",
     loginFailed: "Sign in failed. Please try again.",
     scanFailed: "Scan failed. Please try again.",
     riskScore: "Risk score",
@@ -51,7 +51,7 @@ const translations = {
     risk: "🚨 High Scam Risk",
     shareResult: "Share Result",
     copyResult: "Copy Result",
-    reportSite: "Report this site",
+    reportSite: "Report this scam",
     copied: "Result copied to clipboard.",
     reportSaved: "Report saved. Thank you for helping improve ScamScouter.",
     reportNeedsScan: "Please run a scan first.",
@@ -60,8 +60,11 @@ const translations = {
     checkedWith: "Checked with ScamScouter",
     uploadImage: "Choose screenshot/photo",
     removeImage: "Remove image",
-    imageReady: "Image ready for scan",
+    imageReady: "Image ready",
     imageTooLarge: "Image is too large. Please upload an image under 4 MB.",
+    ocrLoading: "Reading text from image...",
+    ocrDone: "Text extracted from image. You can edit it before scanning.",
+    ocrFailed: "Could not read text from this image. Try a clearer screenshot or paste the text manually.",
     upgradeSoon: "Premium plans are coming soon. Contact hello@scamscouter.com for early access."
   },
   ro: {
@@ -79,10 +82,10 @@ const translations = {
     scannerLabel: "Scanează orice pare suspect",
     scannerTitle: "Lipește un link, mesaj sau email",
     statusDot: "Activ",
-    inputPlaceholder: "Lipește un link, mesaj, email sau site suspect...",
+    inputPlaceholder: "Lipește un link, mesaj, email, număr de telefon sau site suspect...",
     scanButton: "Scanează acum",
     analyzing: "Analizăm semnalele de fraudă... 🤖",
-    emptyInput: "Te rog lipește un link, mesaj sau email suspect.",
+    emptyInput: "Te rog lipește un link, mesaj, număr de telefon sau email suspect.",
     loginFailed: "Autentificarea a eșuat. Încearcă din nou.",
     scanFailed: "Scanarea a eșuat. Încearcă din nou.",
     riskScore: "Scor de risc",
@@ -92,7 +95,7 @@ const translations = {
     risk: "🚨 Risc ridicat de scam",
     shareResult: "Distribuie rezultatul",
     copyResult: "Copiază rezultatul",
-    reportSite: "Raportează site-ul",
+    reportSite: "Raportează scamul",
     copied: "Rezultatul a fost copiat.",
     reportSaved: "Raport salvat. Mulțumim că ajuți ScamScouter.",
     reportNeedsScan: "Te rog rulează o scanare înainte.",
@@ -101,8 +104,11 @@ const translations = {
     checkedWith: "Verificat cu ScamScouter",
     uploadImage: "Alege poză/screenshot",
     removeImage: "Șterge poza",
-    imageReady: "Poza este pregătită pentru scanare",
+    imageReady: "Poza este pregătită",
     imageTooLarge: "Imaginea este prea mare. Te rog încarcă o imagine sub 4 MB.",
+    ocrLoading: "Citesc textul din imagine...",
+    ocrDone: "Text extras din imagine. Îl poți corecta înainte de scanare.",
+    ocrFailed: "Nu am putut citi textul din imagine. Încearcă un screenshot mai clar sau lipește textul manual.",
     upgradeSoon: "Planurile premium vor fi disponibile în curând. Contact: hello@scamscouter.com"
   }
 };
@@ -110,7 +116,6 @@ const translations = {
 function detectLanguage() {
   const saved = localStorage.getItem("scamscouter_lang");
   if (saved && translations[saved]) return saved;
-
   const browserLang = navigator.language || navigator.userLanguage || "en";
   return browserLang.toLowerCase().startsWith("ro") ? "ro" : "en";
 }
@@ -153,30 +158,24 @@ function applyLanguage() {
   const langSelect = document.getElementById("languageSelect");
   if (langSelect) langSelect.value = currentLang;
 
-  if (typeof updateImageUploadLanguage === "function") {
-    updateImageUploadLanguage();
-  }
+  updateImageUploadLanguage();
 }
 
 window.setLanguage = function (lang) {
   if (!translations[lang]) return;
-
   currentLang = lang;
   localStorage.setItem("scamscouter_lang", lang);
   applyLanguage();
-  ensureImageUploadUI();
 };
 
 window.addEventListener("scamscouter:includes-ready", applyLanguage);
 
 onAuthStateChanged(auth, async (u) => {
   user = u;
-
   const userBox = document.getElementById("user");
 
   if (u) {
     if (userBox) userBox.innerText = u.email;
-
     await setDoc(doc(db, "users", u.uid), {
       email: u.email,
       uid: u.uid,
@@ -233,20 +232,15 @@ function renderError(message) {
   if (!out) return;
 
   clearOutput(out);
-
   const box = makeEl("div", "result-box");
-  const header = makeEl("div", "result-header result-risk", "Error");
-  const p = makeEl("p", "", message);
-
-  box.appendChild(header);
-  box.appendChild(p);
+  box.appendChild(makeEl("div", "result-header result-risk", "Error"));
+  box.appendChild(makeEl("p", "", message));
   out.appendChild(box);
 }
 
 function renderLoading() {
   const out = document.getElementById("out");
   if (!out) return;
-
   clearOutput(out);
   out.appendChild(makeEl("div", "loading", t("analyzing")));
 }
@@ -267,16 +261,12 @@ function renderResult(data) {
   if (status === "safe" || score <= 29) {
     status = "safe";
     label = t("safe");
-  }
-
-  if (status === "warning" || (score >= 30 && score <= 59)) {
-    status = "warning";
-    label = t("caution");
-  }
-
-  if (status === "risk" || score >= 60) {
+  } else if (status === "risk" || score >= 60) {
     status = "risk";
     label = t("risk");
+  } else {
+    status = "warning";
+    label = t("caution");
   }
 
   const input = document.getElementById("input");
@@ -288,26 +278,28 @@ function renderResult(data) {
   lastShareText = `${label}\n${t("riskScore")}: ${score}/100\n\n${data.result || ""}`;
 
   const box = makeEl("div", "result-box");
-  const header = makeEl("div", `result-header result-${status}`, label);
+  box.appendChild(makeEl("div", `result-header result-${status}`, label));
 
   const meter = makeEl("div", "risk-meter");
   const fill = makeEl("div", `risk-fill ${status}`);
   fill.style.width = `${score}%`;
   meter.appendChild(fill);
+  box.appendChild(meter);
 
   const scoreP = makeEl("p");
-  const scoreStrong = makeEl("strong", "", `${t("riskScore")}: `);
-  scoreP.appendChild(scoreStrong);
+  scoreP.appendChild(makeEl("strong", "", `${t("riskScore")}: `));
   scoreP.appendChild(document.createTextNode(`${score}/100`));
+  box.appendChild(scoreP);
 
   const resultText = makeEl("div");
   resultText.style.whiteSpace = "pre-wrap";
   resultText.textContent = data.result || "";
+  box.appendChild(resultText);
 
   const remaining = makeEl("p");
-  const remainingStrong = makeEl("strong", "", `${t("freeScansLeft")}: `);
-  remaining.appendChild(remainingStrong);
+  remaining.appendChild(makeEl("strong", "", `${t("freeScansLeft")}: `));
   remaining.appendChild(document.createTextNode(String(data.remaining ?? "unlimited")));
+  box.appendChild(remaining);
 
   const actions = makeEl("div", "result-actions");
 
@@ -324,13 +316,7 @@ function renderResult(data) {
   actions.appendChild(copyBtn);
   actions.appendChild(reportBtn);
 
-  box.appendChild(header);
-  box.appendChild(meter);
-  box.appendChild(scoreP);
-  box.appendChild(resultText);
-  box.appendChild(remaining);
   box.appendChild(actions);
-
   out.appendChild(box);
 }
 
@@ -341,11 +327,7 @@ window.shareResult = async function () {
 
   try {
     if (navigator.share) {
-      await navigator.share({
-        title: t("shareTitle"),
-        text: shareText,
-        url: "https://www.scamscouter.com"
-      });
+      await navigator.share({ title: t("shareTitle"), text: shareText, url: "https://www.scamscouter.com" });
     } else {
       await navigator.clipboard.writeText(shareText);
       alert(t("copied"));
@@ -388,6 +370,7 @@ window.reportScam = async function () {
       score: lastScan.score,
       result: lastScan.result,
       signals: lastScan.signals || [],
+      source: extractedImageText ? "ocr_image_or_text" : "text",
       reporterUid: user.uid,
       reporterEmail: user.email,
       approved: false,
@@ -402,26 +385,6 @@ window.reportScam = async function () {
   }
 };
 
-
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      const result = String(reader.result || "");
-      const base64 = result.includes(",") ? result.split(",")[1] : result;
-      resolve({
-        base64,
-        mimeType: file.type || "image/jpeg",
-        name: file.name || "uploaded-image"
-      });
-    };
-
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
 function updateImageUploadLanguage() {
   const label = document.querySelector(".image-upload-label");
   const removeBtn = document.getElementById("removeImageBtn");
@@ -430,9 +393,56 @@ function updateImageUploadLanguage() {
   if (label) label.textContent = t("uploadImage");
   if (removeBtn) removeBtn.textContent = t("removeImage");
 
-  if (status && selectedImageName) {
+  if (status && selectedImageName && !status.dataset.locked) {
     status.textContent = `${t("imageReady")}: ${selectedImageName}`;
   }
+}
+
+function loadTesseract() {
+  return new Promise((resolve, reject) => {
+    if (window.Tesseract) {
+      resolve(window.Tesseract);
+      return;
+    }
+
+    const existing = document.querySelector('script[data-scamscouter-ocr="true"]');
+    if (existing) {
+      existing.addEventListener("load", () => resolve(window.Tesseract));
+      existing.addEventListener("error", reject);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
+    script.async = true;
+    script.dataset.scamscouterOcr = "true";
+    script.onload = () => resolve(window.Tesseract);
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+async function runBrowserOCR(file, status) {
+  status.dataset.locked = "true";
+  status.textContent = t("ocrLoading");
+
+  const Tesseract = await loadTesseract();
+
+  const result = await Tesseract.recognize(file, "eng+ron", {
+    logger: (m) => {
+      if (m && m.status && typeof m.progress === "number") {
+        const pct = Math.round(m.progress * 100);
+        if (m.status.includes("recognizing")) {
+          status.textContent = `${t("ocrLoading")} ${pct}%`;
+        }
+      }
+    }
+  });
+
+  const text = (result && result.data && result.data.text ? result.data.text : "").trim();
+  status.dataset.locked = "";
+
+  return text;
 }
 
 function ensureImageUploadUI() {
@@ -458,10 +468,6 @@ function ensureImageUploadUI() {
   fileInput.id = "imageInput";
   fileInput.accept = "image/*";
   fileInput.className = "image-upload-input";
-
-  // Important:
-  // We do NOT use capture="environment" here.
-  // This lets mobile users choose Gallery, Screenshots, Files, or Camera depending on their phone.
   fileInput.removeAttribute("capture");
 
   const status = document.createElement("div");
@@ -476,19 +482,18 @@ function ensureImageUploadUI() {
   removeBtn.style.display = "none";
 
   const clearImage = () => {
-    selectedImageData = null;
     selectedImageName = "";
+    extractedImageText = "";
     fileInput.value = "";
     status.textContent = "";
+    status.dataset.locked = "";
     removeBtn.style.display = "none";
-    updateImageUploadLanguage();
   };
 
   removeBtn.onclick = clearImage;
 
   fileInput.addEventListener("change", async () => {
     const file = fileInput.files && fileInput.files[0];
-
     if (!file) return;
 
     if (file.size > 4 * 1024 * 1024) {
@@ -497,14 +502,25 @@ function ensureImageUploadUI() {
       return;
     }
 
+    selectedImageName = file.name || "uploaded-image";
+    removeBtn.style.display = "inline-flex";
+
     try {
-      selectedImageData = await fileToBase64(file);
-      selectedImageName = selectedImageData.name;
-      status.textContent = `${t("imageReady")}: ${selectedImageName}`;
-      removeBtn.style.display = "inline-flex";
+      const text = await runBrowserOCR(file, status);
+      extractedImageText = text;
+
+      if (!text) {
+        status.textContent = t("ocrFailed");
+        return;
+      }
+
+      const prefix = currentLang === "ro" ? "[Text extras din imagine]" : "[Text extracted from image]";
+      const existing = input.value.trim();
+      input.value = existing ? `${existing}\n\n${prefix}\n${text}` : `${prefix}\n${text}`;
+      status.textContent = `${t("ocrDone")} (${selectedImageName})`;
     } catch (err) {
       console.error(err);
-      clearImage();
+      status.textContent = t("ocrFailed");
     }
   });
 
@@ -520,15 +536,13 @@ function ensureImageUploadUI() {
 document.addEventListener("DOMContentLoaded", ensureImageUploadUI);
 window.addEventListener("scamscouter:includes-ready", ensureImageUploadUI);
 
-
 window.runScan = async function () {
   const input = document.getElementById("input");
-
   if (!input) return;
 
-  const text = input.value;
+  const text = input.value.trim();
 
-  if (!text.trim() && !selectedImageData) {
+  if (!text) {
     alert(t("emptyInput"));
     return;
   }
@@ -536,9 +550,7 @@ window.runScan = async function () {
   renderLoading();
 
   try {
-    const headers = {
-      "Content-Type": "application/json"
-    };
+    const headers = { "Content-Type": "application/json" };
 
     if (user) {
       headers.Authorization = `Bearer ${await user.getIdToken()}`;
@@ -547,11 +559,7 @@ window.runScan = async function () {
     const response = await fetch("/api/scan", {
       method: "POST",
       headers,
-      body: JSON.stringify({
-        text,
-        language: currentLang,
-        image: selectedImageData
-      })
+      body: JSON.stringify({ text, language: currentLang })
     });
 
     const data = await response.json();
@@ -562,7 +570,7 @@ window.runScan = async function () {
     }
 
     lastScan = {
-      input: text || selectedImageName || "Uploaded image",
+      input: text,
       domain: data.domain || null,
       verdict: data.verdict,
       score: data.score,
@@ -581,6 +589,10 @@ window.upgrade = function () {
   alert(t("upgradeSoon"));
 };
 
-document.addEventListener("DOMContentLoaded", () => { applyLanguage(); ensureImageUploadUI(); });
+document.addEventListener("DOMContentLoaded", () => {
+  applyLanguage();
+  ensureImageUploadUI();
+});
+
 applyLanguage();
 ensureImageUploadUI();
