@@ -1,25 +1,31 @@
-# ScamScouter Complete v1.2.2 Single Upload Button
+# ScamScouter Complete WWW Index Fix
 
-This package keeps one single image upload button.
+This is the full site package rebuilt for Google Search Console indexing.
 
-Important change:
-- The image input no longer uses capture="environment".
-- On mobile, the button lets the user choose from Gallery, Screenshots, Files, or Camera depending on the phone.
-- English label: Choose screenshot/photo
-- Romanian label: Alege poză/screenshot
+Official domain used everywhere:
+https://www.scamscouter.com/
 
-Included:
-- Full site files
-- Favicon
-- Header SVG logo
-- Screenshot/photo upload
-- Detection Engine v1.2 Image Upload
-- CSS updates
-- All SEO pages
-
-Upload all files directly into the root of your GitHub repo.
+Included fixes:
+- sitemap.xml uses only https://www.scamscouter.com URLs
+- robots.txt points to https://www.scamscouter.com/sitemap.xml
+- all HTML canonical tags use https://www.scamscouter.com
+- favicon files included
+- header logo is inline SVG, no external logo path needed
+- app.js cache-busted to v1.2.3
+- api/scan.js is the small stable version to avoid deploy/API issues
+- CSS is loaded through /scamscouter.css?v=3
 
 Important:
-- Keep your real Google Analytics ID in analytics.html if you already replaced G-XXXXXXXXXX.
-- To truly analyze screenshots/photos, set GEMINI_API_KEY in Vercel Environment Variables.
-- After deploy, hard refresh with Ctrl + Shift + R.
+1. Upload all files directly into the root of your GitHub repository.
+2. Do not upload the ZIP itself.
+3. Do not upload the parent folder.
+4. Keep api/scan.js exactly in api/scan.js.
+5. If analytics.html contains G-XXXXXXXXXX, replace it with your real Google Analytics Measurement ID.
+6. After Vercel deploy is Ready, test:
+   - https://www.scamscouter.com/sitemap.xml
+   - https://www.scamscouter.com/robots.txt
+   - https://www.scamscouter.com/api/scan
+
+Search Console:
+Use the property https://www.scamscouter.com/ and submit:
+https://www.scamscouter.com/sitemap.xml

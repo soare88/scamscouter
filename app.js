@@ -337,14 +337,14 @@ function renderResult(data) {
 window.shareResult = async function () {
   const out = document.getElementById("out");
   const text = lastShareText || out?.innerText || "I checked a suspicious link with ScamScouter.";
-  const shareText = `${text}\n\n${t("checkedWith")}: https://scamscouter.com`;
+  const shareText = `${text}\n\n${t("checkedWith")}: https://www.scamscouter.com`;
 
   try {
     if (navigator.share) {
       await navigator.share({
         title: t("shareTitle"),
         text: shareText,
-        url: "https://scamscouter.com"
+        url: "https://www.scamscouter.com"
       });
     } else {
       await navigator.clipboard.writeText(shareText);
@@ -358,7 +358,7 @@ window.shareResult = async function () {
 window.copyResult = async function () {
   const out = document.getElementById("out");
   const text = lastShareText || out?.innerText || "";
-  const copyText = `${text}\n\n${t("checkedWith")}: https://scamscouter.com`;
+  const copyText = `${text}\n\n${t("checkedWith")}: https://www.scamscouter.com`;
 
   try {
     await navigator.clipboard.writeText(copyText);
