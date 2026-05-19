@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScamScouter Admin</title>
+  <meta name="description" content="Private admin page for ScamScouter report moderation." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://www.scamscouter.com/admin.html" />
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
+  <link rel="manifest" href="/site.webmanifest?v=2" />
+  <meta name="theme-color" content="#060b1a" />
+  <link rel="stylesheet" href="/scamscouter.css?v=4" />
+</head>
+<body>
+  <div id="site-analytics"></div>
+  <div class="page-bg">
+    <div class="hero-glow"></div>
+    <div id="site-header"></div>
+    <main class="seo-section" style="text-align:left;max-width:1120px;">
+  <h1>ScamScouter Admin</h1>
+  <p>This private page helps review community scam reports. It is marked noindex and is not included in the sitemap.</p>
+
+  <div class="result-box">
+    <strong>Admin access</strong>
+    <p>Sign in with an approved admin email. If your email is not in the admin list, open <code>admin.js</code> and add it to <code>ADMIN_EMAILS</code>.</p>
+    <button class="scan-btn" id="adminLoginBtn">Sign in with Google</button>
+  </div>
+
+  <div id="adminStatus" class="report-status"></div>
+  <div id="adminReports" class="admin-report-list"></div>
+</main>
+    <div id="site-footer"></div>
+  </div>
+  <script src="/includes.js"></script>
+  <script type="module" src="/app.js?v=1.6"></script>
+  <script type="module" src="/admin.js?v=1.6"></script>
+</body>
+</html>

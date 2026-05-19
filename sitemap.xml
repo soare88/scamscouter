@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.scamscouter.com/</loc>
+    <loc>https://www.scamscouter.com/about.html</loc>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.scamscouter.com/about.html</loc>
+    <loc>https://www.scamscouter.com/amazon-scam-email-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/anaf-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/analytics.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/apple-id-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/bank-scam-message-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/business-email-scam-checker.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -16,37 +41,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.scamscouter.com/privacy.html</loc>
+    <loc>https://www.scamscouter.com/crypto-scam-checker.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.scamscouter.com/terms.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.scamscouter.com/pricing.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.scamscouter.com/is-this-link-safe.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.scamscouter.com/fake-website-checker.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.scamscouter.com/phishing-email-checker.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.scamscouter.com/paypal-scam-email-checker.html</loc>
+    <loc>https://www.scamscouter.com/delivery-scam-checker.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -56,7 +56,222 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.scamscouter.com/email-link-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/facebook-marketplace-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/fake-payment-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/fake-store-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/fake-website-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/fedex-scam-text-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/footer.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/gmail-phishing-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/header.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/how-it-works.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/instagram-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/investment-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/invoice-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/is-this-link-safe.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/job-offer-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/loan-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/microsoft-scam-email-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/paypal-scam-email-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/phishing-email-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/pricing.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/privacy.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/qr-code-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/recent-scams.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/romance-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/scam-facebook-marketplace.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.scamscouter.com/scam-olx-romania.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/shopping-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/short-link-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/sms-fan-courier-fals.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/sms-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/social-media-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/tax-scam-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/teapa-banca.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/teapa-crypto.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/teapa-curier-fals.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/teapa-investitii.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/teapa-paypal.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/teapa-whatsapp.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/terms.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/ups-scam-text-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/verifica-cod-qr-suspect.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/verifica-email-suspect.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/verifica-link-bitly.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -66,7 +281,22 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.scamscouter.com/sms-fan-courier-fals.html</loc>
+    <loc>https://www.scamscouter.com/verifica-magazin-online.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/verifica-sms-suspect.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/website-trust-score-checker.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.scamscouter.com/whatsapp-scam-checker.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

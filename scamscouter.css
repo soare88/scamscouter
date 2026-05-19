@@ -992,3 +992,201 @@ body.scamscouter-css-loaded-test {
 .image-upload-box {
   position: relative;
 }
+
+
+/* Report scam modal */
+body.report-modal-open{overflow:hidden}.report-modal{position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:18px}.report-modal-backdrop{position:absolute;inset:0;background:rgba(2,6,23,.74);backdrop-filter:blur(8px)}.report-modal-card{position:relative;width:min(560px,100%);max-height:calc(100vh - 36px);overflow:auto;border-radius:28px;border:1px solid rgba(255,255,255,.14);background:rgba(11,18,36,.97);box-shadow:0 35px 100px rgba(0,0,0,.55);color:#fff}.report-modal-header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:22px 22px 12px}.report-modal-header h2{font-size:24px;letter-spacing:-.04em}.report-modal-x{width:38px;height:38px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;font-size:24px;cursor:pointer}.report-modal-body{padding:10px 22px 18px}.report-label{display:block;margin:14px 0 8px;color:#aab6c8;font-size:13px;font-weight:850}.report-select,.report-notes{width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(2,6,23,.62);color:#fff;padding:13px 14px;font-size:15px;outline:none}.report-select option{background:#0f172a;color:#fff}.report-notes{min-height:110px;resize:vertical}.report-summary{margin-top:14px;padding:12px;border-radius:14px;background:rgba(37,99,235,.10);border:1px solid rgba(96,165,250,.22);color:#cbd5e1;font-size:13px;line-height:1.5}.report-status{margin-top:12px;min-height:20px;color:#93c5fd;font-size:14px;font-weight:750}.report-modal-actions{display:flex;justify-content:flex-end;gap:10px;padding:0 22px 22px}.report-cancel,.report-submit{min-height:42px;padding:0 16px;border-radius:14px;border:1px solid rgba(255,255,255,.14);color:#fff;font-weight:850;cursor:pointer}.report-cancel{background:rgba(255,255,255,.08)}.report-submit{background:linear-gradient(135deg,#2563eb,#3b82f6);box-shadow:0 12px 28px rgba(37,99,235,.24)}.report-submit:disabled{opacity:.65;cursor:wait}@media(max-width:560px){.report-modal-actions{flex-direction:column}.report-cancel,.report-submit{width:100%}}
+
+
+/* v1.4.2 Upload button design fix */
+.image-upload-box {
+  margin: 14px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.image-upload-label {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 900;
+  box-shadow: 0 14px 35px rgba(37, 99, 235, 0.32);
+}
+
+.image-upload-label::before {
+  content: "📷";
+  margin-right: 8px;
+}
+
+.image-upload-label:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #1d4ed8, #60a5fa);
+}
+
+.image-upload-status {
+  margin-top: 10px;
+  padding: 0 4px;
+  color: #aab6c8;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.image-remove-btn {
+  margin-top: 10px;
+  min-height: 38px;
+  padding: 0 13px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.09);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.image-remove-btn:hover {
+  transform: translateY(-1px);
+}
+
+.scan-btn {
+  margin-top: 12px;
+}
+
+
+/* v1.6 professional result + reports */
+.professional-result-grid {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.professional-result-card {
+  padding: 13px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.055);
+}
+
+.professional-result-card span {
+  display: block;
+  color: #aab6c8;
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 6px;
+}
+
+.professional-result-card strong {
+  display: block;
+  color: #ffffff;
+  line-height: 1.45;
+}
+
+.recent-scams-list,
+.admin-report-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.recent-scam-card,
+.admin-report-card {
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.065);
+  backdrop-filter: blur(14px);
+}
+
+.recent-scam-top,
+.admin-report-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.recent-scam-top h2,
+.admin-report-header h2 {
+  font-size: 20px;
+  letter-spacing: -.04em;
+}
+
+.recent-scam-top span,
+.admin-report-header span {
+  padding: 7px 9px;
+  border-radius: 999px;
+  background: rgba(37,99,235,.14);
+  border: 1px solid rgba(96,165,250,.24);
+  color: #bfdbfe;
+  font-size: 12px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.recent-scam-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.recent-scam-meta span {
+  padding: 7px 9px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.admin-report-card pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: rgba(2,6,23,.52);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  padding: 12px;
+  color: #cbd5e1;
+  margin-top: 12px;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.admin-actions button {
+  min-height: 38px;
+  padding: 0 13px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.14);
+  color: #fff;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.approve-btn {
+  background: rgba(34,197,94,.18);
+}
+
+.reject-btn {
+  background: rgba(239,68,68,.16);
+}
+
+@media (max-width: 640px) {
+  .recent-scam-top,
+  .admin-report-header {
+    flex-direction: column;
+  }
+}

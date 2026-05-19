@@ -51,6 +51,15 @@ const translations = {
     risk: "🚨 High Scam Risk",
     shareResult: "Share Result",
     copyResult: "Copy Result",
+    mainReason: "Main reason",
+    recommendedAction: "Recommended action",
+    confidence: "Confidence",
+    confidenceLow: "Low",
+    confidenceMedium: "Medium",
+    confidenceHigh: "High",
+    actionSafe: "Still verify payment or login requests through official channels.",
+    actionWarning: "Do not enter card details, passwords or verification codes until you verify the source.",
+    actionRisk: "Do not click, pay, reply or enter personal details. Verify only through official channels.",
     reportSite: "Report this scam",
     copied: "Result copied to clipboard.",
     reportSaved: "Report saved. Thank you for helping improve ScamScouter.",
@@ -65,6 +74,26 @@ const translations = {
     ocrLoading: "Reading text from image...",
     ocrDone: "Text extracted from image. You can edit it before scanning.",
     ocrFailed: "Could not read text from this image. Try a clearer screenshot or paste the text manually.",
+    reportTitle: "Report this scam",
+    reportType: "What are you reporting?",
+    reportPlatform: "Where did you receive it?",
+    reportNotes: "Extra details",
+    reportTypeWebsite: "Website / link",
+    reportTypePhone: "Phone number",
+    reportTypeEmail: "Email address",
+    reportTypeMessage: "Message / screenshot text",
+    reportPlatformWebsite: "Website",
+    reportPlatformSms: "SMS",
+    reportPlatformWhatsapp: "WhatsApp",
+    reportPlatformEmail: "Email",
+    reportPlatformMarketplace: "Marketplace / OLX",
+    reportPlatformSocial: "Social media",
+    reportPlatformOther: "Other",
+    reportNotesPlaceholder: "Add details such as what the scammer asked for, amount, company name, or anything suspicious...",
+    submitReport: "Submit report",
+    cancelReport: "Cancel",
+    reportSaving: "Saving report...",
+    reportClose: "Close",
     upgradeSoon: "Premium plans are coming soon. Contact hello@scamscouter.com for early access."
   },
   ro: {
@@ -95,6 +124,15 @@ const translations = {
     risk: "🚨 Risc ridicat de scam",
     shareResult: "Distribuie rezultatul",
     copyResult: "Copiază rezultatul",
+    mainReason: "Motiv principal",
+    recommendedAction: "Acțiune recomandată",
+    confidence: "Încredere",
+    confidenceLow: "Scăzută",
+    confidenceMedium: "Medie",
+    confidenceHigh: "Ridicată",
+    actionSafe: "Verifică totuși cererile de plată sau autentificare prin canale oficiale.",
+    actionWarning: "Nu introduce date de card, parole sau coduri până nu verifici sursa.",
+    actionRisk: "Nu da click, nu plăti, nu răspunde și nu introduce date personale. Verifică doar prin surse oficiale.",
     reportSite: "Raportează scamul",
     copied: "Rezultatul a fost copiat.",
     reportSaved: "Raport salvat. Mulțumim că ajuți ScamScouter.",
@@ -109,6 +147,26 @@ const translations = {
     ocrLoading: "Citesc textul din imagine...",
     ocrDone: "Text extras din imagine. Îl poți corecta înainte de scanare.",
     ocrFailed: "Nu am putut citi textul din imagine. Încearcă un screenshot mai clar sau lipește textul manual.",
+    reportTitle: "Raportează scamul",
+    reportType: "Ce raportezi?",
+    reportPlatform: "Unde ai primit mesajul?",
+    reportNotes: "Detalii suplimentare",
+    reportTypeWebsite: "Website / link",
+    reportTypePhone: "Număr de telefon",
+    reportTypeEmail: "Adresă email",
+    reportTypeMessage: "Mesaj / text din screenshot",
+    reportPlatformWebsite: "Website",
+    reportPlatformSms: "SMS",
+    reportPlatformWhatsapp: "WhatsApp",
+    reportPlatformEmail: "Email",
+    reportPlatformMarketplace: "Marketplace / OLX",
+    reportPlatformSocial: "Rețele sociale",
+    reportPlatformOther: "Altceva",
+    reportNotesPlaceholder: "Adaugă detalii: ce a cerut scammerul, suma, numele firmei, linkul sau orice pare suspect...",
+    submitReport: "Trimite raportul",
+    cancelReport: "Anulează",
+    reportSaving: "Se salvează raportul...",
+    reportClose: "Închide",
     upgradeSoon: "Planurile premium vor fi disponibile în curând. Contact: hello@scamscouter.com"
   }
 };
@@ -159,6 +217,7 @@ function applyLanguage() {
   if (langSelect) langSelect.value = currentLang;
 
   updateImageUploadLanguage();
+  updateReportModalLanguage();
 }
 
 window.setLanguage = function (lang) {
@@ -245,6 +304,30 @@ function renderLoading() {
   out.appendChild(makeEl("div", "loading", t("analyzing")));
 }
 
+
+function getResultMainReason(data) {
+  const signals = Array.isArray(data.signals) ? data.signals : [];
+  if (!signals.length) return data.riskLevel === "safe" ? "No major automated red flags detected." : "Multiple risk signals detected.";
+  const important = signals.find((s) =>
+    /known high-risk|brand impersonation|crypto|unknown|shortener|payment|delivery|contact details|sensitive/i.test(s)
+  );
+  return important || signals[0];
+}
+
+function getRecommendedAction(status) {
+  if (status === "safe") return t("actionSafe");
+  if (status === "risk") return t("actionRisk");
+  return t("actionWarning");
+}
+
+function getConfidence(score, signals) {
+  const count = Array.isArray(signals) ? signals.length : 0;
+  if (score >= 75 || score <= 20 || count >= 4) return t("confidenceHigh");
+  if (score >= 40 || count >= 2) return t("confidenceMedium");
+  return t("confidenceLow");
+}
+
+
 function renderResult(data) {
   const out = document.getElementById("out");
   if (!out) return;
@@ -290,6 +373,25 @@ function renderResult(data) {
   scoreP.appendChild(makeEl("strong", "", `${t("riskScore")}: `));
   scoreP.appendChild(document.createTextNode(`${score}/100`));
   box.appendChild(scoreP);
+
+  const detailGrid = makeEl("div", "professional-result-grid");
+
+  const reasonCard = makeEl("div", "professional-result-card");
+  reasonCard.appendChild(makeEl("span", "", t("mainReason")));
+  reasonCard.appendChild(makeEl("strong", "", getResultMainReason(data)));
+
+  const actionCard = makeEl("div", "professional-result-card");
+  actionCard.appendChild(makeEl("span", "", t("recommendedAction")));
+  actionCard.appendChild(makeEl("strong", "", getRecommendedAction(status)));
+
+  const confidenceCard = makeEl("div", "professional-result-card");
+  confidenceCard.appendChild(makeEl("span", "", t("confidence")));
+  confidenceCard.appendChild(makeEl("strong", "", getConfidence(score, data.signals)));
+
+  detailGrid.appendChild(reasonCard);
+  detailGrid.appendChild(actionCard);
+  detailGrid.appendChild(confidenceCard);
+  box.appendChild(detailGrid);
 
   const resultText = makeEl("div");
   resultText.style.whiteSpace = "pre-wrap";
@@ -350,7 +452,156 @@ window.copyResult = async function () {
   }
 };
 
-window.reportScam = async function () {
+
+function inferReportType(scan) {
+  if (!scan) return "message";
+  if (scan.phones && scan.phones.length) return "phone";
+  if (scan.emails && scan.emails.length) return "email";
+  if (scan.domain) return "website";
+  return "message";
+}
+
+function inferReportPlatform(scan) {
+  const text = String((scan && scan.input) || "").toLowerCase();
+  if (text.includes("whatsapp")) return "whatsapp";
+  if (text.includes("sms") || text.includes("mesaj")) return "sms";
+  if (text.includes("olx") || text.includes("marketplace")) return "marketplace";
+  if (text.includes("@")) return "email";
+  if (text.includes("facebook") || text.includes("instagram") || text.includes("tiktok")) return "social";
+  if (scan && scan.domain) return "website";
+  return "other";
+}
+
+function ensureReportModal() {
+  let modal = document.getElementById("reportModal");
+  if (modal) return modal;
+
+  modal = document.createElement("div");
+  modal.id = "reportModal";
+  modal.className = "report-modal";
+  modal.style.display = "none";
+
+  modal.innerHTML = `
+    <div class="report-modal-backdrop" data-report-close="true"></div>
+    <div class="report-modal-card" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
+      <div class="report-modal-header">
+        <h2 id="reportModalTitle"></h2>
+        <button type="button" class="report-modal-x" data-report-close="true">×</button>
+      </div>
+      <div class="report-modal-body">
+        <label class="report-label" for="reportType"></label>
+        <select id="reportType" class="report-select">
+          <option value="website"></option>
+          <option value="phone"></option>
+          <option value="email"></option>
+          <option value="message"></option>
+        </select>
+
+        <label class="report-label" for="reportPlatform"></label>
+        <select id="reportPlatform" class="report-select">
+          <option value="website"></option>
+          <option value="sms"></option>
+          <option value="whatsapp"></option>
+          <option value="email"></option>
+          <option value="marketplace"></option>
+          <option value="social"></option>
+          <option value="other"></option>
+        </select>
+
+        <label class="report-label" for="reportNotes"></label>
+        <textarea id="reportNotes" class="report-notes" rows="4"></textarea>
+
+        <div id="reportSummary" class="report-summary"></div>
+        <div id="reportStatus" class="report-status"></div>
+      </div>
+      <div class="report-modal-actions">
+        <button type="button" class="report-cancel" data-report-close="true"></button>
+        <button type="button" class="report-submit" id="submitReportBtn"></button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  modal.querySelectorAll("[data-report-close]").forEach((btn) => btn.addEventListener("click", closeReportModal));
+  document.getElementById("submitReportBtn").addEventListener("click", submitScamReport);
+  return modal;
+}
+
+function updateReportModalLanguage() {
+  const modal = document.getElementById("reportModal");
+  if (!modal) return;
+
+  const set = (selector, value) => {
+    const el = modal.querySelector(selector);
+    if (el) el.textContent = value;
+  };
+
+  set("#reportModalTitle", t("reportTitle"));
+  set('label[for="reportType"]', t("reportType"));
+  set('label[for="reportPlatform"]', t("reportPlatform"));
+  set('label[for="reportNotes"]', t("reportNotes"));
+  set(".report-cancel", t("cancelReport"));
+  set("#submitReportBtn", t("submitReport"));
+
+  const notes = modal.querySelector("#reportNotes");
+  if (notes) notes.placeholder = t("reportNotesPlaceholder");
+
+  const type = modal.querySelector("#reportType");
+  if (type) {
+    type.querySelector('option[value="website"]').textContent = t("reportTypeWebsite");
+    type.querySelector('option[value="phone"]').textContent = t("reportTypePhone");
+    type.querySelector('option[value="email"]').textContent = t("reportTypeEmail");
+    type.querySelector('option[value="message"]').textContent = t("reportTypeMessage");
+  }
+
+  const platform = modal.querySelector("#reportPlatform");
+  if (platform) {
+    platform.querySelector('option[value="website"]').textContent = t("reportPlatformWebsite");
+    platform.querySelector('option[value="sms"]').textContent = t("reportPlatformSms");
+    platform.querySelector('option[value="whatsapp"]').textContent = t("reportPlatformWhatsapp");
+    platform.querySelector('option[value="email"]').textContent = t("reportPlatformEmail");
+    platform.querySelector('option[value="marketplace"]').textContent = t("reportPlatformMarketplace");
+    platform.querySelector('option[value="social"]').textContent = t("reportPlatformSocial");
+    platform.querySelector('option[value="other"]').textContent = t("reportPlatformOther");
+  }
+}
+
+function openReportModal() {
+  const modal = ensureReportModal();
+  updateReportModalLanguage();
+
+  const type = document.getElementById("reportType");
+  const platform = document.getElementById("reportPlatform");
+  const notes = document.getElementById("reportNotes");
+  const status = document.getElementById("reportStatus");
+  const summary = document.getElementById("reportSummary");
+
+  if (type) type.value = inferReportType(lastScan);
+  if (platform) platform.value = inferReportPlatform(lastScan);
+  if (notes) notes.value = "";
+  if (status) status.textContent = "";
+
+  if (summary && lastScan) {
+    const parts = [];
+    if (lastScan.domain) parts.push(`Domain: ${lastScan.domain}`);
+    if (lastScan.phones && lastScan.phones.length) parts.push(`Phone: ${lastScan.phones.join(", ")}`);
+    if (lastScan.emails && lastScan.emails.length) parts.push(`Email: ${lastScan.emails.join(", ")}`);
+    parts.push(`Verdict: ${lastScan.verdict || "unknown"}`);
+    parts.push(`Score: ${lastScan.score ?? "unknown"}/100`);
+    summary.textContent = parts.join(" • ");
+  }
+
+  modal.style.display = "flex";
+  document.body.classList.add("report-modal-open");
+}
+
+function closeReportModal() {
+  const modal = document.getElementById("reportModal");
+  if (modal) modal.style.display = "none";
+  document.body.classList.remove("report-modal-open");
+}
+
+async function submitScamReport() {
   if (!lastScan) {
     alert(t("reportNeedsScan"));
     return;
@@ -362,27 +613,55 @@ window.reportScam = async function () {
     if (!user) return;
   }
 
+  const submitBtn = document.getElementById("submitReportBtn");
+  const status = document.getElementById("reportStatus");
+  const reportType = document.getElementById("reportType")?.value || inferReportType(lastScan);
+  const platform = document.getElementById("reportPlatform")?.value || inferReportPlatform(lastScan);
+  const notes = document.getElementById("reportNotes")?.value || "";
+
   try {
+    if (submitBtn) submitBtn.disabled = true;
+    if (status) status.textContent = t("reportSaving");
+
     await addDoc(collection(db, "scamReports"), {
+      reportType,
+      platform,
+      notes: notes.trim(),
       input: lastScan.input,
       domain: lastScan.domain || null,
-      verdict: lastScan.verdict,
-      score: lastScan.score,
-      result: lastScan.result,
+      phones: lastScan.phones || [],
+      emails: lastScan.emails || [],
+      verdict: lastScan.verdict || null,
+      riskLevel: lastScan.riskLevel || null,
+      score: lastScan.score ?? null,
+      result: lastScan.result || "",
       signals: lastScan.signals || [],
+      language: currentLang,
       source: extractedImageText ? "ocr_image_or_text" : "text",
+      approved: false,
+      reviewed: false,
+      product: "ScamScouter",
       reporterUid: user.uid,
       reporterEmail: user.email,
-      approved: false,
-      product: "ScamScouter",
       createdAt: serverTimestamp()
     });
 
-    alert(t("reportSaved"));
+    if (status) status.textContent = t("reportSaved");
+    setTimeout(closeReportModal, 900);
   } catch (err) {
     console.error(err);
-    alert("Could not save report. Please try again.");
+    if (status) status.textContent = "Could not save report. Please try again.";
+  } finally {
+    if (submitBtn) submitBtn.disabled = false;
   }
+}
+
+window.reportScam = async function () {
+  if (!lastScan) {
+    alert(t("reportNeedsScan"));
+    return;
+  }
+  openReportModal();
 };
 
 function updateImageUploadLanguage() {
@@ -572,7 +851,10 @@ window.runScan = async function () {
     lastScan = {
       input: text,
       domain: data.domain || null,
+      phones: data.phones || [],
+      emails: data.emails || [],
       verdict: data.verdict,
+      riskLevel: data.riskLevel,
       score: data.score,
       result: data.result || "",
       signals: data.signals || []

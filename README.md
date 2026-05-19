@@ -1,31 +1,48 @@
-# ScamScouter Core Detection v1.3 OCR + Phone
+# ScamScouter Final Growth Pack v1.6
 
-This is the next major product update after index stabilization.
+This package adds the remaining major platform upgrades without changing the indexing structure.
 
-Included:
-- Browser OCR for screenshots/photos using Tesseract.js
-- No Gemini cost for Free image checks
-- One image upload button: Choose screenshot/photo / Alege poză/screenshot
-- OCR text is extracted in the user's browser and inserted into the scan box
-- Phone number detection in api/scan.js
-- Email detection in api/scan.js
-- Small stable API file
-- Official www indexing preserved:
-  https://www.scamscouter.com/
-- sitemap.xml and robots.txt stay on www
-- Header logo SVG and favicon included
+Added:
+- /recent-scams.html
+  Public page for approved scam reports only.
+- /admin.html
+  Private noindex admin moderation page, NOT included in sitemap.
+- /how-it-works.html
+  Trust and explanation page.
+- Improved scan result layout:
+  Main reason, recommended action and confidence.
+- Optional Google Safe Browsing support:
+  Add GOOGLE_SAFE_BROWSING_API_KEY in Vercel Environment Variables later.
+  If not configured, the API still works normally.
+- Updated CSS for result cards, recent reports and admin moderation.
+- Sitemap remains on https://www.scamscouter.com/
+- robots.txt disallows admin.html and admin.js.
+- All existing SEO pages remain.
 
 Important:
 1. Upload all files directly into the root of your GitHub repo.
-2. Do not upload the ZIP itself.
-3. Do not upload the parent folder.
-4. Keep api/scan.js exactly inside api/scan.js.
-5. If analytics.html contains G-XXXXXXXXXX, replace it with your real Google Analytics Measurement ID.
-6. After Vercel deploys, hard refresh with Ctrl + Shift + R.
+2. Do not upload the ZIP itself or the parent folder.
+3. Keep api/scan.js exactly inside api/scan.js.
+4. If analytics.html contains G-XXXXXXXXXX, replace it with your real GA4 ID.
+5. After Vercel deploy is Ready, test:
+   - https://www.scamscouter.com/sitemap.xml
+   - https://www.scamscouter.com/robots.txt
+   - https://www.scamscouter.com/how-it-works.html
+   - https://www.scamscouter.com/recent-scams.html
+   - https://www.scamscouter.com/api/scan
 
-Test:
-- Open https://www.scamscouter.com/api/scan
-  It should show: ScamScouter Detection Engine v1.3 OCR + Phone
-- Upload a screenshot from your phone.
-- The extracted text should appear in the text box.
-- Press Scan Now.
+Admin:
+- /admin.html is noindex and not in sitemap.
+- Admin access uses ADMIN_EMAILS in admin.js.
+- Default emails included: hello@scamscouter.com, contact@scamscouter.com, support@scamscouter.com.
+- If your Google login email is different, edit ADMIN_EMAILS in admin.js.
+
+Firebase:
+- recent-scams.html reads approved reports from scamReports.
+- admin.html approves/rejects pending reports.
+- You may need a Firestore index for approved + createdAt queries if Firebase requests one.
+
+Indexing:
+- This package does not change URL structure.
+- admin.html is intentionally noindex and excluded from sitemap.
+- Sitemap keeps all public pages on https://www.scamscouter.com/
