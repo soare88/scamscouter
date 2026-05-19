@@ -1,4 +1,4 @@
-const ENGINE_VERSION = "ScamScouter Detection Engine v1.3 OCR + Phone";
+const ENGINE_VERSION = "ScamScouter Detection Engine v1.6 Growth Pack";
 
 const TRUSTED = [
   "google.com","apple.com","microsoft.com","amazon.com","paypal.com","revolut.com","wise.com",
@@ -57,6 +57,43 @@ function getEmails(text) {
   return [...new Set(matches.map(e => e.toLowerCase()))];
 }
 
+
+async function checkGoogleSafeBrowsing(urls) {
+  const key = process.env.GOOGLE_SAFE_BROWSING_API_KEY;
+  if (!key || !urls || !urls.length) return [];
+
+  try {
+    const body = {
+      client: {
+        clientId: "scamscouter",
+        clientVersion: "1.6"
+      },
+      threatInfo: {
+        threatTypes: ["MALWARE", "SOCIAL_ENGINEERING", "UNWANTED_SOFTWARE", "POTENTIALLY_HARMFUL_APPLICATION"],
+        platformTypes: ["ANY_PLATFORM"],
+        threatEntryTypes: ["URL"],
+        threatEntries: urls.slice(0, 10).map((url) => ({ url }))
+      }
+    };
+
+    const response = await fetch(
+      `https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${key}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      }
+    );
+
+    if (!response.ok) return [];
+    const data = await response.json();
+    return data.matches || [];
+  } catch {
+    return [];
+  }
+}
+
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ ok: false, version: ENGINE_VERSION, error: "Method not allowed. Use POST." });
@@ -72,7 +109,8 @@ export default async function handler(req, res) {
     }
 
     const lower = text.toLowerCase();
-    const domains = [...new Set(getUrls(text).map(getDomain).filter(Boolean))];
+    const rawUrls = getUrls(text);
+    const domains = [...new Set(rawUrls.map(getDomain).filter(Boolean))];
     const phones = getPhones(text);
     const emails = getEmails(text);
 
@@ -90,9 +128,9 @@ export default async function handler(req, res) {
     }
 
     if (phones.length) {
-      add("Phone number detected: " + phones.join(", "), 8);
+      add("Contact details detected in the message.", 6);
       if (/(whatsapp|sms|curier|colet|livrare|payment|plata|plată|transfer|revolut|iban|taxa|taxă|card|cod)/i.test(text)) {
-        add("Phone number appears in a payment/delivery/account context. Verify before contacting or paying.", 18);
+        add("Message contains contact details in a payment, delivery or account context. Verify through official channels.", 16);
       }
     }
 
@@ -105,6 +143,12 @@ export default async function handler(req, res) {
 
     if (!domains.length && text.length > 25) {
       add("Message content analyzed without a clear URL. Treat unknown messages with caution.", 12);
+    }
+
+    const googleMatches = await checkGoogleSafeBrowsing(rawUrls);
+    if (googleMatches.length) {
+      knownRisk = true;
+      add("Google Safe Browsing detected this URL as unsafe.", 95);
     }
 
     for (const domain of domains) {
@@ -186,10 +230,11 @@ export default async function handler(req, res) {
 
     const checks = [
       domains[0] ? "Domain analysis: checked" : "Domain analysis: no domain detected",
-      phones.length ? "Phone number analysis: checked" : "Phone number analysis: no number detected",
+      phones.length ? "Contact detail context: checked" : "Contact detail context: no contact detail detected",
       emails.length ? "Email analysis: checked" : "Email analysis: no email detected",
       "Unknown domain policy: checked",
       "Known high-risk list: checked",
+      process.env.GOOGLE_SAFE_BROWSING_API_KEY ? "Google Safe Browsing: checked" : "Google Safe Browsing: optional check not configured",
       "Crypto / investment patterns: checked",
       "Brand impersonation patterns: checked",
       "URL structure: checked",
@@ -209,10 +254,10 @@ Semnale detectate:
 ${signalList}
 
 Explicație:
-ScamScouter analizează linkuri, domenii, mesaje, emailuri și numere de telefon. Domeniile necunoscute primesc cel puțin Atenție. Numerele de telefon din contexte de plată, curier, cont sau coduri trebuie verificate manual.
+ScamScouter analizează linkuri, domenii, mesaje, emailuri și text extras din screenshoturi. Domeniile necunoscute primesc cel puțin Atenție. Datele de contact din contexte de plată, curier, cont sau coduri trebuie verificate manual.
 
 Sfaturi:
-Nu introduce parole, date de card, coduri de verificare, seed phrase sau private key. Nu suna și nu plăti către numere necunoscute fără verificare din surse oficiale.`
+Nu introduce parole, date de card, coduri de verificare, seed phrase sau private key. Nu plăti și nu continua conversația fără verificare din surse oficiale.`
       : `${ENGINE_VERSION}
 
 Verdict: ${verdict}
@@ -225,10 +270,10 @@ Detected signals:
 ${signalList}
 
 Explanation:
-ScamScouter analyzes suspicious links, domains, messages, emails and phone numbers. Unknown domains receive at least Use Caution. Phone numbers in payment, delivery, account or code-verification contexts should be manually verified.
+ScamScouter analyzes suspicious links, domains, messages, emails and screenshot text. Unknown domains receive at least Use Caution. Contact details in payment, delivery, account or code-verification contexts should be manually verified.
 
 Safety advice:
-Do not enter passwords, card numbers, verification codes, seed phrases or private keys. Do not call or pay unknown numbers without verifying through official sources.`;
+Do not enter passwords, card numbers, verification codes, seed phrases or private keys. Do not pay or continue the conversation without verifying through official sources.`;
 
     return res.status(200).json({
       ok: true,
@@ -239,7 +284,6 @@ Do not enter passwords, card numbers, verification codes, seed phrases or privat
       result,
       remaining: "unlimited",
       domain: domains[0] || null,
-      phones,
       emails,
       signals,
       checks
