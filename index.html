@@ -39,46 +39,46 @@
           </div>
           <textarea id="input" rows="5" placeholder="Paste a suspicious link, message, email, or website..."></textarea>
           <button id="scanBtn" onclick="runScan()" class="scan-btn">Scan Now</button>
-          <p class="scanner-proof">Free beta • No signup required • Instant results</p>
+          <p class="scanner-proof" data-i18n="scannerProof">Free beta • No signup required • Instant results</p>
           <div id="out" class="output-area"></div>
         </div>
 
         <div class="hero-stats">
-          <article><strong>Free</strong><span>No signup required</span></article>
-          <article><strong>Instant</strong><span>Fast risk analysis</span></article>
-          <article><strong>AI</strong><span>Scam pattern checks</span></article>
+          <article><strong data-i18n="statFreeTitle">Free</strong><span data-i18n="statFreeText">No signup required</span></article>
+          <article><strong data-i18n="statInstantTitle">Instant</strong><span data-i18n="statInstantText">Fast risk analysis</span></article>
+          <article><strong data-i18n="statAiTitle">AI</strong><span data-i18n="statAiText">Scam pattern checks</span></article>
         </div>
       </section>
 
-      <section class="premium-hero-right" aria-label="Example trust score">
+      <section class="premium-hero-right" data-i18n-aria="scoreAria" aria-label="Example trust score">
         <div class="score-glow"></div>
         <div class="score-card">
           <div class="score-card-header">
-            <div><p>Checking example</p><h2>scamscouter.com</h2></div>
+            <div><p data-i18n="checkingExample">Checking example</p><h2>scamscouter.com</h2></div>
             <div class="safe-check">✓</div>
           </div>
           <div class="score-circle-wrap">
-            <div class="score-circle"><span>Trust Score</span><strong>92%</strong><em>Very Safe</em></div>
+            <div class="score-circle"><span data-i18n="trustScore">Trust Score</span><strong>92%</strong><em data-i18n="verySafe">Very Safe</em></div>
           </div>
           <div class="check-list">
-            <div><span>SSL Certificate</span><strong>Valid</strong></div>
-            <div><span>Blacklist Status</span><strong>Clean</strong></div>
-            <div><span>Domain Signals</span><strong>Checked</strong></div>
-            <div><span>Scam Patterns</span><strong>Analyzed</strong></div>
+            <div><span data-i18n="sslCertificate">SSL Certificate</span><strong data-i18n="valid">Valid</strong></div>
+            <div><span data-i18n="blacklistStatus">Blacklist Status</span><strong data-i18n="clean">Clean</strong></div>
+            <div><span data-i18n="domainSignals">Domain Signals</span><strong data-i18n="checked">Checked</strong></div>
+            <div><span data-i18n="scamPatterns">Scam Patterns</span><strong data-i18n="analyzed">Analyzed</strong></div>
           </div>
         </div>
       </section>
     </main>
 
     <section class="feature-grid premium-features">
-      <article class="feature-card"><div class="feature-icon">🛡️</div><h3>AI Scam Detection</h3><p>ScamScouter analyzes suspicious patterns in links, emails, messages and websites to help you avoid scams.</p></article>
-      <article class="feature-card"><div class="feature-icon">⚡</div><h3>Instant Risk Score</h3><p>Get a simple verdict, risk score, red flags and practical safety advice in seconds.</p></article>
-      <article class="feature-card"><div class="feature-icon">🔒</div><h3>Check Before You Click</h3><p>Useful for phishing links, fake stores, marketplace scams, delivery scams and suspicious emails.</p></article>
+      <article class="feature-card"><div class="feature-icon">🛡️</div><h3 data-i18n="featureAiTitle">AI Scam Detection</h3><p data-i18n="featureAiText">ScamScouter analyzes suspicious patterns in links, emails, messages and websites to help you avoid scams.</p></article>
+      <article class="feature-card"><div class="feature-icon">⚡</div><h3 data-i18n="featureScoreTitle">Instant Risk Score</h3><p data-i18n="featureScoreText">Get a simple verdict, risk score, red flags and practical safety advice in seconds.</p></article>
+      <article class="feature-card"><div class="feature-icon">🔒</div><h3 data-i18n="featureClickTitle">Check Before You Click</h3><p data-i18n="featureClickText">Useful for phishing links, fake stores, marketplace scams, delivery scams and suspicious emails.</p></article>
     </section>
 
     <section class="seo-section">
-      <h2>Popular scam checks</h2>
-      <p style="margin-bottom:18px;">Quick access to common scam checks in English and Romanian.</p>
+      <h2 data-i18n="popularChecksTitle">Popular scam checks</h2>
+      <p style="margin-bottom:18px;" data-i18n="popularChecksText">Quick access to common scam checks in English and Romanian.</p>
       <div class="quick-links">
         <a href="/is-this-link-safe.html">Is this link safe?</a>
         <a href="/fake-website-checker.html">Fake website checker</a>
@@ -88,18 +88,18 @@
         <a href="/scam-olx-romania.html">Scam OLX România</a>
         <a href="/verifica-link-suspect.html">Verifică link suspect</a>
         <a href="/sms-fan-courier-fals.html">SMS FAN Courier fals</a>
-        <a href="/pricing.html">Premium coming soon</a>
+        <a href="/pricing.html" data-i18n="premiumComingSoon">Premium coming soon</a>
       </div>
     </section>
 
     <section class="seo-section">
-      <h2>Built for quick decisions</h2>
-      <p>ScamScouter helps you slow down before clicking a suspicious link, entering card details, paying a fake delivery fee, replying to a fake buyer or trusting an unexpected email.</p>
+      <h2 data-i18n="builtTitle">Built for quick decisions</h2>
+      <p data-i18n="builtText">ScamScouter helps you slow down before clicking a suspicious link, entering card details, paying a fake delivery fee, replying to a fake buyer or trusting an unexpected email.</p>
     </section>
 
     <div id="site-footer"></div>
   </div>
   <script src="/includes.js"></script>
-  <script type="module" src="/app.js?v=1.6"></script>
+  <script type="module" src="/app.js?v=1.6.1"></script>
 </body>
 </html>

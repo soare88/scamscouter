@@ -38,10 +38,42 @@ const translations = {
     scannerLabel: "Scan anything suspicious",
     scannerTitle: "Paste a link, message or email",
     statusDot: "Live",
-    inputPlaceholder: "Paste a suspicious link, message, email, phone number, or website...",
+    homeTitle: "ScamScouter - Check Suspicious Links, Messages & Scam Websites",
+    homeDescription: "Use ScamScouter to check suspicious links, scam messages, phishing emails and fake websites before you click.",
+    scannerProof: "Free beta • No signup required • Instant results",
+    statFreeTitle: "Free",
+    statFreeText: "No signup required",
+    statInstantTitle: "Instant",
+    statInstantText: "Fast risk analysis",
+    statAiTitle: "AI",
+    statAiText: "Scam pattern checks",
+    scoreAria: "Example trust score",
+    checkingExample: "Checking example",
+    trustScore: "Trust Score",
+    verySafe: "Very Safe",
+    sslCertificate: "SSL Certificate",
+    valid: "Valid",
+    blacklistStatus: "Blacklist Status",
+    clean: "Clean",
+    domainSignals: "Domain Signals",
+    checked: "Checked",
+    scamPatterns: "Scam Patterns",
+    analyzed: "Analyzed",
+    featureAiTitle: "AI Scam Detection",
+    featureAiText: "ScamScouter analyzes suspicious patterns in links, emails, messages and websites to help you avoid scams.",
+    featureScoreTitle: "Instant Risk Score",
+    featureScoreText: "Get a simple verdict, risk score, red flags and practical safety advice in seconds.",
+    featureClickTitle: "Check Before You Click",
+    featureClickText: "Useful for phishing links, fake stores, marketplace scams, delivery scams and suspicious emails.",
+    popularChecksTitle: "Popular scam checks",
+    popularChecksText: "Quick access to common scam checks in English and Romanian.",
+    premiumComingSoon: "Premium coming soon",
+    builtTitle: "Built for quick decisions",
+    builtText: "ScamScouter helps you slow down before clicking a suspicious link, entering card details, paying a fake delivery fee, replying to a fake buyer or trusting an unexpected email.",
+    inputPlaceholder: "Paste a suspicious link, message, email, or website...",
     scanButton: "Scan Now",
     analyzing: "Analyzing scam signals... 🤖",
-    emptyInput: "Please paste a suspicious link, message, phone number, or email.",
+    emptyInput: "Please paste a suspicious link, message, or email.",
     loginFailed: "Sign in failed. Please try again.",
     scanFailed: "Scan failed. Please try again.",
     riskScore: "Risk score",
@@ -79,7 +111,6 @@ const translations = {
     reportPlatform: "Where did you receive it?",
     reportNotes: "Extra details",
     reportTypeWebsite: "Website / link",
-    reportTypePhone: "Phone number",
     reportTypeEmail: "Email address",
     reportTypeMessage: "Message / screenshot text",
     reportPlatformWebsite: "Website",
@@ -111,10 +142,42 @@ const translations = {
     scannerLabel: "Scanează orice pare suspect",
     scannerTitle: "Lipește un link, mesaj sau email",
     statusDot: "Activ",
-    inputPlaceholder: "Lipește un link, mesaj, email, număr de telefon sau site suspect...",
+    homeTitle: "ScamScouter - Verifică linkuri, mesaje și site-uri suspecte",
+    homeDescription: "Folosește ScamScouter pentru a verifica linkuri suspecte, mesaje scam, emailuri phishing și site-uri false înainte să dai click.",
+    scannerProof: "Beta gratuit • Fără cont obligatoriu • Rezultate rapide",
+    statFreeTitle: "Gratuit",
+    statFreeText: "Fără cont obligatoriu",
+    statInstantTitle: "Instant",
+    statInstantText: "Analiză rapidă de risc",
+    statAiTitle: "AI",
+    statAiText: "Verificare semnale scam",
+    scoreAria: "Exemplu scor de încredere",
+    checkingExample: "Exemplu verificare",
+    trustScore: "Scor de încredere",
+    verySafe: "Foarte sigur",
+    sslCertificate: "Certificat SSL",
+    valid: "Valid",
+    blacklistStatus: "Status blacklist",
+    clean: "Curat",
+    domainSignals: "Semnale domeniu",
+    checked: "Verificat",
+    scamPatterns: "Tipare scam",
+    analyzed: "Analizate",
+    featureAiTitle: "Detectare scam asistată de AI",
+    featureAiText: "ScamScouter analizează tipare suspecte în linkuri, emailuri, mesaje și site-uri pentru a te ajuta să eviți fraudele.",
+    featureScoreTitle: "Scor de risc instant",
+    featureScoreText: "Primești verdict simplu, scor de risc, semnale importante și sfaturi practice în câteva secunde.",
+    featureClickTitle: "Verifică înainte să dai click",
+    featureClickText: "Util pentru linkuri phishing, magazine false, scamuri marketplace, curier fals și emailuri suspecte.",
+    popularChecksTitle: "Verificări populare",
+    popularChecksText: "Acces rapid la verificări comune pentru scamuri în engleză și română.",
+    premiumComingSoon: "Premium în curând",
+    builtTitle: "Creat pentru decizii rapide",
+    builtText: "ScamScouter te ajută să încetinești înainte să dai click pe un link suspect, să introduci date de card, să plătești o taxă falsă de livrare, să răspunzi unui cumpărător fals sau să ai încredere într-un email neașteptat.",
+    inputPlaceholder: "Lipește un link, mesaj, email sau site suspect...",
     scanButton: "Scanează acum",
     analyzing: "Analizăm semnalele de fraudă... 🤖",
-    emptyInput: "Te rog lipește un link, mesaj, număr de telefon sau email suspect.",
+    emptyInput: "Te rog lipește un link, mesaj sau email suspect.",
     loginFailed: "Autentificarea a eșuat. Încearcă din nou.",
     scanFailed: "Scanarea a eșuat. Încearcă din nou.",
     riskScore: "Scor de risc",
@@ -152,7 +215,6 @@ const translations = {
     reportPlatform: "Unde ai primit mesajul?",
     reportNotes: "Detalii suplimentare",
     reportTypeWebsite: "Website / link",
-    reportTypePhone: "Număr de telefon",
     reportTypeEmail: "Adresă email",
     reportTypeMessage: "Mesaj / text din screenshot",
     reportPlatformWebsite: "Website",
@@ -206,6 +268,16 @@ function applyLanguage() {
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     el.innerText = t(el.getAttribute("data-i18n"));
   });
+
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+    el.setAttribute("aria-label", t(el.getAttribute("data-i18n-aria")));
+  });
+
+  if (location.pathname === "/" || location.pathname.endsWith("/index.html")) {
+    document.title = t("homeTitle");
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) metaDescription.setAttribute("content", t("homeDescription"));
+  }
 
   const userBox = document.getElementById("user");
   if (userBox && !user) userBox.innerText = t("guest");
@@ -455,7 +527,6 @@ window.copyResult = async function () {
 
 function inferReportType(scan) {
   if (!scan) return "message";
-  if (scan.phones && scan.phones.length) return "phone";
   if (scan.emails && scan.emails.length) return "email";
   if (scan.domain) return "website";
   return "message";
@@ -492,7 +563,6 @@ function ensureReportModal() {
         <label class="report-label" for="reportType"></label>
         <select id="reportType" class="report-select">
           <option value="website"></option>
-          <option value="phone"></option>
           <option value="email"></option>
           <option value="message"></option>
         </select>
@@ -549,7 +619,6 @@ function updateReportModalLanguage() {
   const type = modal.querySelector("#reportType");
   if (type) {
     type.querySelector('option[value="website"]').textContent = t("reportTypeWebsite");
-    type.querySelector('option[value="phone"]').textContent = t("reportTypePhone");
     type.querySelector('option[value="email"]').textContent = t("reportTypeEmail");
     type.querySelector('option[value="message"]').textContent = t("reportTypeMessage");
   }
@@ -584,7 +653,6 @@ function openReportModal() {
   if (summary && lastScan) {
     const parts = [];
     if (lastScan.domain) parts.push(`Domain: ${lastScan.domain}`);
-    if (lastScan.phones && lastScan.phones.length) parts.push(`Phone: ${lastScan.phones.join(", ")}`);
     if (lastScan.emails && lastScan.emails.length) parts.push(`Email: ${lastScan.emails.join(", ")}`);
     parts.push(`Verdict: ${lastScan.verdict || "unknown"}`);
     parts.push(`Score: ${lastScan.score ?? "unknown"}/100`);
@@ -629,7 +697,6 @@ async function submitScamReport() {
       notes: notes.trim(),
       input: lastScan.input,
       domain: lastScan.domain || null,
-      phones: lastScan.phones || [],
       emails: lastScan.emails || [],
       verdict: lastScan.verdict || null,
       riskLevel: lastScan.riskLevel || null,
@@ -851,7 +918,6 @@ window.runScan = async function () {
     lastScan = {
       input: text,
       domain: data.domain || null,
-      phones: data.phones || [],
       emails: data.emails || [],
       verdict: data.verdict,
       riskLevel: data.riskLevel,
