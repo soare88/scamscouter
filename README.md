@@ -1,23 +1,21 @@
-# ScamScouter v1.6.1 Homepage Language Fix
+# ScamScouter v1.6.2 Core Pages Language Fix
 
-This package fixes the homepage language issue.
+This package fixes the language selector on the main static pages.
 
-Fixes:
-- Homepage now translates when EN/RO selector changes.
-- Main hero, scanner proof, trust score card, feature cards and homepage sections translate.
-- Homepage title/meta description also update dynamically.
-- Public phone checker wording remains removed.
-- Keeps v1.6 Growth Pack:
-  - OCR
-  - Report Scam
-  - Recent Scams
-  - Admin noindex
-  - How it works
-  - SEO pages
-  - sitemap/canonical/robots on https://www.scamscouter.com/
+Fixed bilingual pages:
+- homepage from v1.6.1 preserved
+- pricing.html
+- about.html
+- contact.html
+- privacy.html
+- terms.html
+- how-it-works.html
+- recent-scams.html
 
 Important:
-- Upload all files directly into the GitHub repo root.
-- Do not upload the ZIP itself or the parent folder.
-- Keep your real analytics.html if it contains your real GA4 ID.
+- This does NOT change URL structure.
+- This does NOT change canonical URLs.
+- This does NOT change sitemap/robots indexing logic.
+- Admin remains noindex if present.
+- Keep your existing analytics.html if it contains your real GA4 ID.
 - After deploy, hard refresh with Ctrl + Shift + R.
