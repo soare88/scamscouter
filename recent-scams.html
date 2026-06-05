@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Recent Reported Scams | ScamScouter</title>
   <meta name="description" content="View recently reported scam patterns, including fake delivery messages, marketplace scams, phishing links and suspicious payment pages." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.scamscouter.com/recent-scams.html" />
-
   <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
@@ -16,21 +14,82 @@
   <meta name="theme-color" content="#060b1a" />
   <link rel="stylesheet" href="/scamscouter.css?v=4" />
 
-  <meta property="og:type" content="article" />
+  <!-- Open Graph & Twitter -->
+  <meta property="og:type" content="website" />
   <meta property="og:site_name" content="ScamScouter" />
   <meta property="og:title" content="Recent Reported Scams | ScamScouter" />
   <meta property="og:description" content="View recently reported scam patterns, including fake delivery messages, marketplace scams, phishing links and suspicious payment pages." />
   <meta property="og:url" content="https://www.scamscouter.com/recent-scams.html" />
   <meta property="og:image" content="https://www.scamscouter.com/android-chrome-512x512.png" />
-
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Recent Reported Scams | ScamScouter" />
   <meta name="twitter:description" content="View recently reported scam patterns, including fake delivery messages, marketplace scams, phishing links and suspicious payment pages." />
-  <meta name="twitter:image" content="https://www.scamscouter.com/android-chrome-512x512.png" />
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Recent Reported Scams","description":"View recently reported scam patterns, including fake delivery messages, marketplace scams, phishing links and suspicious payment pages.","author":{"@type":"Organization","name":"ScamScouter"},"publisher":{"@type":"Organization","name":"ScamScouter"},"mainEntityOfPage":"https://www.scamscouter.com/recent-scams.html"}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are recent scam reports automatically verified?","acceptedAnswer":{"@type":"Answer","text":"Only approved public patterns should appear. Still, use your own judgment and verify through official sources."}},{"@type":"Question","name":"Can I check my own scam message?","acceptedAnswer":{"@type":"Answer","text":"Yes. Paste the suspicious message, link or email into ScamScouter for a risk analysis."}},{"@type":"Question","name":"Should I share personal data in reports?","acceptedAnswer":{"@type":"Answer","text":"No. Avoid sharing passwords, full card numbers, private IDs or sensitive personal information."}}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ScamScouter","item":"https://www.scamscouter.com"},{"@type":"ListItem","position":2,"name":"Recent Reported Scams","item":"https://www.scamscouter.com/recent-scams.html"}]}</script>
+  <!-- Superior Nested Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Recent Reported Scams",
+      "description": "View recently reported scam patterns, including fake delivery messages, marketplace scams, phishing links and suspicious payment pages.",
+      "url": "https://www.scamscouter.com/recent-scams.html",
+      "publisher": {
+        "@type": "Organization",
+        "name": "ScamScouter",
+        "url": "https://www.scamscouter.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are recent scam reports automatically verified?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only approved public patterns should appear. Still, use your own judgment and verify through official sources."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I check my own scam message?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Paste the suspicious message, link or email into ScamScouter for a risk analysis."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I share personal data in reports?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Avoid sharing passwords, full card numbers, private IDs or sensitive personal information."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ScamScouter",
+          "item": "https://www.scamscouter.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Recent Reported Scams",
+          "item": "https://www.scamscouter.com/recent-scams.html"
+        }
+      ]
+    }
+  ]
+  </script>
 </head>
 <body>
   <div id="site-analytics"></div>
@@ -41,7 +100,8 @@
     <main class="seo-section" style="text-align:left;max-width:960px;">
       <p class="mini-label">ScamScouter safety guide</p>
       <h1>Recent Reported Scams</h1>
-<p>Browse recent scam patterns and warning signs reported or approved for public awareness. This page helps visitors recognize common fraud tactics before they click, pay or enter personal information.</p><p>You can also paste your own suspicious link, message or email into ScamScouter for a risk check.</p>
+      <p>Browse recent scam patterns and warning signs reported or approved for public awareness. This page helps visitors recognize common fraud tactics before they click, pay or enter personal information.</p>
+      <p>You can also paste your own suspicious link, message or email into ScamScouter for a risk check.</p>
 
       <div class="scanner-card" style="margin-top:24px;margin-bottom:32px;">
         <div class="scanner-header">
@@ -54,10 +114,21 @@
         <textarea id="input" rows="5" placeholder="Paste the suspicious message, link or email..."></textarea>
         <button id="scanBtn" onclick="runScan()" class="scan-btn">Scan now</button>
         <div id="out" class="output-area"></div>
-        <p class="mini-label" style="margin-top:14px;">Free • No signup required • Fast risk analysis</p>
       </div>
 
-<h2>What appears on this page</h2><p>Recent scam reports may include fake delivery texts, marketplace payment links, phishing emails, fake shopping websites, crypto investment pages, job offer scams and impersonation messages.</p><h2>How to use recent scam reports</h2><ul><li>compare the message you received with known patterns;</li><li>look for repeated warning signs such as urgency, payment requests and suspicious domains;</li><li>avoid clicking links directly from messages;</li><li>use the scanner before entering personal or payment details.</li></ul><h2>Check your own message</h2><p>If you received a suspicious message, paste it into the scanner above. Do not include private passwords, full card numbers or sensitive personal documents.</p>
+      <h2>What appears on this page</h2>
+      <p>Recent scam reports may include fake delivery texts, marketplace payment links, phishing emails, fake shopping websites, crypto investment pages, job offer scams and impersonation messages.</p>
+      
+      <h2>How to use recent scam reports</h2>
+      <ul>
+        <li>Compare the message you received with known patterns.</li>
+        <li>Look for repeated warning signs such as urgency, payment requests and suspicious domains.</li>
+        <li>Avoid clicking links directly from messages.</li>
+        <li>Use the scanner before entering personal or payment details.</li>
+      </ul>
+
+      <h2>Check your own message</h2>
+      <p>If you received a suspicious message, paste it into the scanner above. Do not include private passwords, full card numbers or sensitive personal documents.</p>
 
       <div id="recentScamsList" class="recent-scams-list" style="margin-top:20px;">
         <div class="loading">Loading approved reports...</div>
@@ -68,20 +139,13 @@
       <details class="faq-item"><summary>Can I check my own scam message?</summary><p>Yes. Paste the suspicious message, link or email into ScamScouter for a risk analysis.</p></details>
       <details class="faq-item"><summary>Should I share personal data in reports?</summary><p>No. Avoid sharing passwords, full card numbers, private IDs or sensitive personal information.</p></details>
 
-      <h2>Related checks</h2>
+      <h2>Related Scam Checkers</h2>
       <div class="quick-links" style="margin-top:18px;">
         <a href="/fake-website-checker.html">Fake website checker</a>
         <a href="/is-this-link-safe.html">Is this link safe?</a>
         <a href="/phishing-email-checker.html">Phishing email checker</a>
         <a href="/sms-scam-checker.html">SMS scam checker</a>
         <a href="/shopping-scam-checker.html">Shopping scam checker</a>
-        <a href="/recent-scams.html">Recent scams</a>
-      </div>
-
-      <div class="scanner-card" style="margin-top:32px;">
-        <h2>Got a suspicious message or link?</h2>
-        <p>Paste it into ScamScouter and check warning signs before you click, pay or enter personal information.</p>
-        <a class="scan-btn" href="/" style="display:inline-block;text-decoration:none;text-align:center;">Open the main scanner</a>
       </div>
     </main>
 
@@ -89,5 +153,6 @@
   </div>
   <script src="/includes.js"></script>
   <script type="module" src="/app.js?v=1.6.2"></script>
+  <script type="module" src="/recent-scams.js"></script> <!-- SCRIPT ADAUGAT PENTRU A INCARCA RAPOARTELE -->
 </body>
 </html>
