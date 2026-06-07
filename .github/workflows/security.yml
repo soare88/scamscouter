@@ -1,0 +1,8 @@
+// ✅ NEW (Uses environment variables)
+import { firebaseConfig, validateFirebaseConfig } from './app-config.js';
+
+// At the top of your app initialization:
+validateFirebaseConfig();
+
+// Then use firebaseConfig as before:
+const app = initializeApp(firebaseConfig);
