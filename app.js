@@ -1,15 +1,15 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
-import { firebaseConfig, validateFirebaseConfig } from "./app-config.js";
 
-// Validate Firebase configuration on startup
-try {
-  validateFirebaseConfig();
-} catch (err) {
-  console.error("❌ Firebase Configuration Error:", err.message);
-  // Log error but don't block app - graceful degradation
-}
+const firebaseConfig = {
+  apiKey: "AIzaSyAF14JSdD3vPLfgRzm7rYNvP_0o1hJ0p8Q",
+  authDomain: "scamio.firebaseapp.com",
+  projectId: "scamio",
+  storageBucket: "scamio.firebasestorage.app",
+  messagingSenderId: "216169578111",
+  appId: "1:216169578111:web:37d634e6d794ec8bfe094a"
+};
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -100,7 +100,7 @@ const translations = {
     pricingWhyFreeTitle: "Why is ScamScouter free right now?",
     pricingWhyFreeText: "ScamScouter is still in beta. The goal is to help people check suspicious content quickly while we improve detection, reporting and educational pages.",
     pricingDisclaimerTitle: "Important note",
-    pricingDisclaimerText: "ScamScouter provides risk signals and guidance. It cannot guarantee that every website, message or email is safe or fraudulent. Always verify important payments, accou[...]
+    pricingDisclaimerText: "ScamScouter provides risk signals and guidance. It cannot guarantee that every website, message or email is safe or fraudulent. Always verify important payments, accounts and contracts through official channels.",
     aboutTitle: "About ScamScouter",
     aboutIntro: "ScamScouter helps people check suspicious links, messages, emails and screenshots before they click, pay or share personal information.",
     aboutMissionTitle: "Our mission",
@@ -119,7 +119,7 @@ const translations = {
     privacyTitle: "Privacy Policy",
     privacyIntro: "ScamScouter is designed to help users check suspicious content while keeping privacy in mind.",
     privacyDataTitle: "Information you provide",
-    privacyDataText: "When you scan a message, link or screenshot text, the submitted content may be processed to generate a risk result. If you report a scam, the report may be stored for modera[...]
+    privacyDataText: "When you scan a message, link or screenshot text, the submitted content may be processed to generate a risk result. If you report a scam, the report may be stored for moderation and safety improvement.",
     privacyAnalyticsTitle: "Analytics",
     privacyAnalyticsText: "We may use analytics tools to understand traffic, page usage and product performance.",
     privacySafetyTitle: "Safety",
@@ -251,7 +251,7 @@ const translations = {
     popularChecksText: "Acces rapid la verificări comune pentru scamuri în engleză și română.",
     premiumComingSoon: "Premium în curând",
     builtTitle: "Creat pentru decizii rapide",
-    builtText: "ScamScouter te ajută să încetinești înainte să dai click pe un link suspect, să introduci date de card, să plătești o taxă falsă de livrare, să răspunzi unui cumpăr[...]
+    builtText: "ScamScouter te ajută să încetinești înainte să dai click pe un link suspect, să introduci date de card, să plătești o taxă falsă de livrare, să răspunzi unui cumpărător fals sau să ai încredere într-un email neașteptat.",
     pricingTitle: "Prețuri",
     pricingIntro: "ScamScouter este momentan în beta gratuit. Poți verifica linkuri suspecte, mesaje, emailuri și screenshoturi fără un plan plătit.",
     pricingFreeBadge: "Beta gratuit",
@@ -280,20 +280,20 @@ const translations = {
     pricingBusinessFeature3: "Opțiuni de export",
     pricingBusinessFeature4: "Opțiuni API în viitor",
     pricingWhyFreeTitle: "De ce este ScamScouter gratuit acum?",
-    pricingWhyFreeText: "ScamScouter este încă în beta. Scopul este să ajute oamenii să verifice rapid conținut suspect în timp ce îmbunătățim detecția, raportarea și paginile educat[...]
+    pricingWhyFreeText: "ScamScouter este încă în beta. Scopul este să ajute oamenii să verifice rapid conținut suspect în timp ce îmbunătățim detecția, raportarea și paginile educative.",
     pricingDisclaimerTitle: "Notă importantă",
-    pricingDisclaimerText: "ScamScouter oferă semnale de risc și îndrumare. Nu poate garanta că fiecare site, mesaj sau email este sigur ori fraudulos. Verifică întotdeauna plățile, contu[...]
+    pricingDisclaimerText: "ScamScouter oferă semnale de risc și îndrumare. Nu poate garanta că fiecare site, mesaj sau email este sigur ori fraudulos. Verifică întotdeauna plățile, conturile și contractele importante prin canale oficiale.",
     aboutTitle: "Despre ScamScouter",
     aboutIntro: "ScamScouter ajută oamenii să verifice linkuri, mesaje, emailuri și screenshoturi suspecte înainte să dea click, să plătească sau să ofere date personale.",
     aboutMissionTitle: "Misiunea noastră",
-    aboutMissionText: "Misiunea noastră este să facem verificarea scamurilor simplă pentru utilizatorii obișnuiți. ScamScouter evidențiază semnale de avertizare și oferă îndrumare pract[...]
+    aboutMissionText: "Misiunea noastră este să facem verificarea scamurilor simplă pentru utilizatorii obișnuiți. ScamScouter evidențiază semnale de avertizare și oferă îndrumare practică în câteva secunde.",
     aboutChecksTitle: "Ce verificăm",
     aboutCheck1: "Linkuri suspecte și domenii necunoscute",
     aboutCheck2: "Tipare de phishing și imitare brand",
     aboutCheck3: "Mesaje false de curier, marketplace, crypto și plată",
     aboutCheck4: "Text extras din screenshoturi prin OCR în browser",
     aboutLimitsTitle: "Limitare importantă",
-    aboutLimitsText: "ScamScouter este un instrument informativ. Niciun sistem automat nu poate garanta acuratețe 100%. Verifică întotdeauna plățile importante și cererile de cont prin cana[...]
+    aboutLimitsText: "ScamScouter este un instrument informativ. Niciun sistem automat nu poate garanta acuratețe 100%. Verifică întotdeauna plățile importante și cererile de cont prin canale oficiale.",
     contactTitle: "Contact",
     contactIntro: "Ai feedback, întrebări sau o problemă cu un raport de scam? Contactează ScamScouter.",
     contactEmailTitle: "Email",
@@ -301,7 +301,7 @@ const translations = {
     privacyTitle: "Politica de confidențialitate",
     privacyIntro: "ScamScouter este conceput să ajute utilizatorii să verifice conținut suspect, ținând cont de confidențialitate.",
     privacyDataTitle: "Informațiile pe care le furnizezi",
-    privacyDataText: "Când scanezi un mesaj, link sau text din screenshot, conținutul trimis poate fi procesat pentru generarea rezultatului de risc. Dacă raportezi un scam, raportul poate fi [...]
+    privacyDataText: "Când scanezi un mesaj, link sau text din screenshot, conținutul trimis poate fi procesat pentru generarea rezultatului de risc. Dacă raportezi un scam, raportul poate fi stocat pentru moderare și îmbunătățirea siguranței.",
     privacyAnalyticsTitle: "Analytics",
     privacyAnalyticsText: "Putem folosi instrumente analytics pentru a înțelege traficul, utilizarea paginilor și performanța produsului.",
     privacySafetyTitle: "Siguranță",
