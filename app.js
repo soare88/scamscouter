@@ -1,3 +1,5 @@
+const SCAMSCOUTER_FRONTEND_VERSION = "1.6.4-restored-cache-fix";
+console.info("ScamScouter frontend", SCAMSCOUTER_FRONTEND_VERSION);
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
