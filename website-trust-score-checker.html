@@ -1,33 +1,32 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Website Trust Score Checker | Check Website Risk</title>
-  <meta name="description" content="Check the trust score of a website based on domain signals, suspicious patterns, payment risks and scam indicators before you click or pay." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.scamscouter.com/website-trust-score-checker.html" />
-  <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
-  <link rel="manifest" href="/site.webmanifest?v=2" />
-  <meta name="theme-color" content="#060b1a" />
-  <link rel="stylesheet" href="/scamscouter.css?v=4" />
-
-  <!-- Open Graph & Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="ScamScouter" />
-  <meta property="og:title" content="Website Trust Score Checker | Check Website Risk" />
-  <meta property="og:description" content="Check the trust score of a website based on domain signals, suspicious patterns, payment risks and scam indicators before you click or pay." />
-  <meta property="og:url" content="https://www.scamscouter.com/website-trust-score-checker.html" />
-  <meta property="og:image" content="https://www.scamscouter.com/android-chrome-512x512.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Website Trust Score Checker | Check Website Risk" />
-  <meta name="twitter:description" content="Check the trust score of a website based on domain signals, suspicious patterns, payment risks and scam indicators before you click or pay." />
-  <meta name="twitter:image" content="https://www.scamscouter.com/android-chrome-512x512.png" />
-
-  <!-- Superior Nested Schema.org JSON-LD -->
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Website Trust Score Checker | Check Website Risk</title>
+<meta content="Check the trust score of a website based on domain signals, suspicious patterns, payment risks and scam indicators before you click or pay." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://www.scamscouter.com/website-trust-score-checker.html" rel="canonical"/>
+<link href="/favicon.ico?v=2" rel="icon" sizes="any"/>
+<link href="/favicon.svg?v=2" rel="icon" type="image/svg+xml"/>
+<link href="/apple-touch-icon.png?v=2" rel="apple-touch-icon"/>
+<link href="/site.webmanifest?v=2" rel="manifest"/>
+<meta content="#060b1a" name="theme-color"/>
+<link href="/scamscouter.css?v=4" rel="stylesheet"/>
+<!-- Open Graph & Twitter -->
+<meta content="article" property="og:type"/>
+<meta content="ScamScouter" property="og:site_name"/>
+<meta content="Website Trust Score Checker | Check Website Risk" property="og:title"/>
+<meta content="Check the trust score of a website based on domain signals, suspicious patterns, payment risks and scam indicators before you click or pay." property="og:description"/>
+<meta content="https://www.scamscouter.com/website-trust-score-checker.html" property="og:url"/>
+<meta content="https://www.scamscouter.com/android-chrome-512x512.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Website Trust Score Checker | Check Website Risk" name="twitter:title"/>
+<meta content="Check the trust score of a website based on domain signals, suspicious patterns, payment risks and scam indicators before you click or pay." name="twitter:description"/>
+<meta content="https://www.scamscouter.com/android-chrome-512x512.png" name="twitter:image"/>
+<!-- Superior Nested Schema.org JSON-LD -->
+<script type="application/ld+json">
   [
     {
       "@context": "https://schema.org",
@@ -95,67 +94,61 @@
   </script>
 </head>
 <body>
-  <div id="site-analytics"></div>
-  <div class="page-bg">
-    <div class="hero-glow"></div>
-    <div id="site-header"></div>
-    <main class="seo-section" style="text-align:left;max-width:960px;">
-      <p class="mini-label">ScamScouter safety guide</p>
-      <h1>Website Trust Score Checker</h1>
-      <p>A website trust score helps you decide whether a site deserves caution before you click, log in, enter card details or make a payment. ScamScouter reviews suspicious signals that may indicate phishing, fake stores, copied brands or risky payment pages.</p>
-      <p>Paste a website URL, link or suspicious message below and get a practical risk analysis.</p>
-
-      <div class="scanner-card" style="margin-top:24px;margin-bottom:32px;">
-        <div class="scanner-header">
-          <div>
-            <p class="mini-label">Check now</p>
-            <h2>Scan the suspicious message, link or email</h2>
-          </div>
-          <span class="status-dot">Live</span>
-        </div>
-        <textarea id="input" rows="5" placeholder="Paste the suspicious message, link or email..."></textarea>
-        <button id="scanBtn" onclick="runScan()" class="scan-btn">Scan now</button>
-        <div id="out" class="output-area"></div>
-      </div>
-
-      <h2>What a website trust score should consider</h2>
-      <p>A single visual impression is not enough. Scam websites can look professional, use HTTPS and display fake reviews. A better trust check looks at the domain, context, payment behavior, contact details and pressure tactics.</p>
-
-      <h2>Risk signals ScamScouter looks for</h2>
-      <ul>
-        <li>Unusual domains, extra words, hyphens or brand impersonation.</li>
-        <li>Requests for card details, passwords or verification codes.</li>
-        <li>Fake checkout pages or suspicious payment instructions.</li>
-        <li>Urgent messages, threats or unrealistic offers.</li>
-        <li>Missing company details, unclear return policy or copied legal pages.</li>
-      </ul>
-
-      <h2>When to check a website trust score</h2>
-      <ul>
-        <li>Before buying from a store you have never used.</li>
-        <li>Before entering card details on a payment page.</li>
-        <li>After receiving a link by SMS, email or WhatsApp.</li>
-        <li>When a website claims to represent a known brand but the domain looks different.</li>
-      </ul>
-
-      <h2>Frequently Asked Questions</h2>
-      <details class="faq-item"><summary>Can a trust score guarantee that a website is safe?</summary><p>No. A trust score is a risk analysis, not a 100% guarantee. Use it together with your own verification and official sources.</p></details>
-      <details class="faq-item"><summary>Can a fake website use HTTPS?</summary><p>Yes. HTTPS only means the connection is encrypted. It does not prove that the website or company is legitimate.</p></details>
-      <details class="faq-item"><summary>What should I do if a website has a low trust score?</summary><p>Do not enter sensitive data. Verify the domain, company details, reviews and payment method before taking action.</p></details>
-
-      <h2>Related checks</h2>
-      <div class="quick-links" style="margin-top:18px;">
-        <a href="/fake-website-checker.html">Fake website checker</a>
-        <a href="/is-this-link-safe.html">Is this link safe?</a>
-        <a href="/phishing-email-checker.html">Phishing email checker</a>
-        <a href="/sms-scam-checker.html">SMS scam checker</a>
-        <a href="/fake-store-checker.html">Fake store checker</a>
-        <a href="/recent-scams.html">Recent scams</a>
-      </div>
-    </main>
-    <div id="site-footer"></div>
-  </div>
-  <script src="/includes.js"></script>
-  <script type="module" src="/app.js?v=1.6.4"></script>
+<div id="site-analytics"></div>
+<div class="page-bg">
+<div class="hero-glow"></div>
+<div id="site-header"></div>
+<main class="seo-section" style="text-align:left;max-width:960px;">
+<p class="mini-label">ScamScouter safety guide</p>
+<h1>Website Trust Score Checker</h1>
+<p>A website trust score helps you decide whether a site deserves caution before you click, log in, enter card details or make a payment. ScamScouter reviews suspicious signals that may indicate phishing, fake stores, copied brands or risky payment pages.</p>
+<p>Paste a website URL, link or suspicious message below and get a practical risk analysis.</p>
+<div class="scanner-card" style="margin-top:24px;margin-bottom:32px;">
+<div class="scanner-header">
+<div>
+<p class="mini-label">Check now</p>
+<h2>Scan the suspicious message, link or email</h2>
+</div>
+<span class="status-dot">Live</span>
+</div>
+<textarea id="input" placeholder="Paste the suspicious message, link or email..." rows="5"></textarea>
+<button class="scan-btn" id="scanBtn" onclick="runScan()">Scan now</button>
+<div class="output-area" id="out"></div>
+</div>
+<h2>What a website trust score should consider</h2>
+<p>A single visual impression is not enough. Scam websites can look professional, use HTTPS and display fake reviews. A better trust check looks at the domain, context, payment behavior, contact details and pressure tactics.</p>
+<h2>Risk signals ScamScouter looks for</h2>
+<ul>
+<li>Unusual domains, extra words, hyphens or brand impersonation.</li>
+<li>Requests for card details, passwords or verification codes.</li>
+<li>Fake checkout pages or suspicious payment instructions.</li>
+<li>Urgent messages, threats or unrealistic offers.</li>
+<li>Missing company details, unclear return policy or copied legal pages.</li>
+</ul>
+<h2>When to check a website trust score</h2>
+<ul>
+<li>Before buying from a store you have never used.</li>
+<li>Before entering card details on a payment page.</li>
+<li>After receiving a link by SMS, email or WhatsApp.</li>
+<li>When a website claims to represent a known brand but the domain looks different.</li>
+</ul>
+<h2>Frequently Asked Questions</h2>
+<details class="faq-item"><summary>Can a trust score guarantee that a website is safe?</summary><p>No. A trust score is a risk analysis, not a 100% guarantee. Use it together with your own verification and official sources.</p></details>
+<details class="faq-item"><summary>Can a fake website use HTTPS?</summary><p>Yes. HTTPS only means the connection is encrypted. It does not prove that the website or company is legitimate.</p></details>
+<details class="faq-item"><summary>What should I do if a website has a low trust score?</summary><p>Do not enter sensitive data. Verify the domain, company details, reviews and payment method before taking action.</p></details>
+<h2>Related checks</h2>
+<div class="quick-links" style="margin-top:18px;">
+<a href="/fake-website-checker.html">Fake website checker</a>
+<a href="/is-this-link-safe.html">Is this link safe?</a>
+<a href="/phishing-email-checker.html">Phishing email checker</a>
+<a href="/sms-scam-checker.html">SMS scam checker</a>
+<a href="/fake-store-checker.html">Fake store checker</a>
+<a href="/recent-scams.html">Recent scams</a>
+</div>
+</main>
+<div id="site-footer"></div>
+</div>
+<script src="/includes.js"></script>
+<script src="/app.js?v=1.6.4" type="module"></script>
 </body>
 </html>

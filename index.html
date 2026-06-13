@@ -1,105 +1,114 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScamScouter - Check Suspicious Links, Messages & Scam Websites</title>
-  <meta name="description" content="Use ScamScouter to check suspicious links, scam messages, phishing emails and fake websites before you click." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.scamscouter.com/" />
-  <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
-  <link rel="manifest" href="/site.webmanifest?v=2" />
-  <meta name="theme-color" content="#060b1a" />
-
-  <link rel="stylesheet" href="/scamscouter.css?v=4" />
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ScamScouter - Check Suspicious Links, Messages &amp; Scam Websites</title>
+<meta content="Use ScamScouter to check suspicious links, scam messages, phishing emails and fake websites before you click." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://www.scamscouter.com/" rel="canonical"/>
+<link href="/favicon.ico?v=2" rel="icon" sizes="any"/>
+<link href="/favicon.svg?v=2" rel="icon" type="image/svg+xml"/>
+<link href="/favicon-32x32.png?v=2" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png?v=2" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/apple-touch-icon.png?v=2" rel="apple-touch-icon"/>
+<link href="/site.webmanifest?v=2" rel="manifest"/>
+<meta content="#060b1a" name="theme-color"/>
+<link href="/scamscouter.css?v=4" rel="stylesheet"/>
+<meta content="website" property="og:type"/><meta content="ScamScouter" property="og:site_name"/><meta content="ScamScouter - Check Suspicious Links, Messages &amp; Scam Websites" property="og:title"/><meta content="Use ScamScouter to check suspicious links, scam messages, phishing emails and fake websites before you click." property="og:description"/><meta content="https://www.scamscouter.com/" property="og:url"/><meta content="https://www.scamscouter.com/android-chrome-512x512.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="ScamScouter - Check Suspicious Links, Messages &amp; Scam Websites" name="twitter:title"/><meta content="Use ScamScouter to check suspicious links, scam messages, phishing emails and fake websites before you click." name="twitter:description"/><meta content="https://www.scamscouter.com/android-chrome-512x512.png" name="twitter:image"/><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "ScamScouter - Check Suspicious Links, Messages & Scam Websites",
+  "description": "Use ScamScouter to check suspicious links, scam messages, phishing emails and fake websites before you click.",
+  "url": "https://www.scamscouter.com/",
+  "inLanguage": "en-US",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "ScamScouter",
+    "url": "https://www.scamscouter.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ScamScouter",
+    "url": "https://www.scamscouter.com/"
+  }
+}</script></head>
 <body>
-  <div id="site-analytics"></div>
-  <div class="page-bg">
-    <div class="hero-glow"></div>
-    <div id="site-header"></div>
-
-    <main class="premium-hero">
-      <section class="premium-hero-left">
-        <div class="hero-badge" id="eyebrow">AI-assisted scam protection</div>
-        <h1 id="headline">Check suspicious links before you click.</h1>
-        <p id="subheadline">Paste any suspicious link, message, email or website below and get an instant scam risk analysis.</p>
-
-        <div class="home-scanner-card">
-          <div class="scanner-mini-header">
-            <div>
-              <p class="mini-label" id="scannerLabel">Scan anything suspicious</p>
-              <h2 id="scannerTitle">Paste a link, message or email</h2>
-            </div>
-            <span class="status-dot" id="statusDot">Live</span>
-          </div>
-          <textarea id="input" rows="5" placeholder="Paste a suspicious link, message, email, or website..."></textarea>
-          <button id="scanBtn" onclick="runScan()" class="scan-btn">Scan Now</button>
-          <p class="scanner-proof" data-i18n="scannerProof">Free beta • No signup required • Instant results</p>
-          <div id="out" class="output-area"></div>
-        </div>
-
-        <div class="hero-stats">
-          <article><strong data-i18n="statFreeTitle">Free</strong><span data-i18n="statFreeText">No signup required</span></article>
-          <article><strong data-i18n="statInstantTitle">Instant</strong><span data-i18n="statInstantText">Fast risk analysis</span></article>
-          <article><strong data-i18n="statAiTitle">AI</strong><span data-i18n="statAiText">Scam pattern checks</span></article>
-        </div>
-      </section>
-
-      <section class="premium-hero-right" data-i18n-aria="scoreAria" aria-label="Example trust score">
-        <div class="score-glow"></div>
-        <div class="score-card">
-          <div class="score-card-header">
-            <div><p data-i18n="checkingExample">Checking example</p><h2>scamscouter.com</h2></div>
-            <div class="safe-check">✓</div>
-          </div>
-          <div class="score-circle-wrap">
-            <div class="score-circle"><span data-i18n="trustScore">Trust Score</span><strong>92%</strong><em data-i18n="verySafe">Very Safe</em></div>
-          </div>
-          <div class="check-list">
-            <div><span data-i18n="sslCertificate">SSL Certificate</span><strong data-i18n="valid">Valid</strong></div>
-            <div><span data-i18n="blacklistStatus">Blacklist Status</span><strong data-i18n="clean">Clean</strong></div>
-            <div><span data-i18n="domainSignals">Domain Signals</span><strong data-i18n="checked">Checked</strong></div>
-            <div><span data-i18n="scamPatterns">Scam Patterns</span><strong data-i18n="analyzed">Analyzed</strong></div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <section class="feature-grid premium-features">
-      <article class="feature-card"><div class="feature-icon">🛡️</div><h3 data-i18n="featureAiTitle">AI Scam Detection</h3><p data-i18n="featureAiText">ScamScouter analyzes suspicious patterns in links, emails, messages and websites to help you avoid scams.</p></article>
-      <article class="feature-card"><div class="feature-icon">⚡</div><h3 data-i18n="featureScoreTitle">Instant Risk Score</h3><p data-i18n="featureScoreText">Get a simple verdict, risk score, red flags and practical safety advice in seconds.</p></article>
-      <article class="feature-card"><div class="feature-icon">🔒</div><h3 data-i18n="featureClickTitle">Check Before You Click</h3><p data-i18n="featureClickText">Useful for phishing links, fake stores, marketplace scams, delivery scams and suspicious emails.</p></article>
-    </section>
-
-    <section class="seo-section">
-      <h2 data-i18n="popularChecksTitle">Popular scam checks</h2>
-      <p style="margin-bottom:18px;" data-i18n="popularChecksText">Quick access to common scam checks in English and Romanian.</p>
-      <div class="quick-links">
-        <a href="/is-this-link-safe.html">Is this link safe?</a>
-        <a href="/fake-website-checker.html">Fake website checker</a>
-        <a href="/phishing-email-checker.html">Phishing email checker</a>
-        <a href="/paypal-scam-email-checker.html">PayPal scam email checker</a>
-        <a href="/dhl-scam-text-checker.html">DHL scam text checker</a>
-        <a href="/scam-olx-romania.html">Scam OLX România</a>
-        <a href="/verifica-link-suspect.html">Verifică link suspect</a>
-        <a href="/sms-fan-courier-fals.html">SMS FAN Courier fals</a>
-        <a href="/pricing.html" data-i18n="premiumComingSoon">Premium coming soon</a>
-      </div>
-    </section>
-
-    <section class="seo-section">
-      <h2 data-i18n="builtTitle">Built for quick decisions</h2>
-      <p data-i18n="builtText">ScamScouter helps you slow down before clicking a suspicious link, entering card details, paying a fake delivery fee, replying to a fake buyer or trusting an unexpected email.</p>
-    </section>
-
-    <div id="site-footer"></div>
-  </div>
-  <script src="/includes.js"></script>
-  <script type="module" src="/app.js?v=1.6.4"></script>
+<div id="site-analytics"></div>
+<div class="page-bg">
+<div class="hero-glow"></div>
+<div id="site-header"></div>
+<main class="premium-hero">
+<section class="premium-hero-left">
+<div class="hero-badge" id="eyebrow">AI-assisted scam protection</div>
+<h1 id="headline">Check suspicious links before you click.</h1>
+<p id="subheadline">Paste any suspicious link, message, email or website below and get an instant scam risk analysis.</p>
+<div class="home-scanner-card">
+<div class="scanner-mini-header">
+<div>
+<p class="mini-label" id="scannerLabel">Scan anything suspicious</p>
+<h2 id="scannerTitle">Paste a link, message or email</h2>
+</div>
+<span class="status-dot" id="statusDot">Live</span>
+</div>
+<textarea id="input" placeholder="Paste a suspicious link, message, email, or website..." rows="5"></textarea>
+<button class="scan-btn" id="scanBtn" onclick="runScan()">Scan Now</button>
+<p class="scanner-proof" data-i18n="scannerProof">Free beta • No signup required • Instant results</p>
+<div class="output-area" id="out"></div>
+</div>
+<div class="hero-stats">
+<article><strong data-i18n="statFreeTitle">Free</strong><span data-i18n="statFreeText">No signup required</span></article>
+<article><strong data-i18n="statInstantTitle">Instant</strong><span data-i18n="statInstantText">Fast risk analysis</span></article>
+<article><strong data-i18n="statAiTitle">AI</strong><span data-i18n="statAiText">Scam pattern checks</span></article>
+</div>
+</section>
+<section aria-label="Example trust score" class="premium-hero-right" data-i18n-aria="scoreAria">
+<div class="score-glow"></div>
+<div class="score-card">
+<div class="score-card-header">
+<div><p data-i18n="checkingExample">Checking example</p><h2>scamscouter.com</h2></div>
+<div class="safe-check">✓</div>
+</div>
+<div class="score-circle-wrap">
+<div class="score-circle"><span data-i18n="trustScore">Trust Score</span><strong>92%</strong><em data-i18n="verySafe">Very Safe</em></div>
+</div>
+<div class="check-list">
+<div><span data-i18n="sslCertificate">SSL Certificate</span><strong data-i18n="valid">Valid</strong></div>
+<div><span data-i18n="blacklistStatus">Blacklist Status</span><strong data-i18n="clean">Clean</strong></div>
+<div><span data-i18n="domainSignals">Domain Signals</span><strong data-i18n="checked">Checked</strong></div>
+<div><span data-i18n="scamPatterns">Scam Patterns</span><strong data-i18n="analyzed">Analyzed</strong></div>
+</div>
+</div>
+</section>
+</main>
+<section class="feature-grid premium-features">
+<article class="feature-card"><div class="feature-icon">🛡️</div><h3 data-i18n="featureAiTitle">AI Scam Detection</h3><p data-i18n="featureAiText">ScamScouter analyzes suspicious patterns in links, emails, messages and websites to help you avoid scams.</p></article>
+<article class="feature-card"><div class="feature-icon">⚡</div><h3 data-i18n="featureScoreTitle">Instant Risk Score</h3><p data-i18n="featureScoreText">Get a simple verdict, risk score, red flags and practical safety advice in seconds.</p></article>
+<article class="feature-card"><div class="feature-icon">🔒</div><h3 data-i18n="featureClickTitle">Check Before You Click</h3><p data-i18n="featureClickText">Useful for phishing links, fake stores, marketplace scams, delivery scams and suspicious emails.</p></article>
+</section>
+<section class="seo-section">
+<h2 data-i18n="popularChecksTitle">Popular scam checks</h2>
+<p data-i18n="popularChecksText" style="margin-bottom:18px;">Quick access to common scam checks in English and Romanian.</p>
+<div class="quick-links">
+<a href="/is-this-link-safe.html">Is this link safe?</a>
+<a href="/fake-website-checker.html">Fake website checker</a>
+<a href="/phishing-email-checker.html">Phishing email checker</a>
+<a href="/paypal-scam-email-checker.html">PayPal scam email checker</a>
+<a href="/dhl-scam-text-checker.html">DHL scam text checker</a>
+<a href="/scam-olx-romania.html">Scam OLX România</a>
+<a href="/verifica-link-suspect.html">Verifică link suspect</a>
+<a href="/sms-fan-courier-fals.html">SMS FAN Courier fals</a>
+<a data-i18n="premiumComingSoon" href="/pricing.html">Premium coming soon</a>
+</div>
+</section>
+<section class="seo-section">
+<h2 data-i18n="builtTitle">Built for quick decisions</h2>
+<p data-i18n="builtText">ScamScouter helps you slow down before clicking a suspicious link, entering card details, paying a fake delivery fee, replying to a fake buyer or trusting an unexpected email.</p>
+</section>
+<div id="site-footer"></div>
+</div>
+<script src="/includes.js"></script>
+<script src="/app.js?v=1.6.4" type="module"></script>
 </body>
 </html>

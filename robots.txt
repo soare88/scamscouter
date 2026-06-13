@@ -2,5 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 Disallow: /admin.js
+Disallow: /header.html
+Disallow: /footer.html
+Disallow: /analytics.html
 
 Sitemap: https://www.scamscouter.com/sitemap.xml

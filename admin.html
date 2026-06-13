@@ -1,41 +1,57 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScamScouter Admin</title>
-  <meta name="description" content="Private admin page for ScamScouter report moderation." />
-  <meta name="robots" content="noindex, nofollow" />
-  <link rel="canonical" href="https://www.scamscouter.com/admin.html" />
-  <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
-  <link rel="manifest" href="/site.webmanifest?v=2" />
-  <meta name="theme-color" content="#060b1a" />
-  <link rel="stylesheet" href="/scamscouter.css?v=4" />
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ScamScouter Admin</title>
+<meta content="Private admin page for ScamScouter report moderation." name="description"/>
+<meta content="noindex, nofollow, noarchive" name="robots"/>
+<link href="https://www.scamscouter.com/admin.html" rel="canonical"/>
+<link href="/favicon.ico?v=2" rel="icon" sizes="any"/>
+<link href="/favicon.svg?v=2" rel="icon" type="image/svg+xml"/>
+<link href="/apple-touch-icon.png?v=2" rel="apple-touch-icon"/>
+<link href="/site.webmanifest?v=2" rel="manifest"/>
+<meta content="#060b1a" name="theme-color"/>
+<link href="/scamscouter.css?v=4" rel="stylesheet"/>
+<meta content="article" property="og:type"/><meta content="ScamScouter" property="og:site_name"/><meta content="ScamScouter Admin" property="og:title"/><meta content="Private admin page for ScamScouter report moderation." property="og:description"/><meta content="https://www.scamscouter.com/admin.html" property="og:url"/><meta content="https://www.scamscouter.com/android-chrome-512x512.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="ScamScouter Admin" name="twitter:title"/><meta content="Private admin page for ScamScouter report moderation." name="twitter:description"/><meta content="https://www.scamscouter.com/android-chrome-512x512.png" name="twitter:image"/><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "ScamScouter Admin",
+  "description": "Private admin page for ScamScouter report moderation.",
+  "url": "https://www.scamscouter.com/admin.html",
+  "inLanguage": "en-US",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "ScamScouter",
+    "url": "https://www.scamscouter.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ScamScouter",
+    "url": "https://www.scamscouter.com/"
+  }
+}</script></head>
 <body>
-  <div id="site-analytics"></div>
-  <div class="page-bg">
-    <div class="hero-glow"></div>
-    <div id="site-header"></div>
-    <main class="seo-section" style="text-align:left;max-width:1120px;">
-  <h1>ScamScouter Admin</h1>
-  <p>This private page helps review community scam reports. It is marked noindex and is not included in the sitemap.</p>
-
-  <div class="result-box">
-    <strong>Admin access</strong>
-    <p>Sign in with an approved admin email. If your email is not in the admin list, open <code>admin.js</code> and add it to <code>ADMIN_EMAILS</code>.</p>
-    <button class="scan-btn" id="adminLoginBtn">Sign in with Google</button>
-  </div>
-
-  <div id="adminStatus" class="report-status"></div>
-  <div id="adminReports" class="admin-report-list"></div>
+<div id="site-analytics"></div>
+<div class="page-bg">
+<div class="hero-glow"></div>
+<div id="site-header"></div>
+<main class="seo-section" style="text-align:left;max-width:1120px;">
+<h1>ScamScouter Admin</h1>
+<p>This private page helps review community scam reports. It is marked noindex and is not included in the sitemap.</p>
+<div class="result-box">
+<strong>Admin access</strong>
+<p>Sign in with an approved admin email. If your email is not in the admin list, open <code>admin.js</code> and add it to <code>ADMIN_EMAILS</code>.</p>
+<button class="scan-btn" id="adminLoginBtn">Sign in with Google</button>
+</div>
+<div class="report-status" id="adminStatus"></div>
+<div class="admin-report-list" id="adminReports"></div>
 </main>
-    <div id="site-footer"></div>
-  </div>
-  <script src="/includes.js"></script>
-  <script type="module" src="/app.js?v=1.6.4"></script>
-  <script type="module" src="/admin.js?v=1.6"></script>
+<div id="site-footer"></div>
+</div>
+<script src="/includes.js"></script>
+<script src="/app.js?v=1.6.4" type="module"></script>
+<script src="/admin.js?v=1.6" type="module"></script>
 </body>
 </html>

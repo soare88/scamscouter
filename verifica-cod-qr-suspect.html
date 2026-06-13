@@ -1,32 +1,31 @@
 <!DOCTYPE html>
-<html lang="ro">
+
+<html lang="ro-RO">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verifică Cod QR Suspect | Linkuri QR, Plăți False și Phishing</title>
-  <meta name="description" content="Verifică linkuri deschise din coduri QR suspecte, pagini false de plată, meniuri false și tentative de phishing." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.scamscouter.com/verifica-cod-qr-suspect.html" />
-  <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
-  <link rel="manifest" href="/site.webmanifest?v=2" />
-  <meta name="theme-color" content="#060b1a" />
-  <link rel="stylesheet" href="/scamscouter.css?v=4" />
-
-  <!-- Open Graph & Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="ScamScouter" />
-  <meta property="og:title" content="Verifică Cod QR Suspect | Linkuri QR, Plăți False și Phishing" />
-  <meta property="og:description" content="Verifică linkuri deschise din coduri QR suspecte, pagini false de plată, meniuri false și tentative de phishing." />
-  <meta property="og:url" content="https://www.scamscouter.com/verifica-cod-qr-suspect.html" />
-  <meta property="og:image" content="https://www.scamscouter.com/android-chrome-512x512.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Verifică Cod QR Suspect | Linkuri QR, Plăți False și Phishing" />
-  <meta name="twitter:description" content="Verifică linkuri deschise din coduri QR suspecte, pagini false de plată, meniuri false și tentative de phishing." />
-
-  <!-- Superior Nested Schema.org JSON-LD (Romanian) -->
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Verifică Cod QR Suspect | Linkuri QR, Plăți False și Phishing</title>
+<meta content="Verifică linkuri deschise din coduri QR suspecte, pagini false de plată, meniuri false și tentative de phishing." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://www.scamscouter.com/verifica-cod-qr-suspect.html" rel="canonical"/>
+<link href="/favicon.ico?v=2" rel="icon" sizes="any"/>
+<link href="/favicon.svg?v=2" rel="icon" type="image/svg+xml"/>
+<link href="/apple-touch-icon.png?v=2" rel="apple-touch-icon"/>
+<link href="/site.webmanifest?v=2" rel="manifest"/>
+<meta content="#060b1a" name="theme-color"/>
+<link href="/scamscouter.css?v=4" rel="stylesheet"/>
+<!-- Open Graph & Twitter -->
+<meta content="article" property="og:type"/>
+<meta content="ScamScouter" property="og:site_name"/>
+<meta content="Verifică Cod QR Suspect | Linkuri QR, Plăți False și Phishing" property="og:title"/>
+<meta content="Verifică linkuri deschise din coduri QR suspecte, pagini false de plată, meniuri false și tentative de phishing." property="og:description"/>
+<meta content="https://www.scamscouter.com/verifica-cod-qr-suspect.html" property="og:url"/>
+<meta content="https://www.scamscouter.com/android-chrome-512x512.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Verifică Cod QR Suspect | Linkuri QR, Plăți False și Phishing" name="twitter:title"/>
+<meta content="Verifică linkuri deschise din coduri QR suspecte, pagini false de plată, meniuri false și tentative de phishing." name="twitter:description"/>
+<!-- Superior Nested Schema.org JSON-LD (Romanian) -->
+<script type="application/ld+json">
   [
     {
       "@context": "https://schema.org",
@@ -92,70 +91,62 @@
     }
   ]
   </script>
-</head>
+<meta content="https://www.scamscouter.com/android-chrome-512x512.png" name="twitter:image"/></head>
 <body>
-  <div id="site-analytics"></div>
-  <div class="page-bg">
-    <div class="hero-glow"></div>
-    <div id="site-header"></div>
-
-    <main class="seo-section" style="text-align:left;max-width:960px;">
-      <p class="mini-label">Ghid ScamScouter România</p>
-      <h1>Verifică Cod QR Suspect</h1>
-      <p>Codurile QR pot ascunde linkuri către pagini false de plată, portaluri de login, formulare care colectează date sau site-uri clonă. Pentru că nu vezi destinația completă a adresei web înainte să scanezi, ele pot fi ușor folosite în fraude.</p>
-      <p>Dacă ai scanat un cod QR și telefonul a generat un link necunoscut, copiază linkul și verifică-l în ScamScouter înainte să introduci vreo informație.</p>
-
-      <div class="scanner-card" style="margin-top:24px;margin-bottom:32px;">
-        <div class="scanner-header">
-          <div>
-            <p class="mini-label">Verifică acum</p>
-            <h2>Scanează adresa URL extrasă din codul QR</h2>
-          </div>
-          <span class="status-dot">Activ</span>
-        </div>
-        <textarea id="input" rows="5" placeholder="Lipește linkul extras din codul QR..."></textarea>
-        <button id="scanBtn" onclick="runScan()" class="scan-btn">Scanează acum</button>
-        <div id="out" class="output-area"></div>
-      </div>
-
-      <h2>Unde apar coduri QR suspecte</h2>
-      <p>Codurile QR false pot fi lipite fizic peste afișe reale din stradă, trimise în emailuri, adăugate în facturi falsificate sau folosite pe pagini de plată. Unele duc către site-uri care imită tichete de parcare, meniuri de restaurante, curieri, bănci sau servicii de plată cripto.</p>
-
-      <h2>Semne că un QR poate fi riscant</h2>
-      <ul>
-        <li>Codul QR este un autocolant fizic lipit peste alt cod original.</li>
-        <li>Linkul generat pe ecran folosește un domeniu scurtat (ex: bit.ly) sau complet necunoscut.</li>
-        <li>Pagina web care se deschide cere introducerea datelor de card, parolă, cod SMS sau date personale.</li>
-        <li>La deschidere, apare o taxă neașteptată sau o alertă de „urgență”.</li>
-      </ul>
-
-      <h2>Ce faci după ce scanezi un cod QR</h2>
-      <ol>
-        <li>Privește cu atenție adresa URL completă de pe ecran înainte să dai permisiunea de continuare.</li>
-        <li>Nu introduce date de card dacă domeniul pare necunoscut sau greșit scris.</li>
-        <li>Deschide manual site-ul oficial direct din browser dacă este vorba despre vreo plată.</li>
-        <li>Copiază linkul suspect și verifică-l cu ajutorul instrumentului de mai sus.</li>
-      </ol>
-
-      <h2>Întrebări frecvente</h2>
-      <details class="faq-item"><summary>Poate un cod QR să fie periculos?</summary><p>Da. Codul QR este doar o cale rapidă către un link. Dacă linkul duce către o pagină falsă, poate fi folosit pentru phishing sau plată falsă.</p></details>
-      <details class="faq-item"><summary>Cum verific un link dintr-un QR?</summary><p>După scanare, copiază adresa URL completă și lipește-o în ScamScouter înainte să introduci date.</p></details>
-      <details class="faq-item"><summary>Este sigur să plătesc printr-un QR?</summary><p>Doar dacă domeniul și contextul sunt verificate. Pentru plăți, folosește site-ul sau aplicația oficială.</p></details>
-
-      <h2>Pagini similare</h2>
-      <div class="quick-links" style="margin-top:18px;">
-        <a href="/verifica-link-suspect.html">Verifică link suspect</a>
-        <a href="/verifica-sms-suspect.html">Verifică SMS suspect</a>
-        <a href="/verifica-email-suspect.html">Verifică email suspect</a>
-        <a href="/verifica-magazin-online.html">Verifică magazin online</a>
-        <a href="/teapa-curier-fals.html">Țeapă curier fals</a>
-        <a href="/teapa-banca.html">Țeapă bancă</a>
-      </div>
-    </main>
-
-    <div id="site-footer"></div>
-  </div>
-  <script src="/includes.js"></script>
-  <script type="module" src="/app.js?v=1.6.4"></script>
+<div id="site-analytics"></div>
+<div class="page-bg">
+<div class="hero-glow"></div>
+<div id="site-header"></div>
+<main class="seo-section" style="text-align:left;max-width:960px;">
+<p class="mini-label">Ghid ScamScouter România</p>
+<h1>Verifică Cod QR Suspect</h1>
+<p>Codurile QR pot ascunde linkuri către pagini false de plată, portaluri de login, formulare care colectează date sau site-uri clonă. Pentru că nu vezi destinația completă a adresei web înainte să scanezi, ele pot fi ușor folosite în fraude.</p>
+<p>Dacă ai scanat un cod QR și telefonul a generat un link necunoscut, copiază linkul și verifică-l în ScamScouter înainte să introduci vreo informație.</p>
+<div class="scanner-card" style="margin-top:24px;margin-bottom:32px;">
+<div class="scanner-header">
+<div>
+<p class="mini-label">Verifică acum</p>
+<h2>Scanează adresa URL extrasă din codul QR</h2>
+</div>
+<span class="status-dot">Activ</span>
+</div>
+<textarea id="input" placeholder="Lipește linkul extras din codul QR..." rows="5"></textarea>
+<button class="scan-btn" id="scanBtn" onclick="runScan()">Scanează acum</button>
+<div class="output-area" id="out"></div>
+</div>
+<h2>Unde apar coduri QR suspecte</h2>
+<p>Codurile QR false pot fi lipite fizic peste afișe reale din stradă, trimise în emailuri, adăugate în facturi falsificate sau folosite pe pagini de plată. Unele duc către site-uri care imită tichete de parcare, meniuri de restaurante, curieri, bănci sau servicii de plată cripto.</p>
+<h2>Semne că un QR poate fi riscant</h2>
+<ul>
+<li>Codul QR este un autocolant fizic lipit peste alt cod original.</li>
+<li>Linkul generat pe ecran folosește un domeniu scurtat (ex: bit.ly) sau complet necunoscut.</li>
+<li>Pagina web care se deschide cere introducerea datelor de card, parolă, cod SMS sau date personale.</li>
+<li>La deschidere, apare o taxă neașteptată sau o alertă de „urgență”.</li>
+</ul>
+<h2>Ce faci după ce scanezi un cod QR</h2>
+<ol>
+<li>Privește cu atenție adresa URL completă de pe ecran înainte să dai permisiunea de continuare.</li>
+<li>Nu introduce date de card dacă domeniul pare necunoscut sau greșit scris.</li>
+<li>Deschide manual site-ul oficial direct din browser dacă este vorba despre vreo plată.</li>
+<li>Copiază linkul suspect și verifică-l cu ajutorul instrumentului de mai sus.</li>
+</ol>
+<h2>Întrebări frecvente</h2>
+<details class="faq-item"><summary>Poate un cod QR să fie periculos?</summary><p>Da. Codul QR este doar o cale rapidă către un link. Dacă linkul duce către o pagină falsă, poate fi folosit pentru phishing sau plată falsă.</p></details>
+<details class="faq-item"><summary>Cum verific un link dintr-un QR?</summary><p>După scanare, copiază adresa URL completă și lipește-o în ScamScouter înainte să introduci date.</p></details>
+<details class="faq-item"><summary>Este sigur să plătesc printr-un QR?</summary><p>Doar dacă domeniul și contextul sunt verificate. Pentru plăți, folosește site-ul sau aplicația oficială.</p></details>
+<h2>Pagini similare</h2>
+<div class="quick-links" style="margin-top:18px;">
+<a href="/verifica-link-suspect.html">Verifică link suspect</a>
+<a href="/verifica-sms-suspect.html">Verifică SMS suspect</a>
+<a href="/verifica-email-suspect.html">Verifică email suspect</a>
+<a href="/verifica-magazin-online.html">Verifică magazin online</a>
+<a href="/teapa-curier-fals.html">Țeapă curier fals</a>
+<a href="/teapa-banca.html">Țeapă bancă</a>
+</div>
+</main>
+<div id="site-footer"></div>
+</div>
+<script src="/includes.js"></script>
+<script src="/app.js?v=1.6.4" type="module"></script>
 </body>
 </html>

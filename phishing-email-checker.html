@@ -1,32 +1,31 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Phishing Email Checker | Detect Scam Emails | ScamScouter</title>
-  <meta name="description" content="Check suspicious emails for phishing links, fake senders, password theft, payment fraud and account takeover risks." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.scamscouter.com/phishing-email-checker.html" />
-  <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
-  <link rel="manifest" href="/site.webmanifest?v=2" />
-  <meta name="theme-color" content="#060b1a" />
-  <link rel="stylesheet" href="/scamscouter.css?v=4" />
-
-  <!-- Open Graph & Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="ScamScouter" />
-  <meta property="og:title" content="Phishing Email Checker | Detect Scam Emails" />
-  <meta property="og:description" content="Check suspicious emails for phishing links, fake senders, password theft, payment fraud and account takeover risks." />
-  <meta property="og:url" content="https://www.scamscouter.com/phishing-email-checker.html" />
-  <meta property="og:image" content="https://www.scamscouter.com/android-chrome-512x512.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Phishing Email Checker | Detect Scam Emails" />
-  <meta name="twitter:description" content="Check suspicious emails for phishing links, fake senders, password theft, payment fraud and account takeover risks." />
-
-  <!-- Superior Nested Schema.org JSON-LD -->
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Phishing Email Checker | Detect Scam Emails | ScamScouter</title>
+<meta content="Check suspicious emails for phishing links, fake senders, password theft, payment fraud and account takeover risks." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://www.scamscouter.com/phishing-email-checker.html" rel="canonical"/>
+<link href="/favicon.ico?v=2" rel="icon" sizes="any"/>
+<link href="/favicon.svg?v=2" rel="icon" type="image/svg+xml"/>
+<link href="/apple-touch-icon.png?v=2" rel="apple-touch-icon"/>
+<link href="/site.webmanifest?v=2" rel="manifest"/>
+<meta content="#060b1a" name="theme-color"/>
+<link href="/scamscouter.css?v=4" rel="stylesheet"/>
+<!-- Open Graph & Twitter -->
+<meta content="article" property="og:type"/>
+<meta content="ScamScouter" property="og:site_name"/>
+<meta content="Phishing Email Checker | Detect Scam Emails | ScamScouter" property="og:title"/>
+<meta content="Check suspicious emails for phishing links, fake senders, password theft, payment fraud and account takeover risks." property="og:description"/>
+<meta content="https://www.scamscouter.com/phishing-email-checker.html" property="og:url"/>
+<meta content="https://www.scamscouter.com/android-chrome-512x512.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Phishing Email Checker | Detect Scam Emails | ScamScouter" name="twitter:title"/>
+<meta content="Check suspicious emails for phishing links, fake senders, password theft, payment fraud and account takeover risks." name="twitter:description"/>
+<!-- Superior Nested Schema.org JSON-LD -->
+<script type="application/ld+json">
   [
     {
       "@context": "https://schema.org",
@@ -92,62 +91,55 @@
     }
   ]
   </script>
-</head>
+<meta content="https://www.scamscouter.com/android-chrome-512x512.png" name="twitter:image"/></head>
 <body>
-  <div id="site-analytics"></div>
-  <div class="page-bg">
-    <div class="hero-glow"></div>
-    <div id="site-header"></div>
-
-    <main class="seo-section" style="text-align:left;max-width:960px;">
-      <p class="mini-label">ScamScouter safety guide</p>
-      <h1>Phishing Email Checker</h1>
-      <p>Phishing emails try to steal passwords, card details, verification codes or account access by pretending to be trusted companies. They often use urgency, fake logos and dangerous links.</p>
-      <p>Paste the suspicious email text, sender address or link below before you click.</p>
-
-      <div class="scanner-card" style="margin-top:24px;margin-bottom:32px;">
-        <div class="scanner-header">
-          <div>
-            <p class="mini-label">Check now</p>
-            <h2>Scan the suspicious message, link or email</h2>
-          </div>
-          <span class="status-dot">Live</span>
-        </div>
-        <textarea id="input" rows="5" placeholder="Paste the suspicious message, link or email..."></textarea>
-        <button id="scanBtn" onclick="runScan()" class="scan-btn">Scan now</button>
-        <div id="out" class="output-area"></div>
-      </div>
-
-      <h2>Phishing email red flags</h2>
-      <ul>
-        <li>Sender address does not match the real company domain.</li>
-        <li>Message asks you to confirm password, card or code.</li>
-        <li>Link leads to a lookalike login page.</li>
-        <li>Email threatens account suspension or payment problems.</li>
-        <li>Unexpected attachments or invoice files.</li>
-      </ul>
-
-      <h2>How to check safely</h2>
-      <p>Do not click the email link. Copy the text and link into ScamScouter, then open the official site manually if needed.</p>
-
-      <h2>Frequently Asked Questions</h2>
-      <details class="faq-item"><summary>How can I tell if an email is phishing?</summary><p>Check the sender, links, urgency, attachments and requests for sensitive information.</p></details>
-      <details class="faq-item"><summary>Can a phishing email look professional?</summary><p>Yes. Scammers copy real logos and templates.</p></details>
-      <details class="faq-item"><summary>Should I open attachments from suspicious emails?</summary><p>No. Verify the sender first and avoid unexpected attachments.</p></details>
-
-      <h2>Related checks</h2>
-      <div class="quick-links" style="margin-top:18px;">
-        <a href="/fake-website-checker.html">Fake website checker</a>
-        <a href="/is-this-link-safe.html">Is this link safe?</a>
-        <a href="/email-link-checker.html">Email link checker</a>
-        <a href="/business-email-scam-checker.html">Business email scam checker</a>
-        <a href="/recent-scams.html">Recent reported scams</a>
-      </div>
-    </main>
-
-    <div id="site-footer"></div>
-  </div>
-  <script src="/includes.js"></script>
-  <script type="module" src="/app.js?v=1.6.4"></script>
+<div id="site-analytics"></div>
+<div class="page-bg">
+<div class="hero-glow"></div>
+<div id="site-header"></div>
+<main class="seo-section" style="text-align:left;max-width:960px;">
+<p class="mini-label">ScamScouter safety guide</p>
+<h1>Phishing Email Checker</h1>
+<p>Phishing emails try to steal passwords, card details, verification codes or account access by pretending to be trusted companies. They often use urgency, fake logos and dangerous links.</p>
+<p>Paste the suspicious email text, sender address or link below before you click.</p>
+<div class="scanner-card" style="margin-top:24px;margin-bottom:32px;">
+<div class="scanner-header">
+<div>
+<p class="mini-label">Check now</p>
+<h2>Scan the suspicious message, link or email</h2>
+</div>
+<span class="status-dot">Live</span>
+</div>
+<textarea id="input" placeholder="Paste the suspicious message, link or email..." rows="5"></textarea>
+<button class="scan-btn" id="scanBtn" onclick="runScan()">Scan now</button>
+<div class="output-area" id="out"></div>
+</div>
+<h2>Phishing email red flags</h2>
+<ul>
+<li>Sender address does not match the real company domain.</li>
+<li>Message asks you to confirm password, card or code.</li>
+<li>Link leads to a lookalike login page.</li>
+<li>Email threatens account suspension or payment problems.</li>
+<li>Unexpected attachments or invoice files.</li>
+</ul>
+<h2>How to check safely</h2>
+<p>Do not click the email link. Copy the text and link into ScamScouter, then open the official site manually if needed.</p>
+<h2>Frequently Asked Questions</h2>
+<details class="faq-item"><summary>How can I tell if an email is phishing?</summary><p>Check the sender, links, urgency, attachments and requests for sensitive information.</p></details>
+<details class="faq-item"><summary>Can a phishing email look professional?</summary><p>Yes. Scammers copy real logos and templates.</p></details>
+<details class="faq-item"><summary>Should I open attachments from suspicious emails?</summary><p>No. Verify the sender first and avoid unexpected attachments.</p></details>
+<h2>Related checks</h2>
+<div class="quick-links" style="margin-top:18px;">
+<a href="/fake-website-checker.html">Fake website checker</a>
+<a href="/is-this-link-safe.html">Is this link safe?</a>
+<a href="/email-link-checker.html">Email link checker</a>
+<a href="/business-email-scam-checker.html">Business email scam checker</a>
+<a href="/recent-scams.html">Recent reported scams</a>
+</div>
+</main>
+<div id="site-footer"></div>
+</div>
+<script src="/includes.js"></script>
+<script src="/app.js?v=1.6.4" type="module"></script>
 </body>
 </html>

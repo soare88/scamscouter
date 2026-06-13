@@ -1,33 +1,32 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PayPal Scam Email Checker — Is This PayPal Email Real? | ScamScouter</title>
-  <meta name="description" content="Got a suspicious PayPal email? Check if it is a scam or real. ScamScouter identifies fake PayPal invoices, phishing links, account suspension emails and payment fraud before you click or pay." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.scamscouter.com/paypal-scam-email-checker.html" />
-  <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
-  <link rel="manifest" href="/site.webmanifest?v=2" />
-  <meta name="theme-color" content="#060b1a" />
-  <link rel="stylesheet" href="/scamscouter.css?v=4" />
-
-  <!-- Open Graph & Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="ScamScouter" />
-  <meta property="og:title" content="PayPal Scam Email Checker — Is This PayPal Email Real?" />
-  <meta property="og:description" content="Got a suspicious PayPal email? Check if it is a scam or real. Identify fake PayPal invoices, phishing links, account suspension emails and payment fraud." />
-  <meta property="og:url" content="https://www.scamscouter.com/paypal-scam-email-checker.html" />
-  <meta property="og:image" content="https://www.scamscouter.com/android-chrome-512x512.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="PayPal Scam Email Checker — Is This PayPal Email Real?" />
-  <meta name="twitter:description" content="Got a suspicious PayPal email? Check if it is a scam or real. Identify fake PayPal invoices, phishing links and account suspension fraud." />
-  <meta name="twitter:image" content="https://www.scamscouter.com/android-chrome-512x512.png" />
-
-  <!-- Superior Nested Schema.org JSON-LD -->
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PayPal Scam Email Checker — Is This PayPal Email Real? | ScamScouter</title>
+<meta content="Got a suspicious PayPal email? Check if it is a scam or real. ScamScouter identifies fake PayPal invoices, phishing links, account suspension emails and payment fraud before you click or pay." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://www.scamscouter.com/paypal-scam-email-checker.html" rel="canonical"/>
+<link href="/favicon.ico?v=2" rel="icon" sizes="any"/>
+<link href="/favicon.svg?v=2" rel="icon" type="image/svg+xml"/>
+<link href="/apple-touch-icon.png?v=2" rel="apple-touch-icon"/>
+<link href="/site.webmanifest?v=2" rel="manifest"/>
+<meta content="#060b1a" name="theme-color"/>
+<link href="/scamscouter.css?v=4" rel="stylesheet"/>
+<!-- Open Graph & Twitter -->
+<meta content="article" property="og:type"/>
+<meta content="ScamScouter" property="og:site_name"/>
+<meta content="PayPal Scam Email Checker — Is This PayPal Email Real? | ScamScouter" property="og:title"/>
+<meta content="Got a suspicious PayPal email? Check if it is a scam or real. ScamScouter identifies fake PayPal invoices, phishing links, account suspension emails and payment fraud before you click or pay." property="og:description"/>
+<meta content="https://www.scamscouter.com/paypal-scam-email-checker.html" property="og:url"/>
+<meta content="https://www.scamscouter.com/android-chrome-512x512.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="PayPal Scam Email Checker — Is This PayPal Email Real? | ScamScouter" name="twitter:title"/>
+<meta content="Got a suspicious PayPal email? Check if it is a scam or real. ScamScouter identifies fake PayPal invoices, phishing links, account suspension emails and payment fraud before you click or pay." name="twitter:description"/>
+<meta content="https://www.scamscouter.com/android-chrome-512x512.png" name="twitter:image"/>
+<!-- Superior Nested Schema.org JSON-LD -->
+<script type="application/ld+json">
   [
     {
       "@context": "https://schema.org",
@@ -95,60 +94,52 @@
   </script>
 </head>
 <body>
-  <div id="site-analytics"></div>
-  <div class="page-bg">
-    <div class="hero-glow"></div>
-    <div id="site-header"></div>
-
-    <main class="seo-section" style="text-align:left;max-width:960px;">
-      <p class="mini-label">ScamScouter fraud protection</p>
-      <h1>PayPal Scam Email Checker</h1>
-      <p>Received a suspicious email claiming to be from PayPal? Paste it below and ScamScouter will check it for phishing signals, fake sender addresses, fraudulent invoice patterns and PayPal impersonation tactics — before you click any link, log in or make a payment.</p>
-
-      <div class="scanner-card" style="margin-top:24px;margin-bottom:32px;">
-        <div class="scanner-header">
-          <div>
-            <p class="mini-label">Check now</p>
-            <h2>Scan a suspicious PayPal email or link</h2>
-          </div>
-          <span class="status-dot">Live</span>
-        </div>
-        <textarea id="input" rows="5" placeholder="Paste the PayPal email text, sender address or suspicious link here..."></textarea>
-        <button id="scanBtn" onclick="runScan()" class="scan-btn">Check PayPal Email</button>
-        <div id="out" class="output-area"></div>
-      </div>
-
-      <h2>Is This PayPal Email Real? How to Tell the Difference</h2>
-      <p>Real PayPal emails always come from an address ending in <strong>@paypal.com</strong>. They address you by your full name, not "Dear Customer". And they never ask you to verify your password, card number or bank account details by clicking a link in an email.</p>
-
-      <h2>Most Common PayPal Scam Email Types</h2>
-      <ul>
-        <li><strong>Account suspension emails:</strong> Create urgency claiming your account will be closed in 24 hours.</li>
-        <li><strong>Fake invoice emails:</strong> Sent through PayPal's own system but for fake services, asking you to call a scam support number.</li>
-        <li><strong>Overpayment scams:</strong> A buyer sends more than the agreed amount and asks you to refund the difference before the original payment is reversed.</li>
-      </ul>
-
-      <h2>What to Do if You Clicked a Link</h2>
-      <p>If you entered your PayPal password on a fake page, go to paypal.com directly and change your password immediately. Enable two-factor authentication from your account security settings. If you entered card details, contact your bank.</p>
-
-      <h2>Frequently Asked Questions</h2>
-      <details class="faq-item"><summary>How do I know if a PayPal email is real or fake?</summary><p>Check the sender address — it must end in @paypal.com exactly. Check that your full name is used in the greeting.</p></details>
-      <details class="faq-item"><summary>What is the PayPal invoice scam?</summary><p>Scammers use PayPal's real invoice system to send fraudulent payment requests, bypassing spam filters.</p></details>
-      <details class="faq-item"><summary>Can I check a PayPal email without clicking any links?</summary><p>Yes. Copy the email text, sender address and any links into ScamScouter for an instant risk analysis.</p></details>
-
-      <h2>Related Scam Checkers</h2>
-      <div class="quick-links" style="margin-top:18px;">
-        <a href="/phishing-email-checker.html">Phishing email checker</a>
-        <a href="/fake-website-checker.html">Fake website checker</a>
-        <a href="/is-this-link-safe.html">Is this link safe?</a>
-        <a href="/business-email-scam-checker.html">Business email scam checker</a>
-        <a href="/recent-scams.html">Recent reported scams</a>
-      </div>
-    </main>
-
-    <div id="site-footer"></div>
-  </div>
-  <script src="/includes.js"></script>
-  <script type="module" src="/app.js?v=1.6.4"></script>
+<div id="site-analytics"></div>
+<div class="page-bg">
+<div class="hero-glow"></div>
+<div id="site-header"></div>
+<main class="seo-section" style="text-align:left;max-width:960px;">
+<p class="mini-label">ScamScouter fraud protection</p>
+<h1>PayPal Scam Email Checker</h1>
+<p>Received a suspicious email claiming to be from PayPal? Paste it below and ScamScouter will check it for phishing signals, fake sender addresses, fraudulent invoice patterns and PayPal impersonation tactics — before you click any link, log in or make a payment.</p>
+<div class="scanner-card" style="margin-top:24px;margin-bottom:32px;">
+<div class="scanner-header">
+<div>
+<p class="mini-label">Check now</p>
+<h2>Scan a suspicious PayPal email or link</h2>
+</div>
+<span class="status-dot">Live</span>
+</div>
+<textarea id="input" placeholder="Paste the PayPal email text, sender address or suspicious link here..." rows="5"></textarea>
+<button class="scan-btn" id="scanBtn" onclick="runScan()">Check PayPal Email</button>
+<div class="output-area" id="out"></div>
+</div>
+<h2>Is This PayPal Email Real? How to Tell the Difference</h2>
+<p>Real PayPal emails always come from an address ending in <strong>@paypal.com</strong>. They address you by your full name, not "Dear Customer". And they never ask you to verify your password, card number or bank account details by clicking a link in an email.</p>
+<h2>Most Common PayPal Scam Email Types</h2>
+<ul>
+<li><strong>Account suspension emails:</strong> Create urgency claiming your account will be closed in 24 hours.</li>
+<li><strong>Fake invoice emails:</strong> Sent through PayPal's own system but for fake services, asking you to call a scam support number.</li>
+<li><strong>Overpayment scams:</strong> A buyer sends more than the agreed amount and asks you to refund the difference before the original payment is reversed.</li>
+</ul>
+<h2>What to Do if You Clicked a Link</h2>
+<p>If you entered your PayPal password on a fake page, go to paypal.com directly and change your password immediately. Enable two-factor authentication from your account security settings. If you entered card details, contact your bank.</p>
+<h2>Frequently Asked Questions</h2>
+<details class="faq-item"><summary>How do I know if a PayPal email is real or fake?</summary><p>Check the sender address — it must end in @paypal.com exactly. Check that your full name is used in the greeting.</p></details>
+<details class="faq-item"><summary>What is the PayPal invoice scam?</summary><p>Scammers use PayPal's real invoice system to send fraudulent payment requests, bypassing spam filters.</p></details>
+<details class="faq-item"><summary>Can I check a PayPal email without clicking any links?</summary><p>Yes. Copy the email text, sender address and any links into ScamScouter for an instant risk analysis.</p></details>
+<h2>Related Scam Checkers</h2>
+<div class="quick-links" style="margin-top:18px;">
+<a href="/phishing-email-checker.html">Phishing email checker</a>
+<a href="/fake-website-checker.html">Fake website checker</a>
+<a href="/is-this-link-safe.html">Is this link safe?</a>
+<a href="/business-email-scam-checker.html">Business email scam checker</a>
+<a href="/recent-scams.html">Recent reported scams</a>
+</div>
+</main>
+<div id="site-footer"></div>
+</div>
+<script src="/includes.js"></script>
+<script src="/app.js?v=1.6.4" type="module"></script>
 </body>
 </html>
